@@ -1,0 +1,8 @@
+31 Oct 2021 18:00:36 - Patch My PC Started
+31 Oct 2021 18:00:36 - Checking connection to patchmypc.com
+31 Oct 2021 18:00:36 - Verified connection to patchmypc.com. Status Code: 200
+31 Oct 2021 18:01:00 - Getting latest definitions from patchmypc.com
+31 Oct 2021 18:01:01 - Definition load completed in: 0.38 seconds
+31 Oct 2021 18:01:01 - Patch My PC version 4.2.0.4 is running. The latest is 4.2.0.4
+31 Oct 2021 18:01:01 - Performing scan of installed applications
+31 Oct 2021 18:01:01 - Scan completed in: 0.51 seconds
