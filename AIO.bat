@@ -35,7 +35,7 @@ echo                  ^|                                                        
 echo                  ^|      [5] BLANK                                                ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|      [6] SYSTEM INFO                                          ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [7] SHUTDOWN OPTIONS   [8] STARWARS      [9] EXIT        ^|
@@ -47,7 +47,7 @@ choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard
 if errorlevel  9 goto:EXIT
 if errorlevel  8 goto:STARWARS
 if errorlevel  7 goto:SHUTDOWN_OPTIONS
-if errorlevel  6 goto:TEST_UNKNOWN
+if errorlevel  6 goto:SYS_INFO
 if errorlevel  5 goto:TEST_UNKNOWN
 if errorlevel  4 goto:TEST_UNKNOWN
 if errorlevel  3 goto:TEST_UNKNOWN
@@ -252,23 +252,23 @@ echo:
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
-echo                  ^|      [1] BLANK                                                ^|
+echo                  ^|      [1] DEFENDER TOOLS                                       ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] BLANK                                                ^|
+echo                  ^|      [2] WINDOWS AND OFFICE ACTIVATION                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] BLANK                                                ^|
+echo                  ^|      [3] DEBLOATER                                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|      [4] UPDATE APPLICATIONS                                  ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] BLANK                                                ^|
+echo                  ^|      [5] WINDOWS CLEANUP                                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [6] BLANK                                                ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] BLANK         [8] BLANK         [9] EXIT             ^|
+echo                  ^|      [7] BLANK         [8] BLANK         [9] GO BACK          ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
@@ -278,24 +278,99 @@ if errorlevel  9 goto:end
 if errorlevel  8 goto:TEST_UNKNOWN
 if errorlevel  7 goto:TEST_UNKNOWN
 if errorlevel  6 goto:TEST_UNKNOWN
-if errorlevel  5 goto:TEST_UNKNOWN
-if errorlevel  4 goto:TEST_UNKNOWN
-if errorlevel  3 goto:TEST_UNKNOWN
-if errorlevel  2 goto:TEST_UNKNOWN
-if errorlevel  1 goto:TEST_UNKNOWN
+if errorlevel  5 goto:PC_Cleanup_Utility
+if errorlevel  4 goto:UPDATE_APPS
+if errorlevel  3 goto:DEBLOATER
+if errorlevel  2 goto:MSACTIVATION
+if errorlevel  1 goto:DEFENDER_TOOLS
 cls
 
 
 ::-------------------------------------------------------------------------------------------------------
+:DEFENDER_TOOLS
+title DEFENDER TOOLS
+cls
+ECHO:
+ECHO THIS SECTION WILL ADD CERTAIN FIREWALL EXCEPTIONS FOR WINDOWS
+ECHO WINDOWS ACTIVATION TOOLKITS AS WELL AS GIVE MEENS TO DISABLE
+ECHO WINDOWS DEFENDER TO ALLOW THE TOOLKITS TO PROPERLY FUNTION.
+timeout 5 >nul
+PAUSE
+
+Powershell -ExecutionPolicy Bypass -File "%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\Disable_Windows_Defender.ps1"
+Powershell -ExecutionPolicy Bypass -File "%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\disable-windows-defender.ps1"
+START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147735507 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147736914 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147743522 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147734094 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147743421 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147765679 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 251873 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 213927 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147722906 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\KMSAutoS -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjHook.dll -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjPatcher.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_x64.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files\KMSSS.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\KMS -Force; ^
+Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd;
+
+PAUSE
+CLS
+ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
+Pushd "%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS"
+Defender_Tools.exe
+popd
+timeout 2 >nul
+endlocal
+pause & cls & goto COMPUTER_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
-
+:MSACTIVATION
+echo
+cls
+title  Microsoft Activation Scripts AIO 1.4
+"%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\MAS.CMD
+timeout 5 >nul
+pause & cls & goto COMPUTER_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
-
+:DEBLOATER
+CLS
+TITLE DEBLOATER
+ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
+timeout 2 >nul
+Powershell -ExecutionPolicy Bypass -File "%~dp0\SOFTWARE\CLEANUP\Debloater.ps1"
+timeout 2 >nul
+pause & cls & goto COMPUTER_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
-
+:UPDATE_APPS
+Title UPDATE APPLICATIONS
+ECHO:
+ECHO THIS OPTION WILL START PATCH MY PC.
+timeout 2 >nul
+START "%~dp0\SOFTWARE\UPDATE_SOFTWARE\PatchMyPC.exe /auto switch
+timeout 2 >nul
+pause & cls & goto COMPUTER_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
+:PC_Cleanup_Utility
+CLS
+TITLE PC Cleanup Utility
+ECHO THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
+timeout 2 >nul
+"%~dp0\SOFTWARE\CLEANUP\PC-Cleanup-Utility.bat
 
+pause & cls & goto COMPUTER_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------------------
@@ -313,6 +388,40 @@ echo This still needs some work and items to address
 pause & cls & goto end
 
 ::========================================================================================================================================
+
+::========================================================================================================================================
+
+:SYS_INFO
+CLS
+Title SYSTEM INFORMATION
+ECHO:
+ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
+TITLE My System Info
+ECHO Please wait... Checking system information.
+timeout 5 >nul
+pause
+:: Section 1: Windows information
+ECHO ==========================
+ECHO WINDOWS INFO
+ECHO ============================
+systeminfo | findstr /c:"OS Name"
+systeminfo | findstr /c:"OS Version"
+systeminfo | findstr /c:"System Type"
+:: Section 2: Hardware information.
+ECHO ============================
+ECHO HARDWARE INFO
+ECHO ============================
+systeminfo | findstr /c:"Total Physical Memory"
+wmic cpu get name
+wmic diskdrive get name,model,size
+wmic path win32_videocontroller get name
+:: Section 3: Networking information.
+ECHO ============================
+ECHO NETWORK INFO
+ECHO ============================
+ipconfig | findstr IPv4
+ipconfig | findstr IPv6
+PAUSE & CLS & GOTO MainMenu
 
 ::========================================================================================================================================
 
