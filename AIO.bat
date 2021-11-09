@@ -595,13 +595,115 @@ endlocal
 exit /b
 
 :end
-color 0c
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress bar
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
 cls
 echo.
-msg * /time:0 /w "Going back to previous menu please wait..."
-timeout 2 >nul
 endlocal
-pause & cls & goto MainMenu
+cls & goto MainMenu
 
 :EXIT
 color 0c
@@ -618,21 +720,6 @@ exit
 :STARWARS
 cls
 title STARWARS
-dism /online /Enable-Feature /FeatureName:TelnetClient
-ECHO NOW COPY AND PASTE THIS LINE INTO TELNET ANSWER LINE:
-echo:
-echo towel.blinkenlights.nl
-echo:
+%~dp0\SOFTWARE\EASTER_EGG\BattleScript.bat
 timeout 5 >nul
-cls
-ECHO IF YOU DON'T THEN YOU WILL NEVER SEE THIS MASTERPIECE:
-ECHO TYPE: O ---- DO THIS FIRST
-echo:
-ECHO THEN...
-ECHO:
-echo towel.blinkenlights.nl
-echo:
-timeout 5 >nul
-pause
-TELNET
-pause & cls & GOTO MainMenu
+pause & cls & goto 
