@@ -722,4 +722,4 @@ cls
 title STARWARS
 %~dp0\SOFTWARE\EASTER_EGG\BattleScript.bat
 timeout 5 >nul
-pause & cls & goto 
+pause & cls & goto EXIT
