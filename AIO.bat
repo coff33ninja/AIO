@@ -114,15 +114,15 @@ echo                  ^|                                                        
 echo                  ^|      [3] TRACE ROUTE WITH USER INPUT                          ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [4] IP CONFIGURATION                                     ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] WIFI SETUP PREVIEW                                   ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] SETUP NETWORK SHARE                                  ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [7] REMOVE NETWORK MAP                                   ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] SETUP NETWORK SHARE                                  ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] REMOVE NETWORK MAP                                   ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] BLANK           [8] BLANK              [9] Go back   ^|
+echo                  ^|      [8] BLANK                                  [9] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
@@ -130,9 +130,9 @@ choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard
 
 if errorlevel  9 goto:end
 if errorlevel  8 goto:TEST_UNKNOWN
-if errorlevel  7 goto:TEST_UNKNOWN
-if errorlevel  6 goto:REMOVE_NETWORK_MAP
-if errorlevel  5 goto:SETUP_NETWORK_SHARE
+if errorlevel  7 goto:REMOVE_NETWORK_MAP
+if errorlevel  6 goto:SETUP_NETWORK_SHARE
+if errorlevel  5 goto:WIFI_CONFIURATION
 if errorlevel  4 goto:CHANGE_IP
 if errorlevel  3 goto:TRACE_ROUTE
 if errorlevel  2 goto:PING
@@ -273,6 +273,51 @@ net use %REMOVELETTER%: /delete
 Set /P %REMOVELETTER%=ENTER MAPPED DRIVE LETTER TO REMOVE:
 pause & cls & goto NETWORK_CONFIGURATION
 
+::-------------------------------------------------------------------------------------------------------
+
+:WIFI_CONFIURATION
+cls
+ECHO:
+title WiFi name list
+echo This section will display all registered WIFI networks on this device.
+echo Use PageUp or PageDown to scroll if needed item does not display.
+netsh wlan show profile
+pause & goto WiFi_prompt
+if error "There is no wireless interface on the system." goto WiFiNo
+
+:WiFi_prompt
+echo.
+echo To view the WiFi password note down the name and press Y to continue,
+echo If not then press N to go back to previous menu.
+echo.
+set /p menu="Do you want to continue? (Y/N): "
+if %menu%==Y goto Yes
+if %menu%==y goto Yes
+if %menu%==N goto WiFiNo
+if %menu%==n goto WiFiNo
+cls
+echo.
+echo Please answer me!...
+echo.
+set /p pause="Press any key to continue!... "
+goto WiFi_prompt
+
+:Yes
+cls
+echo.
+echo Okay, let's continue...
+echo.
+set /p pause="Press any key to continue!... "
+goto WiFi_Pass
+
+:WiFi_Pass
+cls
+echo.
+netsh wlan show profile %changeme% key=clear
+Set /P %changeme%=Enter noted WiFi Name to preview key:
+
+:WiFiNo
+cls & goto NETWORK_CONFIGURATION
 ::========================================================================================================================================
 
 ::========================================================================================================================================
