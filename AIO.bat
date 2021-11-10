@@ -276,6 +276,7 @@ pause & cls & goto NETWORK_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
 
 :WIFI_CONFIURATION
+setlocal enabledelayedexpansion
 cls
 ECHO:
 title WiFi name list
@@ -291,8 +292,8 @@ echo To view the WiFi password note down the name and press Y to continue,
 echo If not then press N to go back to previous menu.
 echo.
 set /p menu="Do you want to continue? (Y/N): "
-if %menu%==Y goto Yes
-if %menu%==y goto Yes
+if %menu%==Y goto WiFiYes
+if %menu%==y goto WiFiYes
 if %menu%==N goto WiFiNo
 if %menu%==n goto WiFiNo
 cls
@@ -300,21 +301,20 @@ echo.
 echo Please answer me!...
 echo.
 set /p pause="Press any key to continue!... "
-goto WiFi_prompt
+goto WiFiYes
 
-:Yes
-cls
+:WiFiYes
 echo.
-echo Okay, let's continue...
+for /f "tokens=2delims=:" %%a in ('netsh wlan show profile ^|findstr ":"') do (
+    set "ssid=%%~a"
+    call :getpwd "%%ssid:~1%%"
+)
+:getpwd
+set "ssid=%*"
+for /f "tokens=2delims=:" %%i in ('netsh wlan show profile name^="%ssid:"=%" key^=clear ^| findstr /C:"Key Content"') do echo ssid: %ssid% pass: %%i
+pause
 echo.
-set /p pause="Press any key to continue!... "
-goto WiFi_Pass
-
-:WiFi_Pass
-cls
-echo.
-netsh wlan show profile %changeme% key=clear
-Set /P %changeme%=Enter noted WiFi Name to preview key:
+cls & goto NETWORK_CONFIGURATION
 
 :WiFiNo
 cls & goto NETWORK_CONFIGURATION
@@ -380,7 +380,7 @@ ECHO WINDOWS DEFENDER TO ALLOW THE TOOLKITS TO PROPERLY FUNTION.
 timeout 5 >nul
 PAUSE
 @echo off
-Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
+rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
 Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\disable-windows-defender.ps1"
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
