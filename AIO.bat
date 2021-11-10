@@ -547,64 +547,55 @@ if errorlevel 2 goto :Disk_Defragment
 if errorlevel 1 goto :Disk_Cleanup
 goto error
 
-:Delete_Temporary_Files
+:Disk_Cleanup
 cls
-echo --------------------------------------------------------------------------------
-echo Delete Temporary Files
-echo --------------------------------------------------------------------------------
+
 echo.
-echo Deleting Cookies...
-ping localhost -n 3 >nul
+title DISK CLEANUP
+echo.
 del /f /q "%userprofile%\Cookies\*.*"
-echo Deleting Temporary Files...
-ping localhost -n 3 >nul
+
 del /f /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
 del /f /q "%userprofile%\AppData\Local\Temp\*.*"
-del /s /f /q c:\windows\temp\*.*
-rd /s /q c:\windows\temp
-md c:\windows\temp
-del /s /f /q C:\WINDOWS\Prefetch
-del /s /f /q %temp%\*.*
-rd /s /q %temp%
+del /s /f /q "c:\windows\temp\*.*"
+rd /s /q "c:\windows\temp"
+md "c:\windows\temp"
+del /s /f /q "C:\WINDOWS\Prefetch"
+del /s /f /q "%temp%\*.*"
+rd /s /q "%temp%"
 md %temp%
-deltree /y c:\windows\tempor~1
-deltree /y c:\windows\temp
-deltree /y c:\windows\tmp
-deltree /y c:\windows\ff*.tmp
-deltree /y c:\windows\history
-deltree /y c:\windows\cookies
-deltree /y c:\windows\recent
-deltree /y c:\windows\spool\printers
+deltree /y "c:\windows\tempor~1"
+deltree /y "c:\windows\temp"
+deltree /y "c:\windows\tmp"
+deltree /y "c:\windows\ff*.tmp"
+deltree /y "c:\windows\history"
+deltree /y "c:\windows\cookies"
+deltree /y "c:\windows\recent"
+deltree /y "c:\windows\spool\printers"
 del c:\WIN386.SWP 
-del /f /s /q %systemdrive%\*.tmp
-del /f /s /q %systemdrive%\*._mp
-del /f /s /q %systemdrive%\*.log
-del /f /s /q %systemdrive%\*.gid
-del /f /s /q %systemdrive%\*.chk
-del /f /s /q %systemdrive%\*.old
-del /f /s /q %systemdrive%\recycled\*.*
-del /f /s /q %windir%\*.bak
-del /f /s /q %windir%\prefetch\*.*
-rd /s /q %windir%\temp & md %windir%\temp
-del /f /q %userprofile%\cookies\*.*
-del /f /q %userprofile%\recent\*.*
-del /f /s /q “%userprofile%\Local Settings\Temporary Internet Files\*.*”
-del /f /s /q “%userprofile%\Local Settings\Temp\*.*”
-del /f /s /q “%userprofile%\recent\*.*”
-cls
-echo --------------------------------------------------------------------------------
-echo Delete Temporary Files
-echo --------------------------------------------------------------------------------
-echo.
-echo Temporary Files deleted.
-echo.
+del /f /s /q "%systemdrive%\*.tmp"
+del /f /s /q "%systemdrive%\*._mp"
+del /f /s /q "%systemdrive%\*.log"
+del /f /s /q "%systemdrive%\*.gid"
+del /f /s /q "%systemdrive%\*.chk"
+del /f /s /q "%systemdrive%\*.old"
+del /f /s /q "%systemdrive%\recycled\*.*"
+del /f /s /q "%windir%\*.bak"
+del /f /s /q "%windir%\prefetch\*.*"
+rd /s /q "%windir%\temp & md %windir%\temp"
+del /f /q "%userprofile%\cookies\*.*"
+del /f /q "%userprofile%\recent\*.*"
+del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+del /f /s /q "userprofile%\Local Settings\Temp\*.*"
+del /f /s /q "%userprofile%\recent\*.*"
+
 if exist "C:\WINDOWS\temp"del /f /q "C:WINDOWS\temp\*.*"
 if exist "C:\WINDOWS\tmp" del /f /q "C:\WINDOWS\tmp\*.*"
 if exist "C:\tmp" del /f /q "C:\tmp\*.*"
 if exist "C:\temp" del /f /q "C:\temp\*.*"
 if exist "%temp%" del /f /q "%temp%\*.*"
 if exist "%tmp%" del /f /q "%tmp%\*.*"
-if not exist "C:\WINDOWS\Users\*.*" goto skip
+
 if exist "C:\WINDOWS\Users\*.zip" del "C:\WINDOWS\Users\*.zip" /f /q
 if exist "C:\WINDOWS\Users\*.exe" del "C:\WINDOWS\Users\*.exe" /f /q
 if exist "C:\WINDOWS\Users\*.gif" del "C:\WINDOWS\Users\*.gif" /f /q
@@ -620,29 +611,23 @@ if exist "C:\WINDOWS\Users\*.mp3" del "C:\WINDOWS\Users\*.mp3" /f /q
 if exist "C:\WINDOWS\Users\*.mov" del "C:\WINDOWS\Users\*.mov" /f /q
 if exist "C:\WINDOWS\Users\*.qt" del "C:\WINDOWS\Users\*.qt" /f /q
 if exist "C:\WINDOWS\Users\*.asf" del "C:\WINDOWS\Users\*.asf" /f /q
-
-:skip
-if not exist C:\WINDOWS\Users\Users\*.* goto skippy /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.zip del C:\WINDOWS\Users\Users\*.zip /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.exe del C:\WINDOWS\Users\Users\*.exe /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.gif del C:\WINDOWS\Users\Users\*.gif /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.jpg del C:\WINDOWS\Users\Users\*.jpg /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.png del C:\WINDOWS\Users\Users\*.png /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.bmp del C:\WINDOWS\Users\Users\*.bmp /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.avi del C:\WINDOWS\Users\Users\*.avi /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.mpg del C:\WINDOWS\Users\Users\*.mpg /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.mpeg del C:\WINDOWS\Users\Users\*.mpeg /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.ra del C:\WINDOWS\Users\Users\*.ra /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.ram del C:\WINDOWS\Users\Users\*.ram /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.mp3 del C:\WINDOWS\Users\Users\*.mp3 /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.asf del C:\WINDOWS\Users\Users\*.asf /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.qt del C:\WINDOWS\Users\Users\*.qt /f /q
-if exist C:\WINDOWS\Users\AppData\Temp\*.mov del C:\WINDOWS\Users\Users\*.mov /f /q
-
-:skippy
-if exist "C:\WINDOWS\ff*.tmp" del C:\WINDOWS\ff*.tmp /f /q
-if exist C:\WINDOWS\ShellIconCache del /f /q "C:\WINDOWS\ShellI~1\*.*"
-cls
+if exist "C:\WINDOWS\Users\AppData\Temp\*.zip" del "C:\WINDOWS\Users\Users\*.zip /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.exe" del "C:\WINDOWS\Users\Users\*.exe /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.gif" del "C:\WINDOWS\Users\Users\*.gif /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.jpg" del "C:\WINDOWS\Users\Users\*.jpg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.png" del "C:\WINDOWS\Users\Users\*.png /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.bmp" del "C:\WINDOWS\Users\Users\*.bmp /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.avi" del "C:\WINDOWS\Users\Users\*.avi /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mpg" del "C:\WINDOWS\Users\Users\*.mpg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mpeg" del "C:\WINDOWS\Users\Users\*.mpeg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.ra" del "C:\WINDOWS\Users\Users\*.ra /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.ram" del "C:\WINDOWS\Users\Users\*.ram /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mp3" del "C:\WINDOWS\Users\Users\*.mp3 /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.asf" del "C:\WINDOWS\Users\Users\*.asf /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.qt" del "C:\WINDOWS\Users\Users\*.qt /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mov" del "C:\WINDOWS\Users\Users\*.mov /f /q"
+if exist "C:\WINDOWS\ff*.tmp" del "C:\WINDOWS\ff*.tmp /f /q"
+if exist "C:\WINDOWS\ShellIconCache" del /f /q "C:\WINDOWS\ShellI~1\*.*"
 DEL /S /Q "%TMP%\*.*"
 DEL /S /Q "%TEMP%\*.*"
 DEL /S /Q "%WINDIR%\Temp\*.*"
@@ -662,14 +647,10 @@ DEL /S /Q "C:\Windows\WinSxS\Temp"
 cleanmgr /VERYLOWDISK /sagerun:0
 ipconfig /flushdns
 echo.
-echo --------------------------------------------------------------------------------
-echo Disk Cleanup
-echo --------------------------------------------------------------------------------
-echo.
+cls
 echo Disk Cleanup successful!
 echo.
-pause
-goto PC_Cleanup_Utility
+pause & cls & goto PC_Cleanup_Utility
 
 :Disk_Defragment
 cls
