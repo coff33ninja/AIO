@@ -122,14 +122,14 @@ echo                  ^|                                                        
 echo                  ^|      [7] REMOVE NETWORK MAP                                   ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|      [8] NETWORK BACKUP                         [9] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  9 goto:end
-if errorlevel  8 goto:TEST_UNKNOWN
+if errorlevel  9 goto:MainMenu
+if errorlevel  8 goto:BACKUP_CONFIG
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
 if errorlevel  5 goto:WIFI_CONFIURATION
@@ -318,6 +318,77 @@ cls & goto NETWORK_CONFIGURATION
 
 :WiFiNo
 cls & goto NETWORK_CONFIGURATION
+
+::-------------------------------------------------------------------------------------------------------
+
+:BACKUP_CONFIG
+color 0f
+title  BACKUP NETWORK CONFIGURATION
+cls
+
+echo:
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] BACKUP WIFI CONFIGURATION                           ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] RESTORE WIFI CONFIGURATION                           ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [7] BLANK                                                ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+
+if errorlevel  9 goto:NETWORK_CONFIGURATION
+if errorlevel  8 goto:TEST_UNKNOWN
+if errorlevel  7 goto:TEST_UNKNOWN
+if errorlevel  6 goto:TEST_UNKNOWN
+if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  4 goto:TEST_UNKNOWN
+if errorlevel  3 goto:TEST_UNKNOWN
+if errorlevel  2 goto:RESTORE_WIFI
+if errorlevel  1 goto:BACKUP_WIFI
+cls
+
+::-------------------------------------------------------------------------------------------------------
+:BACKUP_WIFI
+cls
+echo
+md C:\WIFI
+echo This will backup the WiFi config to C:\WIFI
+netsh wlan export profile key=clear folder=C:\wifi
+pause & goto NETWORK_CONFIGURATION
+
+::-------------------------------------------------------------------------------------------------------
+:RESTORE_WIFI
+cls
+echo
+cd C:\WIFI
+dir
+netsh wlan add profile filename="c:\wifi\%WIFINAME%.xml" user=all
+echo Enter complete file name excluding .xml
+echo exapmle: WIFI-TSUNAMI
+echo the .xml will be added automatically
+Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
+pause & goto NETWORK_CONFIGURATION
+
+::-------------------------------------------------------------------------------------------------------
+
+
 ::========================================================================================================================================
 
 ::========================================================================================================================================
