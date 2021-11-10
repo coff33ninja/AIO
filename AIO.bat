@@ -371,6 +371,8 @@ echo
 md C:\WIFI
 echo This will backup the WiFi config to C:\WIFI
 netsh wlan export profile key=clear folder=C:\wifi
+cd c:\wifi
+start .
 pause & goto NETWORK_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
