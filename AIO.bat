@@ -335,6 +335,7 @@ ECHO WINDOWS DEFENDER TO ALLOW THE TOOLKITS TO PROPERLY FUNTION.
 timeout 5 >nul
 PAUSE
 @echo off
+Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
 Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\disable-windows-defender.ps1"
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
