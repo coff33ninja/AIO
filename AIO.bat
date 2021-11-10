@@ -537,16 +537,14 @@ echo.
 echo Select a tool
 echo =============
 echo.
-echo [1] Delete Temporary Files
-echo [2] Disk Cleanup
-echo [3] Disk Defragment
-echo [4] MainMenu
+echo [1] Disk Cleanup
+echo [2] Disk Defragment
+echo [3] MainMenu
 echo.
-choice /C:1234 /N /M "
-if errorlevel 4 goto :COMPUTER_CONFIGURATION
-if errorlevel 3 goto :Disk_Defragment
-if errorlevel 2 goto :Disk_Cleanup
-if errorlevel 1 goto :Delete_Temporary_Files
+choice /C:123 /N /M "
+if errorlevel 3 goto :COMPUTER_CONFIGURATION
+if errorlevel 2 goto :Disk_Defragment
+if errorlevel 1 goto :Disk_Cleanup
 goto error
 
 :Delete_Temporary_Files
@@ -600,18 +598,6 @@ echo ---------------------------------------------------------------------------
 echo.
 echo Temporary Files deleted.
 echo.
-echo Press any key to return to the menu. . .
-pause >nul
-goto PC_Cleanup_Utility
-
-:Disk_Cleanup
-cls
-echo --------------------------------------------------------------------------------
-echo Disk Cleanup
-echo --------------------------------------------------------------------------------
-echo.
-echo Running Disk Cleanup...
-ping localhost -n 3 >nul
 if exist "C:\WINDOWS\temp"del /f /q "C:WINDOWS\temp\*.*"
 if exist "C:\WINDOWS\tmp" del /f /q "C:\WINDOWS\tmp\*.*"
 if exist "C:\tmp" del /f /q "C:\tmp\*.*"
@@ -657,6 +643,25 @@ if exist C:\WINDOWS\Users\AppData\Temp\*.mov del C:\WINDOWS\Users\Users\*.mov /f
 if exist "C:\WINDOWS\ff*.tmp" del C:\WINDOWS\ff*.tmp /f /q
 if exist C:\WINDOWS\ShellIconCache del /f /q "C:\WINDOWS\ShellI~1\*.*"
 cls
+DEL /S /Q "%TMP%\*.*"
+DEL /S /Q "%TEMP%\*.*"
+DEL /S /Q "%WINDIR%\Temp\*.*"
+DEL /S /Q "%USERPROFILE%\Local Settings\Temp\*.*"
+DEL /S /Q "%USERPROFILE%\Appdata\Local\BraveSoftware\Brave-Browser\User Data\Default\Cache"
+DEL /S /Q "%LocalAppData%\Temp"
+
+DEL /S /Q "C:\Program Files (x86)\Google\Temp"
+DEL /S /Q "C:\Program Files (x86)\Steam\steamapps\temp"
+DEL /S /Q "U:\Games\steamapps\temp"
+DEL /S /Q "C:\ProgramData\Microsoft\Windows\WER\Temp"
+DEL /S /Q "C:\Users\All Users\Microsoft\Windows\WER\Temp"
+DEL /S /Q "C:\Windows\Temp"
+DEL /S /Q "C:\Windows\System32\DriverStore\Temp"
+DEL /S /Q "C:\Windows\WinSxS\Temp"
+
+cleanmgr /VERYLOWDISK /sagerun:0
+ipconfig /flushdns
+echo.
 echo --------------------------------------------------------------------------------
 echo Disk Cleanup
 echo --------------------------------------------------------------------------------
