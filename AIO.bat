@@ -1,10 +1,10 @@
 @echo off
 setlocal
-color 0f
 %SystemRoot%\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {c82192ee-6cb5-4bc0-9ef0-fb818773790a}
 CLS
 
 ::========================================================================================================================================
+
 cls
 ECHO.
 ECHO =============================
@@ -52,13 +52,9 @@ if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
 cls
 title  TEST BOXES
-echo:
-echo                    Press the corresponding number to go to desired section:
-color 0f
 mode con cols=98 lines=32
-
 echo:
-echo                      Press the corresponding number to go to desired section:
+echo                       Press the corresponding number to go to desired section:
 echo:
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
@@ -79,14 +75,14 @@ echo                  ^|                                                        
 echo                  ^|      [6] SYSTEM INFO                                          ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] SHUTDOWN OPTIONS   [8] STARWARS      [9] EXIT        ^|
+echo                  ^|      [7] SHUTDOWN OPTIONS                     [8] EXIT        ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
-if errorlevel  9 goto:EXIT
-if errorlevel  8 goto:STARWARS
+if errorlevel  9 goto:STARWARS
+if errorlevel  8 goto:EXIT
 if errorlevel  7 goto:SHUTDOWN_OPTIONS
 if errorlevel  6 goto:SYS_INFO
 if errorlevel  5 goto:TEST_UNKNOWN
@@ -328,6 +324,7 @@ cls
 
 
 ::-------------------------------------------------------------------------------------------------------
+
 :DEFENDER_TOOLS
 title DEFENDER TOOLS
 cls
@@ -376,14 +373,17 @@ endlocal
 pause & cls & goto COMPUTER_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
+
 :MSACTIVATION
 echo
 cls
 title  Microsoft Activation Scripts AIO 1.4
-%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\MAS.CMD
+ECHO THIS WILL EXIT AIO TO REOPEN MAS IF OTHER ITEMS NEEDS ATTENTION PLEASE RELAUNCH AIO
 timeout 5 >nul
-pause & cls & goto COMPUTER_CONFIGURATION
+%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\MAS.CMD
+
 ::-------------------------------------------------------------------------------------------------------
+
 :DEBLOATER
 CLS
 TITLE DEBLOATER
@@ -392,7 +392,9 @@ timeout 2 >nul
 Powershell -ExecutionPolicy Bypass -File %~dp0\SOFTWARE\CLEANUP\Debloater.ps1
 timeout 2 >nul
 pause & cls & goto COMPUTER_CONFIGURATION
+
 ::-------------------------------------------------------------------------------------------------------
+
 :UPDATE_APPS
 Title UPDATE APPLICATIONS
 ECHO:
@@ -401,15 +403,19 @@ timeout 2 >nul
 START %~dp0\SOFTWARE\UPDATE_SOFTWARE\PatchMyPC.exe /auto switch
 timeout 2 >nul
 pause & cls & goto COMPUTER_CONFIGURATION
+
 ::-------------------------------------------------------------------------------------------------------
+
 :PC_Cleanup_Utility
 CLS
 TITLE PC Cleanup Utility
 ECHO THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
+ECHO RELAUNCH AIO AFTER CLEANUP IF OTHER ITEMS NEEDS ATTENTION
 timeout 2 >nul
 %~dp0\SOFTWARE\CLEANUP\PC-Cleanup-Utility.bat
 
 pause & cls & goto COMPUTER_CONFIGURATION
+
 ::-------------------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------------------
@@ -708,10 +714,114 @@ cls & goto MainMenu
 :EXIT
 color 0c
 cls
-msg * /time:0 /w "This Is a work of fiction and will exit promptly..."
-timeout 2 >nul
+@echo OFF
+mode con cols=55 lines=6
+title Progress bar
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|                                           ^|   0 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##                              ^|   5 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###                                        ^|  15 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#########                                 ^|  30 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###############                            ^|  42 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################                         ^|  45 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################                    ^|  47 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################                  ^|  50 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#############################               ^|  52 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##############################              ^|  53 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|################################            ^|  65 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################################          ^|  70 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|######################################      ^|  80 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################################    ^|  89 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  90 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  95 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|############################################^| 100 ^|
+echo ===================================================
+echo OK!
+cls
+echo.
 endlocal
-exit
+cls & exit
 
 ::========================================================================================================================================
 
