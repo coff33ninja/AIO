@@ -156,17 +156,36 @@ cls
 :CHANGE_IP
 color 0f
 cls
-ECHO:
+echo:
 title IP CONFIGURATION
+echo:
+echo                      SELECT ONE OF THE FOLLOWING TO SETUP NETWORK SETTINGS
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] WIFI AUTOMATIC CONFIGURATION                         ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] ETHERNET AUTOMATIC CONFIGURATION                     ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] WIFI MANUAL                                          ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] ETHERNET MANUAL                                      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                      [5] GO BACK              ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
 ECHO:
-echo SELECT ONE OF THE FOLLOWING TO SETUP NETWORK SETTINGS
-echo [1] WIFI AUTOMATIC CONFIGURATION
-echo [2] ETHERNET AUTOMATIC CONFIGURATION
-echo [3] WIFI MANUAL
-echo [4] ETHERNET MANUAL
-echo [5] GO BACK
-
-choice /c 12345 /N /M "Enter your choice:"
+choice /c 12345 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5]"
 
 if errorlevel 5 goto:NETWORK_CONFIGURATION
 if errorlevel 4 goto:ETHERNET_MANUAL
