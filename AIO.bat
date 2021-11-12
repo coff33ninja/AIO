@@ -473,7 +473,9 @@ timeout 5 >nul
 PAUSE
 @echo off
 rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
-Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\disable-windows-defender.ps1"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/disable-windows-defender.ps1" -O "c:\aio\disable-windows-defender.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\disable-windows-defender.ps1"
+del "c:\aio\disable-windows-defender.ps1"
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
 Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
@@ -504,10 +506,11 @@ Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cm
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
-powershell.exe Invoke-WebRequest https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/Defender_Tools.exe -O c:\aio\Defender_Tools.exe
-start c:\aio\Defender_Tools.exe
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/Defender_Tools.exe" -O "c:\aio\Defender_Tools.exe"
+start "c:\aio\Defender_Tools.exe"
 popd
 timeout 2 >nul
+del "c:\aio\Defender_Tools.exe"
 endlocal
 pause & cls & goto COMPUTER_CONFIGURATION
 
@@ -519,7 +522,9 @@ cls
 title  Microsoft Activation Scripts AIO 1.4
 ECHO THIS WILL EXIT AIO TO REOPEN MAS IF OTHER ITEMS NEEDS ATTENTION PLEASE RELAUNCH AIO
 timeout 5 >nul
-%~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\MAS.CMD
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/MAS.bat" -O "C:\AIO\MAS.bat"
+C:\AIO\MAS.bat
+del c:\AIO\MAS.bat
 
 ::-------------------------------------------------------------------------------------------------------
 
@@ -528,8 +533,10 @@ CLS
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
-Powershell -ExecutionPolicy Bypass -File %~dp0\SOFTWARE\CLEANUP\Debloater.ps1
+powershell Invoke-WebRequest https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/CLEANUP/Debloater.ps1 -O c:\aio\Debloater.ps1
+Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
 timeout 2 >nul
+del c:\aio\debloater.ps1
 pause & cls & goto COMPUTER_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
