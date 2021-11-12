@@ -525,7 +525,7 @@ ECHO THIS WILL EXIT AIO TO REOPEN MAS IF OTHER ITEMS NEEDS ATTENTION PLEASE RELA
 timeout 5 >nul
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/MAS.bat" -O "C:\AIO\MAS.bat"
 C:\AIO\MAS.bat
-del c:\AIO\MAS.bat
+del "c:\AIO\MAS.bat"
 
 ::-------------------------------------------------------------------------------------------------------
 
@@ -534,10 +534,10 @@ CLS
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
-powershell Invoke-WebRequest https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/CLEANUP/Debloater.ps1 -O c:\aio\Debloater.ps1
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/CLEANUP/Debloater.ps1" -O "c:\aio\Debloater.ps1"
 Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
 timeout 2 >nul
-del c:\aio\debloater.ps1
+del "c:\aio\debloater.ps1"
 pause & cls & goto COMPUTER_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
@@ -547,8 +547,13 @@ Title UPDATE APPLICATIONS
 ECHO:
 ECHO THIS OPTION WILL START PATCH MY PC.
 timeout 2 >nul
-START %~dp0\SOFTWARE\UPDATE_SOFTWARE\PatchMyPC.exe /auto switch
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+START C:\AIO\PatchMyPC.exe /auto switch
 timeout 2 >nul
+pause
+del C:\AIO\PatchMyPC.exe
+del C:\AIO\PatchMyPC.ini
 pause & cls & goto COMPUTER_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
