@@ -508,6 +508,7 @@ CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/Defender_Tools.exe" -O "c:\aio\Defender_Tools.exe"
 start "c:\aio\Defender_Tools.exe"
+pause
 popd
 timeout 2 >nul
 del "c:\aio\Defender_Tools.exe"
