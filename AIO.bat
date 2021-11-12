@@ -49,7 +49,7 @@ if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 ::========================================================================================================================================
 
 :MainMenu
-
+md C:\aio
 cls
 title  TEST BOXES
 mode con cols=98 lines=32
@@ -504,7 +504,8 @@ Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cm
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
-start %~dp0\SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\Defender_Tools.exe
+powershell.exe Invoke-WebRequest https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/ACTIVATION_AND_DEFENDER_TOOLS/Defender_Tools.exe -O c:\aio\Defender_Tools.exe
+start c:\aio\Defender_Tools.exe
 popd
 timeout 2 >nul
 endlocal
