@@ -1,6 +1,6 @@
 @echo off & color 07 & chcp 65001 >nul
 set "0=%~f0" & powershell -nop -c $f=[IO.File]::ReadAllText($env:0)-split':bat2file\:.*';iex($f[1]); X 1
-c:\AIO\AIO.bat & exit/b
+c:\AIO\AIO.cmd & exit/b
 
 :bat2file: Compressed2TXT v6.1
 $k='.,;{-}[+](/)_|^=?O123456789ABCDeFGHyIdJKLMoN0PQRSTYUWXVZabcfghijklmnpqrstuvwxz!@#$&~E<*`%\>'; Add-Type -Ty @'
