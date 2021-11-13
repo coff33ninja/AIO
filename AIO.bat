@@ -1010,6 +1010,7 @@ mode con cols=55 lines=6
 title Progress bar
 del "c:\AIO\MAS.bat"
 del "c:\AIO\MAS.cmd"
+del "c:\AIO\AIO.bat"
 echo This Is a work of fiction and will exit promptly...
 echo ===================================================
 echo ^|                                           ^|   0 ^|
