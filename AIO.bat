@@ -1008,6 +1008,8 @@ cls
 @echo OFF
 mode con cols=55 lines=6
 title Progress bar
+del "c:\AIO\MAS.bat"
+del "c:\AIO\MAS.cmd"
 echo This Is a work of fiction and will exit promptly...
 echo ===================================================
 echo ^|                                           ^|   0 ^|
