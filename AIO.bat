@@ -708,7 +708,6 @@ cls
 echo This will start a Windows Manual Updater
 timeout 2 >nul
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
-::cd "c:\aio"
 start c:\aio\WUpdater.exe
 timeout 2 >nul
 pause
