@@ -2,10 +2,8 @@
 
 Special thanks to:
 
-Builtbybel https://github.com/builtbybel
-and
-massgravel https://github.com/massgravel/Microsoft-Activation-Scripts
-and https://github.com/massgravel/Microsoft-Activation-Scripts
+Builtbybel https://github.com/builtbybel, massgravel https://github.com/massgravel/Microsoft-Activation-Scripts,
+slavanap https://github.com/slavanap/Windows10ManualUpdate
 and offcource darius-vr https://github.com/darius-vr
 for the code, files and basis to work from.
 
