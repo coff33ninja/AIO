@@ -439,7 +439,7 @@ echo                  ^|                                                        
 echo                  ^|      [5] WINDOWS CLEANUP                                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|      [6] WINDOWS UPDATER                                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [7] BLANK         [8] BLANK         [9] GO BACK          ^|
@@ -451,7 +451,7 @@ choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard
 if errorlevel  9 goto:end
 if errorlevel  8 goto:TEST_UNKNOWN
 if errorlevel  7 goto:TEST_UNKNOWN
-if errorlevel  6 goto:TEST_UNKNOWN
+if errorlevel  6 goto:WUPDATE
 if errorlevel  5 goto:PC_Cleanup_Utility
 if errorlevel  4 goto:UPDATE_APPS
 if errorlevel  3 goto:DEBLOATER
@@ -703,6 +703,16 @@ echo Disk Defrag successful!
 echo.
 pause & goto PC_Cleanup_Utility
 
+:WUPDATE
+cls
+echo This will start a Windows Manual Updater
+timeout 2 >nul
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
+start "c:\aio\WUpdater.exe"
+timeout 2 >nul
+pause
+del C:\AIO\WUpdater.exe
+pause & cls & goto COMPUTER_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------------------
