@@ -7,6 +7,8 @@ echo. > c:\AIO\log.txt
 ::========================================================================================================================================
 :TERMS_AND_CONDITIONS
 TITLE TERMS AND CONDITIONS
+mode con cols=98 lines=32
+cls
 echo:
 echo      ####################################################
 echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
@@ -15,10 +17,10 @@ echo:
 echo           AIO version - 1.3
 echo           Copyright (C) 2021  Coff33ninja - Darius-vr
 echo:
-echo               This program is distributed in the hope that it will be useful,
-echo               but WITHOUT ANY WARRANTY; without even the implied warranty of
-echo               MERCHANTABILITY or A PARTICULAR PURPOSE.  See the
-echo               GNU General Public License for more details.
+echo               This program is distributed in order to simplify Windows Configuration,
+echo               but WITHOUT ANY GUARANTEE; including, but not limited to, 
+echo               the implied guarantee of RESALES or ANY OTHER unlisted purposes.
+echo               See the GNU General Public License for more details.
 echo:
 echo      User Understands:
 echo           [X] This product is licened under GNU General Public v3.
@@ -28,7 +30,7 @@ echo           [X]
 echo           [X] 
 echo           [X] 
 echo.
-set /p op=Do you agree to the terms and conditions as stated? (Yes or No):
+set /p op=      Do you agree to the terms and conditions as stated? (Yes or No):
 if %op%==Y goto SelfAdminTest
 if %op%==Yes goto SelfAdminTest
 if %op%==yes goto SelfAdminTest
