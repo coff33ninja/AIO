@@ -25,6 +25,20 @@ echo           [X] As a GRAND RULE OF THUMB it is always great to read the scrip
 echo           [X] 
 echo           [X] 
 echo           [X] 
+
+set /p op=Do you agree to the terms and conditions as stated? (Yes or No):
+if %op%==Y goto SelfAdminTest
+if %op%==Yes goto SelfAdminTest
+if %op%==yes goto SelfAdminTest
+if %op%==y goto SelfAdminTest
+if %op%==N goto exit
+if %op%==No goto exit
+if %op%==no goto exit
+if %op%==n goto exit
+echo Incorrect input, try again.
+timeout /t 1 >nul
+goto :MainMenu
+
 PAUSE
 ::========================================================================================================================================
 
