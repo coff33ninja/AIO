@@ -148,8 +148,7 @@ CLS
 Title SYSTEM INFORMATION
 ECHO:
 ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/DEVICE_INFORMATION.bat" -O "c:\aio\DEVICE_INFORMATION.bat"
-start c:\aio\DEVICE_INFORMATION.bat
+
 pause
 ::========================================================================================================================================
 :COMPUTER_CONFIGURATION

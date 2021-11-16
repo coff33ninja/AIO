@@ -48,6 +48,8 @@ mode con cols=98 lines=60
 cls
 title LIST OF NETWORK CONFIGURATION
 echo This section will display a list of all network configurations registered on device.
-netsh interface ip show config
-pause & mode con cols=98 lines=30 & goto NETWORK_CONFIGURATION
-cls
+netsh interface ip show config >> c:\AIO\log1.txt
+Echo %Date% %Time% >> c:\fAIO\log.txt
+ping 8.8.8.8 >> c:\AIO\log.txt
+ipconfig /all >> c:\AIO\log.txt
+pause 
