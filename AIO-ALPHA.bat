@@ -21,16 +21,18 @@ echo               This program is distributed in order to simplify Windows Conf
 echo               but WITHOUT ANY GUARANTEE; including, but not limited to, 
 echo               the implied guarantee of RESALES or ANY OTHER unlisted purposes.
 echo               See the GNU General Public License for more details.
+echo               https://www.gnu.org/licenses/gpl-3.0.en.html
 echo:
-echo      User Understands:
-echo           [X] This product is licened under GNU General Public v3.
-echo           [X] Please note that you as end-user understands that this is a "AS IS" application.
+echo      The End-User Understands:
+echo           [X] This product is licensed under GNU General Public v3.
+echo           [X] Please note that this is an "AS IS" application.
 echo           [X] As a GRAND RULE OF THUMB it is always great to read the script code first.
-echo           [X] 
+echo           [X] This code is compiled using fragments of other open source projects, including, 
+echo               but not limited to github projects by Builtbybel, massgravel and slapanav
 echo           [X] 
 echo           [X] 
 echo.
-set /p op=      Do you agree to the terms and conditions as stated? (Yes or No):
+set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
 if %op%==Y goto SelfAdminTest
 if %op%==Yes goto SelfAdminTest
 if %op%==yes goto SelfAdminTest
@@ -163,7 +165,7 @@ color 0f
 mode con cols=98 lines=60
 cls
 title LIST OF NETWORK CONFIGURATION
-echo This section will display a list of all network configurations registered on device. > c:\fAIO\log.txt 
+echo This section will display a list of all network configurations registered on the device. > c:\fAIO\log.txt 
 ECHO:
 Echo %Date% %Time% >> c:\AIO\log.txt
 ECHO:
