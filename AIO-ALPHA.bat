@@ -1,31 +1,31 @@
-@echo off
+@echo OFF
 setlocal
 %SystemRoot%\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {c82192ee-6cb5-4bc0-9ef0-fb818773790a}
 CLS
 ::========================================================================================================================================
 :TERMS_AND_CONDITIONS
-TITLE TERMS_AND_CONDITIONS
-echo
+TITLE TERMS AND CONDITIONS
+echo:
 echo      ####################################################
 echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
 echo      ####################################################
-echo
+echo:
 echo           AIO v%Current_Version%
 echo           Copyright (C) 2021  Coff33ninja - Darius-vr
-echo
+echo:
 echo               This program is distributed in the hope that it will be useful,
 echo               but WITHOUT ANY WARRANTY; without even the implied warranty of
 echo               MERCHANTABILITY or A PARTICULAR PURPOSE.  See the
 echo               GNU General Public License for more details.
-echo
-ECHO      User Understands:
+echo:
+echo      User Understands:
 echo           [X] This product is licened under GNU General Public v3.
 echo           [X] Please note that you as end-user understands that this is a "AS IS" application.
 echo           [X] As a GRAND RULE OF THUMB it is always great to read the script code first.
 echo           [X] 
 echo           [X] 
 echo           [X] 
-
+echo.
 set /p op=Do you agree to the terms and conditions as stated? (Yes or No):
 if %op%==Y goto SelfAdminTest
 if %op%==Yes goto SelfAdminTest
