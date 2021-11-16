@@ -297,14 +297,34 @@ exit /b
 
 ::========================================================================================================================================
 :EXIT
-color 0c
 cls
+TITLE Cleanup
+echo CLEANING UP RESIDUE LEFT OF AIO RESIDUE
+IF EXIST "c:\AIO\MAS.bat" del "c:\AIO\MAS.bat"
+IF EXIST "c:\AIO\MAS.cmd" del "c:\AIO\MAS.cmd"
+IF EXIST "c:\AIO\AIO.bat" del "c:\AIO\AIO.bat"
+IF EXIST "c:\AIO\DEVICE_INFORMATION.bat" del "DEVICE_INFORMATION.bat"
+IF EXIST "c:\AIO\NETWORK_INFORMATION.bat" del "NETWORK_INFORMATION.bat"
+IF EXIST "c:\AIO\Defender_Tools.exe" del "Defender_Tools.exe"
+IF EXIST "c:\AIO\NETWORK_SETUP.bat" del "NETWORK_SETUP.bat"
+IF EXIST "c:\AIO\TELEMETRY.bat" del "TELEMETRY.bat"
+IF EXIST "c:\AIO\WINDOWS_UPDATER.bat" del "WINDOWS_UPDATER.bat"
+IF EXIST "c:\AIO\SOFTWARE_UPDATER.bat" del "SOFTWARE_UPDATER.bat"
+IF EXIST "c:\AIO\DRIVER_UPDATER.bat" del "DRIVER_UPDATER.bat"
+IF EXIST "c:\AIO\DEBLOATER.ps1" del "DEBLOATER.ps1"
+IF EXIST "c:\AIO\DEFRAG.bat" del "DEFRAG.bat"
+IF EXIST "c:\AIO\TEMP_CLEANER.bat" del "TEMP_CLEANER.bat"
+IF EXIST "c:\AIO\PRE-SET.bat" del "PRE-SET.bat"
+IF EXIST "c:\AIO\FOLDER_LOCKER.bat" del "FOLDER_LOCKER.bat"
+IF EXIST "c:\AIO\USB_SHORTCUT_REMOVER.bat" del "USB_SHORTCUT_REMOVER.bat"
+goto EXIT
+:EXIT_BAR
 @echo OFF
+CLS
+color 0c
 mode con cols=55 lines=6
 title Progress bar
-del "c:\AIO\MAS.bat"
-del "c:\AIO\MAS.cmd"
-del "c:\AIO\AIO.bat"
+ECHO:
 echo This Is a work of fiction and will exit promptly...
 echo ===================================================
 echo ^|                                           ^|   0 ^|
