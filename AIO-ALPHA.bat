@@ -2,6 +2,8 @@
 setlocal
 %SystemRoot%\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {c82192ee-6cb5-4bc0-9ef0-fb818773790a}
 CLS
+MD c:\AIO
+echo. > c:\AIO\log.txt
 ::========================================================================================================================================
 :TERMS_AND_CONDITIONS
 TITLE TERMS AND CONDITIONS
@@ -100,7 +102,7 @@ if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 ::========================================================================================================================================
 
 :MainMenu
-md C:\aio
+
 cls
 title  AIO TOOLBOX
 mode con cols=98 lines=32
@@ -148,18 +150,44 @@ CLS
 Title SYSTEM INFORMATION
 ECHO:
 ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "C:\AIO\HWiNFO32.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "C:\AIO\HWiNFO32.INI"
+start c:\aio\HWiNFO32.exe
+timeout 2 >nul
+GOTO TEST_CONNECTION
 
-pause
+:TEST_CONNECTION
+color 0f
+mode con cols=98 lines=60
+cls
+title LIST OF NETWORK CONFIGURATION
+echo This section will display a list of all network configurations registered on device. > c:\fAIO\log.txt 
+ECHO:
+Echo %Date% %Time% >> c:\AIO\log.txt
+ECHO:
+netsh interface ip show config
+netsh interface ip show config >> c:\AIO\log.txt
+pause & GOTO MainMenu
 ::========================================================================================================================================
 :COMPUTER_CONFIGURATION
+ECHO STILL BLANK
+PAUSE GOTO MainMenu
 ::========================================================================================================================================
 :UPDATER
+ECHO STILL BLANK
+PAUSE GOTO MainMenu
 ::========================================================================================================================================
 :CLEANER
+ECHO STILL BLANK
+PAUSE GOTO MainMenu
 ::========================================================================================================================================
 :AIO_PRE-SET
+ECHO STILL BLANK
+PAUSE GOTO MainMenu
 ::========================================================================================================================================
 :EXTRAS
+ECHO STILL BLANK
+PAUSE GOTO MainMenu
 ::========================================================================================================================================
 
 ::========================================================================================================================================
