@@ -10,8 +10,7 @@ echo      ####################################################
 echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
 echo      ####################################################
 echo:
-echo           AIO v%Current_Version%
-            SET Current_Version=1.4
+echo           AIO version - 1.3
 echo           Copyright (C) 2021  Coff33ninja - Darius-vr
 echo:
 echo               This program is distributed in the hope that it will be useful,
