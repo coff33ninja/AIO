@@ -35,11 +35,24 @@ if %op%==N goto exit
 if %op%==No goto exit
 if %op%==no goto exit
 if %op%==n goto exit
+if errorlevel %op%==Y goto Incorrect
+if errorlevel %op%==Yes goto Incorrect
+if errorlevel %op%==yes goto Incorrect
+if errorlevel %op%==y goto Incorrect
+if errorlevel %op%==N goto Incorrect
+if errorlevel %op%==No goto Incorrect
+if errorlevel %op%==no goto Incorrect
+if errorlevel %op%==n goto Incorrect
+echo
+cls
+:Incorrect input, try again.
+cls
+TITLE Incorrect input
 echo Incorrect input, try again.
-timeout /t 1 >nul
-goto :MainMenu
+pause >nul
+CLS
+goto :TERMS_AND_CONDITIONS
 
-PAUSE
 ::========================================================================================================================================
 
 cls
