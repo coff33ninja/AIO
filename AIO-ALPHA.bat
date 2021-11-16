@@ -284,6 +284,119 @@ exit /b
 
 ::========================================================================================================================================
 :EXIT
+color 0c
+cls
+@echo OFF
+mode con cols=55 lines=6
+title Progress bar
+del "c:\AIO\MAS.bat"
+del "c:\AIO\MAS.cmd"
+del "c:\AIO\AIO.bat"
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|                                           ^|   0 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##                              ^|   5 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###                                        ^|  15 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#########                                 ^|  30 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###############                            ^|  42 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################                         ^|  45 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################                    ^|  47 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################                  ^|  50 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#############################               ^|  52 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##############################              ^|  53 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|################################            ^|  65 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################################          ^|  70 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|######################################      ^|  80 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################################    ^|  89 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  90 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  95 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|############################################^| 100 ^|
+echo ===================================================
+echo OK!
+cls
+echo.
+endlocal
+cls & exit
 ::========================================================================================================================================
 
 
