@@ -4,6 +4,7 @@ setlocal
 CLS
 MD c:\AIO
 echo. > c:\AIO\log.txt
+
 ::========================================================================================================================================
 
 cls
@@ -46,11 +47,14 @@ cd /d %~dp0
 if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
 ::========================================================================================================================================
+
 :TERMS_AND_CONDITIONS_AGREEMENT
 if exist c:/aio/tos.txt goto MainMenu
 if errorlevel goto TERMS_AND_CONDITIONS
 cls
+
 ::========================================================================================================================================
+
 :TERMS_AND_CONDITIONS
 TITLE TERMS AND CONDITIONS
 mode con cols=98 lines=32
@@ -107,6 +111,7 @@ CLS
 goto :TERMS_AND_CONDITIONS
 
 ::========================================================================================================================================
+
 :MainMenu
 cls
 title  AIO TOOLBOX
@@ -149,7 +154,9 @@ if errorlevel  3 goto:UPDATER
 if errorlevel  2 goto:COMPUTER_CONFIGURATION
 if errorlevel  1 goto:INFORMATION
 cls
+
 ::========================================================================================================================================
+
 :INFORMATION
 CLS
 Title SYSTEM INFORMATION
@@ -160,6 +167,8 @@ powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/
 start c:\aio\HWiNFO32.exe
 timeout 2 >nul
 GOTO TEST_CONNECTION
+
+::-------------------------------------------------------------------------------------------------------
 
 :TEST_CONNECTION
 color 0f
@@ -173,7 +182,9 @@ ECHO:
 netsh interface ip show config
 netsh interface ip show config >> c:\AIO\log.txt
 pause & GOTO MainMenu
+
 ::========================================================================================================================================
+
 :COMPUTER_CONFIGURATION
 title COMPUTER_CONFIGURATION
 mode con cols=98 lines=32
@@ -213,6 +224,8 @@ if errorlevel  3 goto:MAS
 if errorlevel  2 goto:DEFENDER_TOOLBOX
 if errorlevel  1 goto:NETWORK_CONFIGURATION
 cls
+
+::-------------------------------------------------------------------------------------------------------
 
 :NETWORK_CONFIGURATION
 color 0f
@@ -313,6 +326,8 @@ if errorlevel 2 goto:AUTOMATIC_CONFIGURATION_ETHERNET
 if errorlevel 1 goto:AUTOMATIC_CONFIGURATION_WIFI
 cls
 
+::-------------------------------------------------------------------------------------------------------
+
 :AUTOMATIC_CONFIGURATION_WIFI
 color 0f
 mode con cols=98 lines=60
@@ -323,6 +338,8 @@ netsh interface ipv4 set address name="Wi-Fi" source=dhcp
 netsh interface ipv4 set dnsservers name"Wi-Fi" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
+::-------------------------------------------------------------------------------------------------------
+
 :AUTOMATIC_CONFIGURATION_ETHERNET
 color 0f
 mode con cols=98 lines=60
@@ -332,6 +349,8 @@ echo:
 netsh interface ipv4 set address name="Ethernet" source=dhcp
 netsh interface ipv4 set dnsservers name"Ethernet" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
+
+::-------------------------------------------------------------------------------------------------------
 
 :WIFI_MANUAL
 color 0f
@@ -348,6 +367,8 @@ Set /P %WIFI-GATEWAY%=Enter GATEWAY:
 netsh interface ipv4 set dns name="Wi-Fi" %WIFI-DNS% primary
 Set /P %WIFI-DNS%=ENTER DNS:
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
+
+::-------------------------------------------------------------------------------------------------------
 
 :ETHERNET_MANUAL
 color 0f
@@ -482,7 +503,7 @@ echo:
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
-echo                  ^|      [1] BACKUP WIFI CONFIGURATION                           ^|
+echo                  ^|      [1] BACKUP WIFI CONFIGURATION                            ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [2] RESTORE WIFI CONFIGURATION                           ^|
 echo                  ^|                                                               ^|
@@ -516,6 +537,7 @@ if errorlevel  1 goto:BACKUP_WIFI
 cls
 
 ::-------------------------------------------------------------------------------------------------------
+
 :BACKUP_WIFI
 color 0f
 mode con cols=98 lines=60
@@ -529,6 +551,7 @@ start .
 pause & goto end_NETWORK_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
+
 :RESTORE_WIFI
 color 0f
 mode con cols=98 lines=60
@@ -599,6 +622,7 @@ timeout 2 >nul
 del "c:\aio\Defender_Tools.exe"
 endlocal
 pause & cls & goto end_COMPUTER_CONFIGURATION
+
 ::========================================================================================================================================
 
 :TELEMETRY
@@ -615,24 +639,28 @@ color 0f
 mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
+
 ::========================================================================================================================================
 :CLEANER
 color 0f
 mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
+
 ::========================================================================================================================================
 :AIO_PRE-SET
 color 0f
 mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
+
 ::========================================================================================================================================
 :EXTRAS
 color 0f
 mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
+
 ::========================================================================================================================================
 
 ::========================================================================================================================================
@@ -640,7 +668,68 @@ PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 ::========================================================================================================================================
 ::========================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ::========================================================================================================================================
+REM THIS SECTION DOES NOT NEED ANY EDITING
 ::========================================================================================================================================
 :SHUTDOWN_OPTIONS
 title Shutdown Script
@@ -774,14 +863,15 @@ endlocal
 exit /b
 
 
-
+::========================================================================================================================================
+REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
 ::========================================================================================================================================
 
 :end_BACKMENU
 cls
 @echo OFF
 mode con cols=43 lines=6
-title Progress bar
+title Progress to MainMenu
 echo Going back to previous menu please wait...
 echo ========================================
 echo ^|                                ^|   0 ^|
@@ -894,7 +984,7 @@ cls & goto MainMenu
 cls
 @echo OFF
 mode con cols=43 lines=6
-title Progress bar
+title Progress to NETWORK CONFIGURATION
 echo Going back to previous menu please wait...
 echo ========================================
 echo ^|                                ^|   0 ^|
@@ -1006,7 +1096,7 @@ cls & goto NETWORK_CONFIGURATION
 cls
 @echo OFF
 mode con cols=43 lines=6
-title Progress bar
+title Progress to COMPUTER CONFIGURATION
 echo Going back to previous menu please wait...
 echo ========================================
 echo ^|                                ^|   0 ^|
@@ -1123,6 +1213,7 @@ forfiles -p "C:\AIO" -s -m *.cmd*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.ps1*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.exe*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.txt*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.ini*  /C "cmd /c del @path"
 goto EXIT_BAR
 
 :EXIT_BAR
@@ -1130,7 +1221,7 @@ goto EXIT_BAR
 CLS
 color 0c
 mode con cols=55 lines=6
-title Progress bar
+title EXITING...
 ECHO:
 echo This Is a work of fiction and will exit promptly...
 echo ===================================================
@@ -1239,7 +1330,8 @@ endlocal
 cls & exit
 ::========================================================================================================================================
 
-
+::========================================================================================================================================
+REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
 ::========================================================================================================================================
 :EASTER
 ::========================================================================================================================================
