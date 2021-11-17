@@ -246,7 +246,7 @@ echo                  ^|========================================================
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  9 goto:end_BACKMENU
+if errorlevel  9 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  8 goto:BACKUP_CONFIG
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
