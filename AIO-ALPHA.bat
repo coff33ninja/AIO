@@ -5,61 +5,6 @@ CLS
 MD c:\AIO
 echo. > c:\AIO\log.txt
 ::========================================================================================================================================
-:TERMS_AND_CONDITIONS
-TITLE TERMS AND CONDITIONS
-mode con cols=98 lines=32
-cls
-echo:
-echo      ####################################################
-echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
-echo      ####################################################
-echo:
-echo           AIO version - 1.3
-echo           Copyright (C) 2021  Coff33ninja - Darius-vr
-echo:
-echo               This program is distributed in order to simplify Windows Configuration,
-echo               but WITHOUT ANY GUARANTEE; including, but not limited to, 
-echo               the implied guarantee of RESALES or ANY OTHER unlisted purposes.
-echo               See the GNU General Public License for more details.
-echo               https://www.gnu.org/licenses/gpl-3.0.en.html
-echo:
-echo      The End-User Understands:
-echo           [X] This product is licensed under GNU General Public v3.
-echo           [X] Please note that this is an "AS IS" application.
-echo           [X] As a GRAND RULE OF THUMB it is always great to read the script code first.
-echo           [X] This code is compiled using fragments of other open source projects, including, 
-echo               but not limited to github projects by Builtbybel, massgravel and slapanav
-echo           [X] 
-echo           [X] 
-echo.
-set /p op=      _Do you agree to the terms and conditions as stated above? (Yes or No):
-if %op%==Y goto SelfAdminTest
-if %op%==Yes goto SelfAdminTest
-if %op%==yes goto SelfAdminTest
-if %op%==y goto SelfAdminTest
-if %op%==N goto exit
-if %op%==No goto exit
-if %op%==no goto exit
-if %op%==n goto exit
-if errorlevel %op%==Y goto Incorrect
-if errorlevel %op%==Yes goto Incorrect
-if errorlevel %op%==yes goto Incorrect
-if errorlevel %op%==y goto Incorrect
-if errorlevel %op%==N goto Incorrect
-if errorlevel %op%==No goto Incorrect
-if errorlevel %op%==no goto Incorrect
-if errorlevel %op%==n goto Incorrect
-echo
-cls
-:Incorrect input, try again.
-cls
-TITLE Incorrect input
-echo Incorrect input, try again.
-pause >nul
-CLS
-goto :TERMS_AND_CONDITIONS
-
-::========================================================================================================================================
 
 cls
 :SelfAdminTest
@@ -100,13 +45,64 @@ setlocal & pushd .
 cd /d %~dp0
 if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
+::========================================================================================================================================
+:TERMS_AND_CONDITIONS
+TITLE TERMS AND CONDITIONS
+mode con cols=98 lines=32
+cls
+echo:
+echo      ####################################################
+echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
+echo      ####################################################
+echo:
+echo           AIO version - 1.3
+echo           Copyright (C) 2021  Coff33ninja - Darius-vr
+echo:
+echo               This program is distributed in order to simplify Windows Configuration,
+echo               but WITHOUT ANY GUARANTEE; including, but not limited to, 
+echo               the implied guarantee of RESALES or ANY OTHER unlisted purposes.
+echo               See the GNU General Public License for more details.
+echo               https://www.gnu.org/licenses/gpl-3.0.en.html
+echo:
+echo      The End-User Understands:
+echo           [X] This product is licensed under GNU General Public v3.
+echo           [X] Please note that this is an "AS IS" application.
+echo           [X] As a GRAND RULE OF THUMB it is always great to read the script code first.
+echo           [X] This code is compiled using fragments of other open source projects, including, 
+echo               but not limited to github projects by Builtbybel, massgravel and slapanav
+echo           [X] 
+echo           [X] 
+echo.
+set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
+if %op%==Y goto MainMenu
+if %op%==Yes goto MainMenu
+if %op%==yes goto MainMenu
+if %op%==y goto MainMenu
+if %op%==N goto exit
+if %op%==No goto exit
+if %op%==no goto exit
+if %op%==n goto exit
+if errorlevel %op%==Y goto Incorrect
+if errorlevel %op%==Yes goto Incorrect
+if errorlevel %op%==yes goto Incorrect
+if errorlevel %op%==y goto Incorrect
+if errorlevel %op%==N goto Incorrect
+if errorlevel %op%==No goto Incorrect
+if errorlevel %op%==no goto Incorrect
+if errorlevel %op%==n goto Incorrect
+echo
+cls
+
+:Incorrect input, try again.
+cls
+TITLE Incorrect input
+echo Incorrect input, try again.
+pause >nul 
+CLS
+goto :TERMS_AND_CONDITIONS
 
 ::========================================================================================================================================
-
-::========================================================================================================================================
-
 :MainMenu
-
 cls
 title  AIO TOOLBOX
 mode con cols=98 lines=32
