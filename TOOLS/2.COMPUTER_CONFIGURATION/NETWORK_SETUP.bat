@@ -1,53 +1,8 @@
-
-::========================================================================================================================================
-
-cls
-ECHO.
-ECHO =============================
-ECHO Running Admin shell
-ECHO =============================
-
-:init
-setlocal DisableDelayedExpansion
-set "batchPath=%~0"
-for %%k in (%0) do set batchName=%%~nk
-set "vbsGetPrivileges=%temp%\OEgetPriv_%batchName%.vbs"
-setlocal EnableDelayedExpansion
-
-:checkPrivileges
-NET FILE 1>NUL 2>NUL
-if '%errorlevel%' == '0' ( goto gotPrivileges ) else ( goto getPrivileges )
-
-:getPrivileges
-if '%1'=='ELEV' (echo ELEV & shift /1 & goto gotPrivileges)
-ECHO.
-ECHO **************************************
-ECHO Invoking UAC for Privilege Escalation
-ECHO **************************************
-
-ECHO Set UAC = CreateObject^("Shell.Application"^) > "%vbsGetPrivileges%"
-ECHO args = "ELEV " >> "%vbsGetPrivileges%"
-ECHO For Each strArg in WScript.Arguments >> "%vbsGetPrivileges%"
-ECHO args = args ^& strArg ^& " "  >> "%vbsGetPrivileges%"
-ECHO Next >> "%vbsGetPrivileges%"
-ECHO UAC.ShellExecute "!batchPath!", args, "", "runas", 1 >> "%vbsGetPrivileges%"
-"%SystemRoot%\System32\WScript.exe" "%vbsGetPrivileges%" %*
-exit /B
-
-:gotPrivileges
-setlocal & pushd .
-cd /d %~dp0
-if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
-
-
-::========================================================================================================================================
-
-
 :NETWORK_CONFIGURATION
 color 0f
 title  NETWORK CONFIGURATION
+mode con cols=98 lines=32
 cls
-
 echo:
 echo:
 echo                  ^|===============================================================^|
@@ -75,7 +30,7 @@ echo                  ^|========================================================
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  9 goto:MainMenu
+if errorlevel  9 goto:end
 if errorlevel  8 goto:BACKUP_CONFIG
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
@@ -355,3 +310,114 @@ Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
 pause & goto NETWORK_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
+
+:end
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress bar
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+exit /b

@@ -46,6 +46,11 @@ cd /d %~dp0
 if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
 ::========================================================================================================================================
+:TERMS_AND_CONDITIONS_AGREEMENT
+if exist c:/aio/tos.txt goto MainMenu
+if errorlevel goto TERMS_AND_CONDITIONS
+cls
+::========================================================================================================================================
 :TERMS_AND_CONDITIONS
 TITLE TERMS AND CONDITIONS
 mode con cols=98 lines=32
@@ -74,10 +79,10 @@ echo           [X]
 echo           [X] 
 echo.
 set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
-if %op%==Y goto MainMenu
-if %op%==Yes goto MainMenu
-if %op%==yes goto MainMenu
-if %op%==y goto MainMenu
+if %op%==Y goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
+if %op%==Yes goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
+if %op%==yes goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
+if %op%==y goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
 if %op%==N goto exit
 if %op%==No goto exit
 if %op%==no goto exit
@@ -170,8 +175,51 @@ netsh interface ip show config >> c:\AIO\log.txt
 pause & GOTO MainMenu
 ::========================================================================================================================================
 :COMPUTER_CONFIGURATION
-ECHO STILL BLANK
-PAUSE GOTO MainMenu
+title COMPUTER_CONFIGURATION
+mode con cols=98 lines=32
+echo:
+echo                       Press the corresponding number to go to desired section:
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                COMPUTER CONFIGURATION MAIN MENU               ^| 
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] NETWORK SETUP                                        ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] COMPUTER CONFIGURATION                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] UPDATER                                              ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] CLEANER                                              ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] AIO PRE-SET                                          ^|
+echo                  ^|                                                               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] EXTRAS                                               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [7] SHUTDOWN OPTIONS                     [8] EXIT        ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
+
+if errorlevel  9 goto:EASTER
+if errorlevel  8 goto:EXIT
+if errorlevel  7 goto:SHUTDOWN_OPTIONS
+if errorlevel  6 goto:EXTRAS
+if errorlevel  5 goto:AIO_PRE-SET
+if errorlevel  4 goto:CLEANER
+if errorlevel  3 goto:UPDATER
+if errorlevel  2 goto:COMPUTER_CONFIGURATION
+if errorlevel  1 goto:NETWORK_SETUP
+cls
+
+:NETWORK_SETUP
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/NETWORK_SETUP.bat" -O "C:\AIO\NETWORK_SETUP.bat"
+c:\aio\NETWORK_SETUP.bat
+goto EXIT_BAR
 ::========================================================================================================================================
 :UPDATER
 ECHO STILL BLANK
@@ -199,6 +247,7 @@ PAUSE GOTO MainMenu
 ::========================================================================================================================================
 :SHUTDOWN_OPTIONS
 title Shutdown Script
+mode con cols=98 lines=32
 set seconds=1
 
 :start
@@ -338,6 +387,7 @@ forfiles -p "C:\AIO" -s -m *.bat*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.cmd*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.ps1*  /C "cmd /c del @path"
 forfiles -p "C:\AIO" -s -m *.exe*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.txt*  /C "cmd /c del @path"
 goto EXIT_BAR
 
 :EXIT_BAR
