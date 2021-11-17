@@ -186,33 +186,31 @@ echo                  ^|      __________________________________________________
 echo                  ^|                                                               ^|
 echo                  ^|      [1] NETWORK SETUP                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] COMPUTER CONFIGURATION                               ^|
+echo                  ^|      [2] DEFENDER TOOLBOX                                     ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] UPDATER                                              ^|
+echo                  ^|      [3] MICROSOFT ACTIVATION                                 ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] CLEANER                                              ^|
+echo                  ^|      [4] TELEMETRY                                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] AIO PRE-SET                                          ^|
+echo                  ^|            ####                       ####                    ^|
+echo                  ^|            ####                       ####                    ^|
+echo                  ^|                       ##      ##                              ^|
+echo                  ^|                         #    #                                ^|
+echo                  ^|     #                     ##                              #   ^|
+echo                  ^|      #___________________________________________________#    ^|
 echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] EXTRAS                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] SHUTDOWN OPTIONS                     [8] EXIT        ^|
+echo                  ^|      [5] SHUTDOWN OPTIONS       [6] BACK      [7] EXIT        ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
+choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
 
-if errorlevel  9 goto:EASTER
-if errorlevel  8 goto:EXIT
-if errorlevel  7 goto:SHUTDOWN_OPTIONS
-if errorlevel  6 goto:EXTRAS
-if errorlevel  5 goto:AIO_PRE-SET
-if errorlevel  4 goto:CLEANER
-if errorlevel  3 goto:UPDATER
-if errorlevel  2 goto:COMPUTER_CONFIGURATION
+if errorlevel  7 goto:EXIT
+if errorlevel  6 goto:end_BACKMENU
+if errorlevel  5 goto:SHUTDOWN_OPTIONS
+if errorlevel  4 goto:TELEMETRY 
+if errorlevel  3 goto:MAS
+if errorlevel  2 goto:DEFENDER_TOOLBOX
 if errorlevel  1 goto:NETWORK_SETUP
 cls
 
@@ -220,22 +218,83 @@ cls
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/NETWORK_SETUP.bat" -O "C:\AIO\NETWORK_SETUP.bat"
 c:\aio\NETWORK_SETUP.bat
 goto EXIT_BAR
+
+:DEFENDER_TOOLBOX
+title DEFENDER TOOLBOX
+cls
+ECHO:
+ECHO THIS SECTION WILL ADD CERTAIN FIREWALL EXCEPTIONS FOR WINDOWS
+ECHO WINDOWS ACTIVATION TOOLKITS AS WELL AS GIVE MEENS TO DISABLE
+ECHO WINDOWS DEFENDER TO ALLOW THE TOOLKITS TO PROPERLY FUNTION.
+timeout 5 >nul
+PAUSE
+@echo off
+rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "c:\aio\disable-windows-defender.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\disable-windows-defender.ps1"
+del "c:\aio\disable-windows-defender.ps1"
+@echo off
+START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147735507 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147736914 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147743522 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147734094 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147743421 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147765679 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 251873 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 213927 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ThreatIDDefaultAction_Ids 2147722906 -ThreatIDDefaultAction_Actions Allow -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\KMSAutoS -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjHook.dll -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjPatcher.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_x64.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files\KMSSS.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files -Force; ^
+Add-MpPreference -ExclusionPath C:\Windows\KMS -Force; ^
+Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd;
+@echo off
+CLS
+ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "c:\aio\Defender_Tools.exe"
+start c:\aio\Defender_Tools.exe 
+pause
+popd
+timeout 2 >nul
+del "c:\aio\Defender_Tools.exe"
+endlocal
+pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
+
+:TELEMETRY
+ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/TELEMETRY.bat" -O "c:\aio\TELEMETRY.bat"
+start c:\aio\TELEMETRY.bat
+PAUSE 
+::========================================================================================================================================
+
 :UPDATER
 ECHO STILL BLANK
-PAUSE GOTO MainMenu
+PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :CLEANER
 ECHO STILL BLANK
-PAUSE GOTO MainMenu
+PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :AIO_PRE-SET
 ECHO STILL BLANK
-PAUSE GOTO MainMenu
+PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :EXTRAS
 ECHO STILL BLANK
-PAUSE GOTO MainMenu
+PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 ::========================================================================================================================================
@@ -376,7 +435,235 @@ echo Perhaps try another input
 endlocal
 exit /b
 
+
+
 ::========================================================================================================================================
+
+:end_BACKMENU
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress bar
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto MainMenu
+
+::========================================================================================================================================
+
+::========================================================================================================================================
+
+:end_COMPUTER_CONFIGURATION
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress bar
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 :EXIT
