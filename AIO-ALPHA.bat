@@ -273,6 +273,7 @@ cls
 
 :CHANGE_IP
 color 0f
+mode con cols=98 lines=60
 cls
 echo:
 title IP CONFIGURATION
@@ -314,6 +315,7 @@ cls
 
 :AUTOMATIC_CONFIGURATION_WIFI
 color 0f
+mode con cols=98 lines=60
 title WIFI AUTOMATIC CONFIGURATION
 cls
 echo:
@@ -323,6 +325,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :AUTOMATIC_CONFIGURATION_ETHERNET
 color 0f
+mode con cols=98 lines=60
 title ETHERNET AUTOMATIC CONFIGURATION
 cls
 echo:
@@ -332,6 +335,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :WIFI_MANUAL
 color 0f
+mode con cols=98 lines=60
 title WIFI MANUAL CONFIGURATION
 cls
 echo: 
@@ -347,6 +351,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :ETHERNET_MANUAL
 color 0f
+mode con cols=98 lines=60
 title ETHERNET MANUAL CONFIGURATION
 cls
 echo:
@@ -364,6 +369,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :PING
 color 0f
+mode con cols=98 lines=60
 cls
 echo:
 echo EXAMPLES
@@ -378,6 +384,7 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 
 :TRACE_ROUTE
 color 0f
+mode con cols=98 lines=60
 cls
 Set /P config=Enter an IP address or hostname to trace:
 tracert.exe -d -h 64 %config%
@@ -387,6 +394,7 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 
 :SETUP_NETWORK_SHARE
 color 0f
+mode con cols=98 lines=60
 cls
 echo:
 title NETWORK SHARE MAP
@@ -403,6 +411,7 @@ pause & ping %COMPUTER_NAME% & goto end_NETWORK_CONFIGURATION
 
 :REMOVE_NETWORK_MAP
 color 0f
+mode con cols=98 lines=60
 cls
 echo:
 title REMOVE NETWORK MAP
@@ -414,6 +423,8 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 
 :WIFI_CONFIURATION
 setlocal enabledelayedexpansion
+color 0f
+mode con cols=98 lines=60
 cls
 ECHO:
 title WiFi name list
@@ -424,6 +435,8 @@ pause & goto WiFi_prompt
 if error "There is no wireless interface on the system." goto WiFiNo
 
 :WiFi_prompt
+color 0f
+mode con cols=98 lines=60
 echo.
 echo To view the WiFi password note down the name and press Y to continue,
 echo If not then press N to go back to previous menu.
@@ -460,6 +473,7 @@ cls & goto end_NETWORK_CONFIGURATION
 
 :BACKUP_CONFIG
 color 0f
+mode con cols=98 lines=60
 title  BACKUP NETWORK CONFIGURATION
 cls
 
@@ -503,6 +517,8 @@ cls
 
 ::-------------------------------------------------------------------------------------------------------
 :BACKUP_WIFI
+color 0f
+mode con cols=98 lines=60
 cls
 echo
 md C:\WIFI
@@ -514,6 +530,8 @@ pause & goto end_NETWORK_CONFIGURATION
 
 ::-------------------------------------------------------------------------------------------------------
 :RESTORE_WIFI
+color 0f
+mode con cols=98 lines=60
 cls
 echo
 cd C:\WIFI
@@ -528,6 +546,8 @@ pause & goto end_NETWORK_CONFIGURATION
 ::-------------------------------------------------------------------------------------------------------
 
 :DEFENDER_TOOLBOX
+color 0f
+mode con cols=98 lines=60
 title DEFENDER TOOLBOX
 cls
 ECHO:
@@ -582,6 +602,8 @@ pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :TELEMETRY
+color 0f
+mode con cols=98 lines=60
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/TELEMETRY.bat" -O "c:\aio\TELEMETRY.bat"
 start c:\aio\TELEMETRY.bat
@@ -589,18 +611,26 @@ PAUSE
 ::========================================================================================================================================
 
 :UPDATER
+color 0f
+mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :CLEANER
+color 0f
+mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :AIO_PRE-SET
+color 0f
+mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 :EXTRAS
+color 0f
+mode con cols=98 lines=60
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
