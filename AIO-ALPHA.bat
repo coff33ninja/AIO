@@ -32,7 +32,7 @@ echo               but not limited to github projects by Builtbybel, massgravel 
 echo           [X] 
 echo           [X] 
 echo.
-set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
+set /p op=      _Do you agree to the terms and conditions as stated above? (Yes or No):
 if %op%==Y goto SelfAdminTest
 if %op%==Yes goto SelfAdminTest
 if %op%==yes goto SelfAdminTest
