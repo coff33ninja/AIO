@@ -211,7 +211,7 @@ if errorlevel  5 goto:SHUTDOWN_OPTIONS
 if errorlevel  4 goto:TELEMETRY 
 if errorlevel  3 goto:MAS
 if errorlevel  2 goto:DEFENDER_TOOLBOX
-if errorlevel  1 goto:NETWORK_SETUP
+if errorlevel  1 goto:NETWORK_CONFIGURATION
 cls
 
 :NETWORK_CONFIGURATION
