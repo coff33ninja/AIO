@@ -641,26 +641,83 @@ powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/
 start c:\aio\TELEMETRY.bat
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
-
+REM THIS SECTION IN PROGRESS...
 :UPDATER
+color 0f
+mode con cols=98 lines=60
+title  UPDATER
 cls
+
+echo:
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] WINDOWS UPDATE                                       ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] WINDOWS UPDATE PAUSER                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] SOFTWARE UPDATER                                     ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [7] BLANK                                                ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+
+if errorlevel  9 goto:end_NETWORK_CONFIGURATION
+if errorlevel  8 goto:TEST_UNKNOWN
+if errorlevel  7 goto:TEST_UNKNOWN
+if errorlevel  6 goto:TEST_UNKNOWN
+if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  4 goto:TEST_UNKNOWN
+if errorlevel  3 goto:SOFTWARE_UPDATER
+if errorlevel  2 goto:WINDOWS_UPDATE_PAUSER
+if errorlevel  1 goto:WINDOWS_UPDATE
+cls
+
+:WINDOWS_UPDATE
+cls
+TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
-timeout 2 >nul
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
 start /wait c:\aio\WUpdater.exe
 timeout 2 >nul
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
+del C:\AIO\WUpdater.exe
+pause & goto Updater
+
+:WINDOWS_UPDATE_PAUSER
+cls
+TITLE WINDOWS UPDATE PAUSE
+echo This section will give options to pause Windows Update...
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
 start /wait c:\aio\UPDATES_PAUSE_TASK.ps1
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
-START C:\AIO\PatchMyPC.exe /auto switch
+timeout 2 >nul
+pause & goto Updater
+
+:SOFTWARE_UPDATER
+cls
+TITLE SOFTWARE UPDATER
+echo This will start a SOFTWARE UPDATE SESSION...
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+START /wait C:\AIO\PatchMyPC.exe /auto switch
 timeout 2 >nul
 pause
 del C:\AIO\PatchMyPC.exe
 del C:\AIO\PatchMyPC.ini
 pause
-del C:\AIO\WUpdater.exe
-pause & cls & goto COMPUTER_CONFIGURATION
+pause & cls & goto Updater
 
 ::========================================================================================================================================
 :CLEANER
