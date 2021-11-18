@@ -623,20 +623,44 @@ pause & cls & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
+:MAS
+color 0f
+mode con cols=98 lines=60
+ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "c:\aio\MAS.cmd"
+start wait c:\aio\MAS.cmd
+PAUSE 
+
+::========================================================================================================================================
+
 :TELEMETRY
 color 0f
 mode con cols=98 lines=60
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/TELEMETRY.bat" -O "c:\aio\TELEMETRY.bat"
 start c:\aio\TELEMETRY.bat
-PAUSE 
+PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
 
 :UPDATER
-color 0f
-mode con cols=98 lines=60
-ECHO STILL BLANK
-PAUSE GOTO end_COMPUTER_CONFIGURATION
+cls
+echo This will start a Windows Manual Updater
+timeout 2 >nul
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
+start /wait c:\aio\WUpdater.exe
+timeout 2 >nul
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
+start /wait c:\aio\UPDATES_PAUSE_TASK.ps1
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/SOFTWARE/UPDATE_SOFTWARE/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+START C:\AIO\PatchMyPC.exe /auto switch
+timeout 2 >nul
+pause
+del C:\AIO\PatchMyPC.exe
+del C:\AIO\PatchMyPC.ini
+pause
+del C:\AIO\WUpdater.exe
+pause & cls & goto COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 :CLEANER
