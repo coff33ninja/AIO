@@ -6,6 +6,7 @@ MD c:\AIO
 echo. > c:\AIO\log.txt
 
 ::========================================================================================================================================
+::========================================================================================================================================
 
 cls
 :SelfAdminTest
@@ -47,12 +48,14 @@ cd /d %~dp0
 if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
 ::========================================================================================================================================
+::========================================================================================================================================
 
 :TERMS_AND_CONDITIONS_AGREEMENT
 if exist c:/aio/tos.txt goto MainMenu
 if errorlevel goto TERMS_AND_CONDITIONS
 cls
 
+::========================================================================================================================================
 ::========================================================================================================================================
 
 :TERMS_AND_CONDITIONS
@@ -111,6 +114,7 @@ CLS
 goto :TERMS_AND_CONDITIONS
 
 ::========================================================================================================================================
+::========================================================================================================================================
 
 :MainMenu
 cls
@@ -168,7 +172,7 @@ start /wait c:\aio\HWiNFO32.exe
 timeout 2 >nul
 GOTO TEST_CONNECTION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :TEST_CONNECTION
 color 0f
@@ -183,6 +187,7 @@ netsh interface ip show config
 netsh interface ip show config >> c:\AIO\log.txt
 pause & GOTO MainMenu
 
+::========================================================================================================================================
 ::========================================================================================================================================
 
 :COMPUTER_CONFIGURATION
@@ -225,7 +230,7 @@ if errorlevel  2 goto:DEFENDER_TOOLBOX
 if errorlevel  1 goto:NETWORK_CONFIGURATION
 cls
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :NETWORK_CONFIGURATION
 color 0f
@@ -270,7 +275,7 @@ if errorlevel  2 goto:PING
 if errorlevel  1 goto:TEST_CONNECTION
 cls
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :TEST_CONNECTION
 color 0f
@@ -282,7 +287,7 @@ netsh interface ip show config
 pause & mode con cols=98 lines=30 & goto end_NETWORK_CONFIGURATION
 cls
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :CHANGE_IP
 color 0f
@@ -326,7 +331,7 @@ if errorlevel 2 goto:AUTOMATIC_CONFIGURATION_ETHERNET
 if errorlevel 1 goto:AUTOMATIC_CONFIGURATION_WIFI
 cls
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :AUTOMATIC_CONFIGURATION_WIFI
 color 0f
@@ -338,7 +343,7 @@ netsh interface ipv4 set address name="Wi-Fi" source=dhcp
 netsh interface ipv4 set dnsservers name"Wi-Fi" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :AUTOMATIC_CONFIGURATION_ETHERNET
 color 0f
@@ -350,7 +355,7 @@ netsh interface ipv4 set address name="Ethernet" source=dhcp
 netsh interface ipv4 set dnsservers name"Ethernet" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :WIFI_MANUAL
 color 0f
@@ -368,7 +373,7 @@ netsh interface ipv4 set dns name="Wi-Fi" %WIFI-DNS% primary
 Set /P %WIFI-DNS%=ENTER DNS:
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :ETHERNET_MANUAL
 color 0f
@@ -386,7 +391,7 @@ netsh interface ipv4 set dns name="Wi-Fi" %ETHER-DNS% primary
 Set /P %ETHER-DNS%=ENTER DNS:
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :PING
 color 0f
@@ -401,7 +406,7 @@ Set /P pinghost=Enter an IP address or hostname to ping:
 ping.exe %pinghost% -t
 pause & cls & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :TRACE_ROUTE
 color 0f
@@ -411,7 +416,7 @@ Set /P config=Enter an IP address or hostname to trace:
 tracert.exe -d -h 64 %config%
 pause & cls & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :SETUP_NETWORK_SHARE
 color 0f
@@ -428,7 +433,7 @@ Set /P %USERNAME%=Enter USER ACCOUNT SHARE NAME (LEAVE BLANK IF THERE IS NONE):
 Set /P %PASSWORD%=Enter Enter USER ACCOUNT PASSWORD (LEAVE BLANK IF THERE IS NONE):
 pause & ping %COMPUTER_NAME% & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :REMOVE_NETWORK_MAP
 color 0f
@@ -440,7 +445,7 @@ net use %REMOVELETTER%: /delete
 Set /P %REMOVELETTER%=ENTER MAPPED DRIVE LETTER TO REMOVE:
 pause & cls & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :WIFI_CONFIURATION
 setlocal enabledelayedexpansion
@@ -490,7 +495,7 @@ cls & goto end_NETWORK_CONFIGURATION
 :WiFiNo
 cls & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :BACKUP_CONFIG
 color 0f
@@ -536,7 +541,7 @@ if errorlevel  2 goto:RESTORE_WIFI
 if errorlevel  1 goto:BACKUP_WIFI
 cls
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :BACKUP_WIFI
 color 0f
@@ -550,7 +555,7 @@ cd c:\wifi
 start .
 pause & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :RESTORE_WIFI
 color 0f
@@ -566,7 +571,7 @@ echo the .xml will be added automatically
 Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
 pause & goto end_NETWORK_CONFIGURATION
 
-::-------------------------------------------------------------------------------------------------------
+::========================================================================================================================================
 
 :DEFENDER_TOOLBOX
 color 0f
@@ -640,8 +645,15 @@ ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/TELEMETRY.bat" -O "c:\aio\TELEMETRY.bat"
 start c:\aio\TELEMETRY.bat
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+
 ::========================================================================================================================================
+::========================================================================================================================================
+
 REM THIS SECTION IN PROGRESS...
+
+::========================================================================================================================================
+::========================================================================================================================================
+
 :UPDATER
 color 0f
 mode con cols=98 lines=60
@@ -669,14 +681,14 @@ echo                  ^|                                                        
 echo                  ^|      [7] BLANK                                                ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|      [8] BLANK           [8] GO BACK            [9] EXIT      ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  9 goto:end_NETWORK_CONFIGURATION
-if errorlevel  8 goto:TEST_UNKNOWN
+if errorlevel  9 goto:EXIT
+if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:TEST_UNKNOWN
 if errorlevel  6 goto:TEST_UNKNOWN
 if errorlevel  5 goto:TEST_UNKNOWN
@@ -686,27 +698,40 @@ if errorlevel  2 goto:WINDOWS_UPDATE_PAUSER
 if errorlevel  1 goto:WINDOWS_UPDATE
 cls
 
+::========================================================================================================================================
+
 :WINDOWS_UPDATE
 cls
+color 0f
+mode con cols=98 lines=60
 TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
 start /wait c:\aio\WUpdater.exe
 timeout 2 >nul
 del C:\AIO\WUpdater.exe
-pause & goto Updater
+pause & goto end_UPDATER
+
+::========================================================================================================================================
 
 :WINDOWS_UPDATE_PAUSER
 cls
+color 0f
+mode con cols=98 lines=60
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
 start /wait c:\aio\UPDATES_PAUSE_TASK.ps1
 timeout 2 >nul
-pause & goto Updater
+pause & goto end_UPDATER
+
+
+::========================================================================================================================================
 
 :SOFTWARE_UPDATER
 cls
+color 0f
+mode con cols=98 lines=60
 TITLE SOFTWARE UPDATER
 echo This will start a SOFTWARE UPDATE SESSION...
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
@@ -717,9 +742,14 @@ pause
 del C:\AIO\PatchMyPC.exe
 del C:\AIO\PatchMyPC.ini
 pause
-pause & cls & goto Updater
+pause & cls & goto end_UPDATER
 
 ::========================================================================================================================================
+::========================================================================================================================================
+::========================================================================================================================================
+::========================================================================================================================================
+::========================================================================================================================================
+
 :CLEANER
 color 0f
 mode con cols=98 lines=60
@@ -727,6 +757,8 @@ ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
+::========================================================================================================================================
+
 :AIO_PRE-SET
 color 0f
 mode con cols=98 lines=60
@@ -734,6 +766,8 @@ ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
+::========================================================================================================================================
+
 :EXTRAS
 color 0f
 mode con cols=98 lines=60
@@ -741,13 +775,837 @@ ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
-
 ::========================================================================================================================================
 ::========================================================================================================================================
 ::========================================================================================================================================
 ::========================================================================================================================================
 ::========================================================================================================================================
 
+::========================================================================================================================================
+
+REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
+
+::========================================================================================================================================
+
+:end_AIO_PRE-SET
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to MainMenu
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto AIO_PRE-SET
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:end_CLEANER
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to MainMenu
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto CLEANER
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:end_UPDATER
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to MainMenu
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto UPDATER
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:end_BACKMENU
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to MainMenu
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto MainMenu
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:end_NETWORK_CONFIGURATION
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to NETWORK CONFIGURATION
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto NETWORK_CONFIGURATION
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:end_COMPUTER_CONFIGURATION
+cls
+@echo OFF
+mode con cols=43 lines=6
+title Progress to COMPUTER CONFIGURATION
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|                                ^|   0 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##                              ^|   5 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####                            ^|  15 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|########                        ^|  30 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  42 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########                      ^|  45 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############                    ^|  47 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############                  ^|  50 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################                ^|  52 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##################              ^|  53 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|####################            ^|  65 ^|
+echo ========================================
+ping localhost -n 2 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|######################          ^|  70 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##########################      ^|  80 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|############################    ^|  89 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  90 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|##############################  ^|  95 ^|
+echo ========================================
+ping localhost -n 1 >nul
+cls
+echo Going back to previous menu please wait...
+echo ========================================
+echo ^|################################^| 100 ^|
+echo ========================================
+echo OK!
+cls
+echo.
+endlocal
+cls & goto COMPUTER_CONFIGURATION
+
+::========================================================================================================================================
+::========================================================================================================================================
+
+:EXIT
+cls
+TITLE Cleanup
+echo CLEANING UP RESIDUE LEFT OF AIO RESIDUE
+forfiles -p "C:\AIO" -s -m *.bat*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.cmd*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.ps1*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.exe*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.txt*  /C "cmd /c del @path"
+forfiles -p "C:\AIO" -s -m *.ini*  /C "cmd /c del @path"
+goto EXIT_BAR
+
+:EXIT_BAR
+@echo OFF
+CLS
+color 0c
+mode con cols=55 lines=6
+title EXITING...
+ECHO:
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|                                           ^|   0 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##                              ^|   5 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###                                        ^|  15 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#########                                 ^|  30 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|###############                            ^|  42 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################                         ^|  45 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################                    ^|  47 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################                  ^|  50 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|#############################               ^|  52 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##############################              ^|  53 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|################################            ^|  65 ^|
+echo ===================================================
+ping localhost -n 2 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##################################          ^|  70 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|######################################      ^|  80 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|########################################    ^|  89 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  90 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|##########################################  ^|  95 ^|
+echo ===================================================
+ping localhost -n 1 >nul
+cls
+echo This Is a work of fiction and will exit promptly...
+echo ===================================================
+echo ^|############################################^| 100 ^|
+echo ===================================================
+echo OK!
+cls
+echo.
+endlocal
+cls & exit
+::========================================================================================================================================
+::========================================================================================================================================
+
+
+
+::========================================================================================================================================
+::========================================================================================================================================
+REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
+::========================================================================================================================================
+:EASTER
+::========================================================================================================================================
 
 
 
@@ -807,9 +1665,13 @@ PAUSE GOTO end_COMPUTER_CONFIGURATION
 
 
 
+
+::========================================================================================================================================
 ::========================================================================================================================================
 REM THIS SECTION DOES NOT NEED ANY EDITING
 ::========================================================================================================================================
+::========================================================================================================================================
+
 :SHUTDOWN_OPTIONS
 title Shutdown Script
 mode con cols=98 lines=32
@@ -941,476 +1803,6 @@ echo Perhaps try another input
 endlocal
 exit /b
 
-
 ::========================================================================================================================================
-REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
 ::========================================================================================================================================
 
-:end_BACKMENU
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to MainMenu
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|                                ^|   0 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##                              ^|   5 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####                            ^|  15 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|########                        ^|  30 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  42 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  45 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############                    ^|  47 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############                  ^|  50 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################                ^|  52 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##################              ^|  53 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####################            ^|  65 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|######################          ^|  70 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########################      ^|  80 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############################    ^|  89 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  90 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  95 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################################^| 100 ^|
-echo ========================================
-echo OK!
-cls
-echo.
-endlocal
-cls & goto MainMenu
-
-::========================================================================================================================================
-
-:end_NETWORK_CONFIGURATION
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to NETWORK CONFIGURATION
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|                                ^|   0 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##                              ^|   5 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####                            ^|  15 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|########                        ^|  30 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  42 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  45 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############                    ^|  47 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############                  ^|  50 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################                ^|  52 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##################              ^|  53 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####################            ^|  65 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|######################          ^|  70 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########################      ^|  80 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############################    ^|  89 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  90 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  95 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################################^| 100 ^|
-echo ========================================
-echo OK!
-cls
-echo.
-endlocal
-cls & goto NETWORK_CONFIGURATION
-::========================================================================================================================================
-
-:end_COMPUTER_CONFIGURATION
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to COMPUTER CONFIGURATION
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|                                ^|   0 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##                              ^|   5 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####                            ^|  15 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|########                        ^|  30 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  42 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########                      ^|  45 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############                    ^|  47 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############                  ^|  50 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################                ^|  52 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##################              ^|  53 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|####################            ^|  65 ^|
-echo ========================================
-ping localhost -n 2 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|######################          ^|  70 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##########################      ^|  80 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|############################    ^|  89 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  90 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|##############################  ^|  95 ^|
-echo ========================================
-ping localhost -n 1 >nul
-cls
-echo Going back to previous menu please wait...
-echo ========================================
-echo ^|################################^| 100 ^|
-echo ========================================
-echo OK!
-cls
-echo.
-endlocal
-cls & goto COMPUTER_CONFIGURATION
-
-::========================================================================================================================================
-:EXIT
-cls
-TITLE Cleanup
-echo CLEANING UP RESIDUE LEFT OF AIO RESIDUE
-forfiles -p "C:\AIO" -s -m *.bat*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.cmd*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.ps1*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.exe*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.txt*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.ini*  /C "cmd /c del @path"
-goto EXIT_BAR
-
-:EXIT_BAR
-@echo OFF
-CLS
-color 0c
-mode con cols=55 lines=6
-title EXITING...
-ECHO:
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|                                           ^|   0 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##                              ^|   5 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|###                                        ^|  15 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|#########                                 ^|  30 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|###############                            ^|  42 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##################                         ^|  45 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|########################                    ^|  47 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################                  ^|  50 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|#############################               ^|  52 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##############################              ^|  53 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|################################            ^|  65 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##################################          ^|  70 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|######################################      ^|  80 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|########################################    ^|  89 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################################  ^|  90 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################################  ^|  95 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|############################################^| 100 ^|
-echo ===================================================
-echo OK!
-cls
-echo.
-endlocal
-cls & exit
-::========================================================================================================================================
-
-::========================================================================================================================================
-REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
-::========================================================================================================================================
-:EASTER
-::========================================================================================================================================
