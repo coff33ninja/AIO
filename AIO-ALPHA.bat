@@ -164,7 +164,7 @@ ECHO:
 ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "C:\AIO\HWiNFO32.exe"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "C:\AIO\HWiNFO32.INI"
-start c:\aio\HWiNFO32.exe
+start /wait c:\aio\HWiNFO32.exe
 timeout 2 >nul
 GOTO TEST_CONNECTION
 
@@ -615,9 +615,7 @@ Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cm
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "c:\aio\Defender_Tools.exe"
-start c:\aio\Defender_Tools.exe 
-pause
-popd
+start /wait c:\aio\Defender_Tools.exe 
 timeout 2 >nul
 del "c:\aio\Defender_Tools.exe"
 endlocal
