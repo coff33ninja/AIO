@@ -105,7 +105,7 @@ if errorlevel %op%==n goto Incorrect
 echo
 cls
 
-:Incorrect input, try again.
+:Incorrect
 cls
 TITLE Incorrect input
 echo Incorrect input, try again.
@@ -788,8 +788,8 @@ echo:
 choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
 CLS
 if errorlevel 7 goto :EXIT
-if errorlevel 6 goto :WMI_RESET
-if errorlevel 5 goto :GROUP_POLICY_RESET
+if errorlevel 6 goto :WMI_RESET_RESET_AGREEMENT
+if errorlevel 5 goto :GROUP_POLICY_RESET_AGREEMENT
 if errorlevel 4 goto :end_BACKMENU
 if errorlevel 3 goto :Windows_Debloater
 if errorlevel 2 goto :Disk_Defragment
@@ -925,7 +925,8 @@ Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
 timeout 2 >nul
 pause & cls & goto end_CLEANER
 
-:GROUP_POLICY_RESET
+:GROUP_POLICY_RESET_AGREEMENT
+CLS
 TITLE GROUP POLICY RESET
 ECHO The Group Policy Editor is an important tool for Windows OS using which
 ECHO System Administrators can fine-tune system settings.
@@ -937,8 +938,49 @@ ECHO know that it’s time to reset all Group Policy settings to default
 ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
 ECHO so that you won't have to look through forums to find a solution.
 ECHO Please reboot once the cleanup is complete.
+ECHO.
 REM REPAIR GAINED FROM https://www.thewindowsclub.com/reset-all-group-policy-settings-to-default
+set /p GPR=      Do you agree to the terms stated above? (Yes or No):
+if %GPR%==Y goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %GPR%==Yes goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %GPR%==yes goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %GPR%==y goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %GPR%==N goto :CLEANER
+if %GPR%==No goto :CLEANER
+if %GPR%==no goto :CLEANER
+if %GPR%==n goto :CLEANER
+if errorlevel %GPR%==Y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==Yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==N goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==No goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==no goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+if errorlevel %GPR%==n goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
 
+:GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+cls
+TITLE Incorrect input
+echo Incorrect input, try again.
+pause >nul 
+CLS
+goto GROUP_POLICY_RESET_AGREEMENT
+cls
+
+:GROUP_POLICY_RESET
+CLS
+TITLE GROUP POLICY RESET
+ECHO The Group Policy Editor is an important tool for Windows OS using which
+ECHO System Administrators can fine-tune system settings.
+ECHO It has several infrastructural configuration options that allow you to make
+ECHO adjustments to the specific performance and security settings for users and computers.
+ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
+ECHO line where your computer starts behaving in an unwanted way. This is when you
+ECHO know that it’s time to reset all Group Policy settings to default
+ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
+ECHO so that you won't have to look through forums to find a solution.
+ECHO Please reboot once the cleanup is complete.
+ECHO.
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
 RD /S /Q "%WinDir%\System32\GroupPolicy"
 gpupdate /force
@@ -955,7 +997,8 @@ reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies"
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
 pause & cls & goto end_CLEANER
 
-:WMI_RESET
+:WMI_RESET_AGREEMENT
+CLS
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
 ECHO Full WMI reset (to the state when the operating system was installed)
 ECHO is a serious measurement that should be well thought about, if needed
@@ -969,9 +1012,48 @@ ECHO If you’re in a case, when you need to reset WMI and it fixed your
 ECHO system to the state when you can boot – backup your content and better
 ECHO reinstall. It should not be an escape solution.
 REM REPAIR GAINED FROM https://www.optimizationcore.com/system-administration/troubleshooting-wmi-check-full-wmi-reset-cmd-batch/
+set /p WMIR=      Do you agree to the terms stated above? (Yes or No):
+if %WMIR%==Y goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %WMIR%==Yes goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %WMIR%==yes goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %WMIR%==y goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %WMIR%==N goto :CLEANER
+if %WMIR%==No goto :CLEANER
+if %WMIR%==no goto :CLEANER
+if %WMIR%==n goto :CLEANER
+if errorlevel %WMIR%==Y goto V
+if errorlevel %WMIR%==Yes goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==yes goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==y goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==N goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==No goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==no goto WMI_RESET_AGREEMENT_INCORRECT
+if errorlevel %WMIR%==n goto WMI_RESET_AGREEMENT_INCORRECT
 
-REM WOULD YOU LIKE TO CONTINUE YES OR NO? NEED BETTER QUESTION
+:WMI_RESET_AGREEMENT_INCORRECT
+cls
+TITLE Incorrect input
+echo Incorrect input, try again.
+pause >nul 
+CLS
+goto WMI_RESET_AGREEMENT
+cls
 
+:WMI_RESET
+CLS
+TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
+ECHO Full WMI reset (to the state when the operating system was installed)
+ECHO is a serious measurement that should be well thought about, if needed
+ECHO at all. After the reset, you will need to reinstall any software that
+ECHO uses WMI repository. If, for example, your Server is System Center
+ECHO Configuration Manager Distribution Point or Pull Distribution Point,
+ECHO then you should not have any problem resetting (though you will need
+ECHO to reinstall SCCM Client). However, keep in mind that if there are
+ECHO other uses for the server, you might need to check it afterwards.
+ECHO If you’re in a case, when you need to reset WMI and it fixed your
+ECHO system to the state when you can boot – backup your content and better
+ECHO reinstall. It should not be an escape solution.
+PAUSE
 ECHO FULL WMI REPOSITORY RESET
 echo:
 ECHO To merge current WMI repository with factory defaults
@@ -983,6 +1065,8 @@ ECHO If this still doesn’t help, make full reset of the WMI respository:
 winmgmt /resetrepository
 PAUSE
 rem need if command here
+
+:-----------------------------------------------------------------------------
 
 ECHO If previos attempt failed, then we must make use of an older method:
 REM Turn winmgmt service Startup type to Disabled
