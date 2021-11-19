@@ -788,9 +788,9 @@ echo:
 choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
 CLS
 if errorlevel 7 goto :EXIT
-if errorlevel 6 goto :WMI_RESET_RESET_AGREEMENT
-if errorlevel 5 goto :GROUP_POLICY_RESET_AGREEMENT
-if errorlevel 4 goto :end_BACKMENU
+if errorlevel 6 goto :end_BACKMENU
+if errorlevel 5 goto :WMI_RESET_RESET_AGREEMENT
+if errorlevel 4 goto :GROUP_POLICY_RESET_AGREEMENT
 if errorlevel 3 goto :Windows_Debloater
 if errorlevel 2 goto :Disk_Defragment
 if errorlevel 1 goto :Disk_Cleanup
