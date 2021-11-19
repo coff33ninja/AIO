@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 # THIS TOOL HAS BEEN ADAPTED FROM BUILDBYBEL/SharpApp
 
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
+# Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
 
 Write-Output "Disabling telemetry via Group Policies"
 New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
