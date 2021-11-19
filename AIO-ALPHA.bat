@@ -81,7 +81,7 @@ echo           [X] This product is licensed under GNU General Public v3.
 echo           [X] Please note that this is an "AS IS" application.
 echo           [X] As a GRAND RULE OF THUMB it is always great to read the script code first.
 echo           [X] This code is compiled using fragments of other open source projects, including, 
-echo               but not limited to github projects by Builtbybel, massgravel and slapanav
+echo               but not limited to github projects by Builtbybel, Massgravel and Slapanav
 echo           [X] 
 echo           [X] 
 echo.
@@ -647,6 +647,7 @@ ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "c:\aio\block-telemetry.ps1"
 ::start c:\aio\TELEMETRY.bat
 Powershell -ExecutionPolicy Bypass -File c:\aio\block-telemetry.ps1
+del c:\aio\block-telemetry.ps1
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
@@ -1067,7 +1068,7 @@ rem need if command here
 
 :-----------------------------------------------------------------------------
 
-ECHO If previos attempt failed, then we must make use of an older method:
+ECHO If previous attempt failed, then we must make use of an older method:
 REM Turn winmgmt service Startup type to Disabled
 sc config winmgmt start = disabled
 REM Stop winmgmt service
