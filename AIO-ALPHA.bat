@@ -755,13 +755,10 @@ pause & cls & goto end_UPDATER
 color 0f
 mode con cols=98 lines=60
 TITLE PC Cleanup Utility
-ECHO THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
-echo ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
-ECHO THERE ARE 2 OTHER REPAIR TOOLS AS A LAST RESORT REPAIR.
-cls
-
-echo:
-echo:
+ECHO                THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
+echo                     ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
+ECHO                        THERE ARE 2 OTHER REPAIR TOOLS AS A LAST RESORT REPAIR.
+ECHO                                    PLEASE READ BEFORE PROCEEDING
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
