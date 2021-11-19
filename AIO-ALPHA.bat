@@ -754,9 +754,281 @@ pause & cls & goto end_UPDATER
 :CLEANER
 color 0f
 mode con cols=98 lines=60
-ECHO STILL BLANK
-PAUSE GOTO end_COMPUTER_CONFIGURATION
+TITLE PC Cleanup Utility
+ECHO THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
+echo ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
+ECHO THERE ARE 2 OTHER REPAIR TOOLS AS A LAST RESORT REPAIR.
+cls
 
+echo:
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Disk Cleanup                                         ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Disk Defragment                                      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] Windows Debloater                                    ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] Group Policy Reset - USE AT OWN RISK                 ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] WMI RESET - USE AT OWN RISK                          ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                          [6] GO BACK            [7] EXIT      ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
+CLS
+if errorlevel 7 goto :EXIT
+if errorlevel 6 goto :WMI_RESET
+if errorlevel 5 goto :GROUP_POLICY_RESET
+if errorlevel 4 goto :end_BACKMENU
+if errorlevel 3 goto :Windows_Debloater
+if errorlevel 2 goto :Disk_Defragment
+if errorlevel 1 goto :Disk_Cleanup
+goto error
+
+:Disk_Cleanup
+cls
+echo.
+title DISK CLEANUP
+echo.
+del /f /q "%userprofile%\Cookies\*.*"
+del /f /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
+del /f /q "%userprofile%\AppData\Local\Temp\*.*"
+del /s /f /q "c:\windows\temp\*.*"
+rd /s /q "c:\windows\temp"
+md "c:\windows\temp"
+del /s /f /q "C:\WINDOWS\Prefetch"
+del /s /f /q "%temp%\*.*"
+rd /s /q "%temp%"
+md %temp%
+deltree /y "c:\windows\tempor~1"
+deltree /y "c:\windows\temp"
+deltree /y "c:\windows\tmp"
+deltree /y "c:\windows\ff*.tmp"
+deltree /y "c:\windows\history"
+deltree /y "c:\windows\cookies"
+deltree /y "c:\windows\recent"
+deltree /y "c:\windows\spool\printers"
+del c:\WIN386.SWP 
+del /f /s /q "%systemdrive%\*.tmp"
+del /f /s /q "%systemdrive%\*._mp"
+del /f /s /q "%systemdrive%\*.log"
+del /f /s /q "%systemdrive%\*.gid"
+del /f /s /q "%systemdrive%\*.chk"
+del /f /s /q "%systemdrive%\*.old"
+del /f /s /q "%systemdrive%\recycled\*.*"
+del /f /s /q "%windir%\*.bak"
+del /f /s /q "%windir%\prefetch\*.*"
+rd /s /q "%windir%\temp & md %windir%\temp"
+del /f /q "%userprofile%\cookies\*.*"
+del /f /q "%userprofile%\recent\*.*"
+del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+del /f /s /q "userprofile%\Local Settings\Temp\*.*"
+del /f /s /q "%userprofile%\recent\*.*"
+if exist "C:\WINDOWS\temp"del /f /q "C:WINDOWS\temp\*.*"
+if exist "C:\WINDOWS\tmp" del /f /q "C:\WINDOWS\tmp\*.*"
+if exist "C:\tmp" del /f /q "C:\tmp\*.*"
+if exist "C:\temp" del /f /q "C:\temp\*.*"
+if exist "%temp%" del /f /q "%temp%\*.*"
+if exist "%tmp%" del /f /q "%tmp%\*.*"
+if exist "C:\WINDOWS\Users\*.zip" del "C:\WINDOWS\Users\*.zip" /f /q
+if exist "C:\WINDOWS\Users\*.exe" del "C:\WINDOWS\Users\*.exe" /f /q
+if exist "C:\WINDOWS\Users\*.gif" del "C:\WINDOWS\Users\*.gif" /f /q
+if exist "C:\WINDOWS\Users\*.jpg" del "C:\WINDOWS\Users\*.jpg" /f /q
+if exist "C:\WINDOWS\Users\*.png" del "C:\WINDOWS\Users\*.png" /f /q
+if exist "C:\WINDOWS\Users\*.bmp" del "C:\WINDOWS\Users\*.bmp" /f /q
+if exist "C:\WINDOWS\Users\*.avi" del "C:\WINDOWS\Users\*.avi" /f /q
+if exist "C:\WINDOWS\Users\*.mpg" del "C:\WINDOWS\Users\*.mpg" /f /q
+if exist "C:\WINDOWS\Users\*.mpeg" del "C:\WINDOWS\Users\*.mpeg" /f /q
+if exist "C:\WINDOWS\Users\*.ra" del "C:\WINDOWS\Users\*.ra" /f /q
+if exist "C:\WINDOWS\Users\*.ram" del "C:\WINDOWS\Users\*.ram"/f /q
+if exist "C:\WINDOWS\Users\*.mp3" del "C:\WINDOWS\Users\*.mp3" /f /q
+if exist "C:\WINDOWS\Users\*.mov" del "C:\WINDOWS\Users\*.mov" /f /q
+if exist "C:\WINDOWS\Users\*.qt" del "C:\WINDOWS\Users\*.qt" /f /q
+if exist "C:\WINDOWS\Users\*.asf" del "C:\WINDOWS\Users\*.asf" /f /q
+if exist "C:\WINDOWS\Users\AppData\Temp\*.zip" del "C:\WINDOWS\Users\Users\*.zip /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.exe" del "C:\WINDOWS\Users\Users\*.exe /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.gif" del "C:\WINDOWS\Users\Users\*.gif /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.jpg" del "C:\WINDOWS\Users\Users\*.jpg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.png" del "C:\WINDOWS\Users\Users\*.png /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.bmp" del "C:\WINDOWS\Users\Users\*.bmp /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.avi" del "C:\WINDOWS\Users\Users\*.avi /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mpg" del "C:\WINDOWS\Users\Users\*.mpg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mpeg" del "C:\WINDOWS\Users\Users\*.mpeg /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.ra" del "C:\WINDOWS\Users\Users\*.ra /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.ram" del "C:\WINDOWS\Users\Users\*.ram /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mp3" del "C:\WINDOWS\Users\Users\*.mp3 /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.asf" del "C:\WINDOWS\Users\Users\*.asf /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.qt" del "C:\WINDOWS\Users\Users\*.qt /f /q"
+if exist "C:\WINDOWS\Users\AppData\Temp\*.mov" del "C:\WINDOWS\Users\Users\*.mov /f /q"
+if exist "C:\WINDOWS\ff*.tmp" del "C:\WINDOWS\ff*.tmp /f /q"
+if exist "C:\WINDOWS\ShellIconCache" del /f /q "C:\WINDOWS\ShellI~1\*.*"
+DEL /S /Q "%TMP%\*.*"
+DEL /S /Q "%TEMP%\*.*"
+DEL /S /Q "%WINDIR%\Temp\*.*"
+DEL /S /Q "%USERPROFILE%\Local Settings\Temp\*.*"
+DEL /S /Q "%USERPROFILE%\Appdata\Local\BraveSoftware\Brave-Browser\User Data\Default\Cache"
+DEL /S /Q "%LocalAppData%\Temp"
+
+DEL /S /Q "C:\Program Files (x86)\Google\Temp"
+DEL /S /Q "C:\Program Files (x86)\Steam\steamapps\temp"
+DEL /S /Q "U:\Games\steamapps\temp"
+DEL /S /Q "C:\ProgramData\Microsoft\Windows\WER\Temp"
+DEL /S /Q "C:\Users\All Users\Microsoft\Windows\WER\Temp"
+DEL /S /Q "C:\Windows\Temp"
+DEL /S /Q "C:\Windows\System32\DriverStore\Temp"
+DEL /S /Q "C:\Windows\WinSxS\Temp"
+
+cleanmgr /VERYLOWDISK /sagerun:0
+ipconfig /flushdns
+echo.
+cls
+echo Disk Cleanup successful!
+echo.
+pause & cls & goto end_CLEANER
+
+:Disk_Defragment
+cls
+echo --------------------------------------------------------------------------------
+echo Disk Defragment
+echo --------------------------------------------------------------------------------
+echo.
+echo Defragmenting hard disks...
+ping localhost -n 3 >nul
+defrag -c -v
+cls
+echo --------------------------------------------------------------------------------
+echo Disk Defragment
+echo --------------------------------------------------------------------------------
+echo.
+echo Disk Defrag successful!
+echo.
+pause & goto end_CLEANER
+
+:Windows_Debloater
+CLS
+TITLE DEBLOATER
+ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
+timeout 2 >nul
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_&_REPAIR/Debloater.ps1" -O "c:\aio\Debloater.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
+timeout 2 >nul
+pause & cls & goto end_CLEANER
+
+:GROUP_POLICY_RESET
+TITLE GROUP POLICY RESET
+ECHO The Group Policy Editor is an important tool for Windows OS using which
+ECHO System Administrators can fine-tune system settings.
+ECHO It has several infrastructural configuration options that allow you to make
+ECHO adjustments to the specific performance and security settings for users and computers.
+ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
+ECHO line where your computer starts behaving in an unwanted way. This is when you
+ECHO know that it’s time to reset all Group Policy settings to default
+ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
+ECHO so that you won't have to look through forums to find a solution.
+ECHO Please reboot once the cleanup is complete.
+REM REPAIR GAINED FROM https://www.thewindowsclub.com/reset-all-group-policy-settings-to-default
+
+RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
+RD /S /Q "%WinDir%\System32\GroupPolicy"
+gpupdate /force
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKCU\Software\Microsoft\WindowsSelfHost" /f
+reg delete "HKCU\Software\Policies" /f
+reg delete "HKLM\Software\Microsoft\Policies" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
+reg delete "HKLM\Software\Microsoft\WindowsSelfHost" /f
+reg delete "HKLM\Software\Policies" /f
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Policies" /f
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /f
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
+pause & cls & goto end_CLEANER
+
+:WMI_RESET
+TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
+ECHO Full WMI reset (to the state when the operating system was installed)
+ECHO is a serious measurement that should be well thought about, if needed
+ECHO at all. After the reset, you will need to reinstall any software that
+ECHO uses WMI repository. If, for example, your Server is System Center
+ECHO Configuration Manager Distribution Point or Pull Distribution Point,
+ECHO then you should not have any problem resetting (though you will need
+ECHO to reinstall SCCM Client). However, keep in mind that if there are
+ECHO other uses for the server, you might need to check it afterwards.
+ECHO If you’re in a case, when you need to reset WMI and it fixed your
+ECHO system to the state when you can boot – backup your content and better
+ECHO reinstall. It should not be an escape solution.
+REM REPAIR GAINED FROM https://www.optimizationcore.com/system-administration/troubleshooting-wmi-check-full-wmi-reset-cmd-batch/
+
+REM WOULD YOU LIKE TO CONTINUE YES OR NO? NEED BETTER QUESTION
+
+ECHO FULL WMI REPOSITORY RESET
+echo:
+ECHO To merge current WMI repository with factory defaults
+winmgmt /salvagerepository
+PAUSE
+rem need if command here
+
+ECHO If this still doesn’t help, make full reset of the WMI respository:
+winmgmt /resetrepository
+PAUSE
+rem need if command here
+
+ECHO If previos attempt failed, then we must make use of an older method:
+REM Turn winmgmt service Startup type to Disabled
+sc config winmgmt start = disabled
+REM Stop winmgmt service
+net stop winmgmt /y
+
+REM Register / Reregister Service DLLs
+regsvr32 /s %systemroot%\system32\scecli.dll 
+regsvr32 /s %systemroot%\system32\userenv.dll
+
+REM Enter WBEM folder
+cd /d %systemroot%\system32\wbem 
+REM Remove “repository” folder
+rd /S /Q repository
+REM Register / Reregister Service DLLs
+for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
+for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
+for /f %%s in ('dir /b *.mof') do mofcomp %%s 
+for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+
+REM Register / Reregister wmiprvse Service
+wmiprvse /regserver
+REM Register / Reregister winmgmt Service
+winmgmt /regserver
+
+REM Enter WBEM folder in SysWOW64
+cd /d %systemroot%\SysWOW64\wbem\
+REM Remove “repository” folder
+rd /S /Q repository
+REM Register / Reregister Service DLLs
+for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
+for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
+for /f %%s in ('dir /b *.mof') do mofcomp %%s 
+for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+
+REM Turn winmgmt service Startup type to Automatic
+sc config winmgmt start = auto
+REM Stop winmgmt service
+net start winmgmt
+
+echo After you run it, there might be “Manageability” errors
+echo on Servers (maybe even clients), so you need to run again:
+winmgmt /resetrepository
+
+pause & cls & goto end_CLEANER
 ::========================================================================================================================================
 ::========================================================================================================================================
 
