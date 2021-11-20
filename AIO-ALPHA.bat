@@ -829,7 +829,8 @@ mode con cols=98 lines=60
 TITLE Chocolatey Installer Setup
 echo This section is reserved for future use
 rem This will start a SOFTWARE UPDATE SESSION...
-rem powershell choco install chocolateygui
+powershell choco install chocolateygui
+rem powershell choco install hot-chocolatey
 timeout 2 >nul
 pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
