@@ -739,20 +739,19 @@ color 0f
 mode con cols=98 lines=60
 title  SOFTWARE UPDATER
 cls
-
-echo:
-echo:
+echo                         This section will give options to update software
+echo                            Pre_Selected or gives options to self select
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
-echo                  ^|      [1] PatchMyPC                                            ^|
+echo                  ^|      [1] PatchMyPC Pre-Set Selections                         ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] Chocolatey                                           ^|
+echo                  ^|      [2] PatchMyPC Self Select                                ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] BLANK                                                ^|
+echo                  ^|      [3] Chocolatey Pre-Set Selections                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|      [4] Chocolatey Self Select                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [5] BLANK                                                ^|
 echo                  ^|                                                               ^|
@@ -772,13 +771,29 @@ if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:TEST_UNKNOWN
 if errorlevel  6 goto:TEST_UNKNOWN
 if errorlevel  5 goto:TEST_UNKNOWN
-if errorlevel  4 goto:TEST_UNKNOWN
-if errorlevel  3 goto:TEST_UNKNOWN
-if errorlevel  2 goto:Chocolatey 
+if errorlevel  4 goto:Chocolatey_GUI
+if errorlevel  3 goto:Chocolatey
+if errorlevel  2 goto:PatchMyPC_OWN_SELECTIONS
 if errorlevel  1 goto:PatchMyPC
 cls
 
 :PatchMyPC
+cls
+color 0f
+mode con cols=98 lines=60
+TITLE PatchMyPC auto setup
+echo This will start a SOFTWARE UPDATE SESSION...
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+START /wait C:\AIO\PatchMyPC.exe /auto switch
+timeout 2 >nul
+pause
+del C:\AIO\PatchMyPC.exe
+del C:\AIO\PatchMyPC.ini
+pause
+pause & cls & goto end_COMPUTER_CONFIGURATION
+
+:PatchMyPC_OWN_SELECTIONS
 cls
 color 0f
 mode con cols=98 lines=60
@@ -801,6 +816,20 @@ mode con cols=98 lines=60
 TITLE Chocolatey Installer Setup
 echo This section is reserved for future use
 rem This will start a SOFTWARE UPDATE SESSION...
+rem https://docs.chocolatey.org/en-us/features/package-builder
+rem @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+timeout 2 >nul
+pause
+pause & cls & goto end_COMPUTER_CONFIGURATION
+
+:Chocolatey_GUI
+cls
+color 0f
+mode con cols=98 lines=60
+TITLE Chocolatey Installer Setup
+echo This section is reserved for future use
+rem This will start a SOFTWARE UPDATE SESSION...
+rem powershell choco install chocolateygui
 timeout 2 >nul
 pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
