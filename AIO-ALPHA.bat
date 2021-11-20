@@ -735,10 +735,54 @@ pause & goto end_UPDATER
 ::========================================================================================================================================
 
 :SOFTWARE_UPDATER
+color 0f
+mode con cols=98 lines=60
+title  SOFTWARE UPDATER
+cls
+
+echo:
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] PatchMyPC                                            ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Chocolatey                                           ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [7] BLANK                                                ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [8] BLANK           [8] GO BACK            [9] EXIT      ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+
+if errorlevel  9 goto:EXIT
+if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  7 goto:TEST_UNKNOWN
+if errorlevel  6 goto:TEST_UNKNOWN
+if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  4 goto:TEST_UNKNOWN
+if errorlevel  3 goto:TEST_UNKNOWN
+if errorlevel  2 goto:Chocolatey 
+if errorlevel  1 goto:PatchMyPC
+cls
+
+:PatchMyPC
 cls
 color 0f
 mode con cols=98 lines=60
-TITLE SOFTWARE UPDATER
+TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
@@ -748,8 +792,18 @@ pause
 del C:\AIO\PatchMyPC.exe
 del C:\AIO\PatchMyPC.ini
 pause
-pause & cls & goto end_UPDATER
+pause & cls & goto end_COMPUTER_CONFIGURATION
 
+:Chocolatey
+cls
+color 0f
+mode con cols=98 lines=60
+TITLE Chocolatey Installer Setup
+echo This section is reserved for future use
+rem This will start a SOFTWARE UPDATE SESSION...
+timeout 2 >nul
+pause
+pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 ::========================================================================================================================================
 ::========================================================================================================================================
