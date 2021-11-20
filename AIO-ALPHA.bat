@@ -647,6 +647,9 @@ rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTele
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "c:\aio\block-telemetry.ps1"
 Powershell -ExecutionPolicy Bypass -File c:\aio\block-telemetry.ps1
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "c:\aio\ooshutup10.exe"
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "c:\aio\ooshutup10.cfg"
+start /wait c:\aio\ooshutup10.exe ooshutup10.cfg /quiet
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
