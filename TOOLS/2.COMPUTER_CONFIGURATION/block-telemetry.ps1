@@ -9,13 +9,6 @@
 # <https://github.com/W4RH4WK/Debloat-Windows-10/issues/79>
 # -----------------------------------------------------------------------------
 # THIS TOOL HAS BEEN ADAPTED FROM BUILDBYBEL/SharpApp
-
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
-
-Write-Output "Disabling telemetry via Group Policies"
-New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" "AllowTelemetry" 0
-
 # Entries related to Akamai have been reported to cause issues with Widevine
 # DRM.
 

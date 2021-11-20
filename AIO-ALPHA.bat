@@ -643,11 +643,10 @@ PAUSE
 color 0f
 mode con cols=98 lines=60
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
-::powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/TELEMETRY.bat" -O "c:\aio\TELEMETRY.bat"
+rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry /F 1> NUL
+reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "c:\aio\block-telemetry.ps1"
-::start c:\aio\TELEMETRY.bat
 Powershell -ExecutionPolicy Bypass -File c:\aio\block-telemetry.ps1
-del c:\aio\block-telemetry.ps1
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
