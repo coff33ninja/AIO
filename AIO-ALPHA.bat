@@ -783,8 +783,9 @@ color 0f
 mode con cols=98 lines=60
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+echo A bunch of software will be auto installed in accordece with clientelle we worked with...
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
 START /wait C:\AIO\PatchMyPC.exe /auto switch
 timeout 2 >nul
 pause
@@ -799,9 +800,10 @@ color 0f
 mode con cols=98 lines=60
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
-START /wait C:\AIO\PatchMyPC.exe /auto switch
+echo Select the software in accordence with your own needs...
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
+START /wait C:\AIO\PatchMyPC.exe
 timeout 2 >nul
 pause
 del C:\AIO\PatchMyPC.exe
@@ -817,7 +819,9 @@ TITLE Chocolatey Installer Setup
 echo This section is reserved for future use
 rem This will start a SOFTWARE UPDATE SESSION...
 rem https://docs.chocolatey.org/en-us/features/package-builder
-rem @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.UPDATER/SOFTWARE/choco_Preset.ps1" -O "c:\aio\choco_Preset.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\choco_Preset.ps1"
 timeout 2 >nul
 pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
@@ -827,8 +831,10 @@ cls
 color 0f
 mode con cols=98 lines=60
 TITLE Chocolatey Installer Setup
-echo This section is reserved for future use
-rem This will start a SOFTWARE UPDATE SESSION...
+echo This will start a SOFTWARE UPDATE SESSION...
+echo Select the software in accordence with your own needs...
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+powershell choco upgrade
 powershell choco install chocolateygui
 rem powershell choco install hot-chocolatey
 timeout 2 >nul

@@ -1,0 +1,11 @@
+2021/11/12 17:33:59 - Patch My PC Started
+2021/11/12 17:33:59 - Patch My PC running with command line option: /auto switch
+2021/11/12 17:33:59 - Checking connection to patchmypc.com
+21 Nov 2021 15:21:32 - Patch My PC Started
+21 Nov 2021 15:21:32 - Checking connection to patchmypc.com
+21 Nov 2021 15:21:32 - Verified connection to patchmypc.com. Status Code: 200
+21 Nov 2021 15:21:32 - Getting latest definitions from patchmypc.com
+21 Nov 2021 15:21:32 - Definition load completed in: 0.28 seconds
+21 Nov 2021 15:21:32 - Patch My PC version 4.2.0.4 is running. The latest is 4.2.0.4
+21 Nov 2021 15:21:32 - Performing scan of installed applications
+21 Nov 2021 15:21:33 - Scan completed in: 0.53 seconds
