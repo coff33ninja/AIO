@@ -835,7 +835,7 @@ pause & cls & goto end_UPDATER
 :DRIVER_UPDATER
 echo this section is for future use...
 md c:\temp
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SNAPPY_DRIVER.zip" -O "c:\temp\SNAPPY_DRIVER.zip"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "c:\temp\SNAPPY_DRIVER.zip"
 cd /d %~dp0
 Call :UnZipFile "C:\AIO\SNAPPY_DRIVER" "c:\AIO\SNAPPY_DRIVER.zip"
 exit /b
