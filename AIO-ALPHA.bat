@@ -834,6 +834,29 @@ pause & cls & goto end_UPDATER
 
 :DRIVER_UPDATER
 echo this section is for future use...
+md c:\temp
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SNAPPY_DRIVER.zip" -O "c:\temp\SNAPPY_DRIVER.zip"
+cd /d %~dp0
+Call :UnZipFile "C:\AIO\SNAPPY_DRIVER" "c:\AIO\SNAPPY_DRIVER.zip"
+exit /b
+
+:UnZipFile <ExtractTo> <newzipfile>
+set vbs="%temp%\_.vbs"
+if exist %vbs% del /f /q %vbs%
+>%vbs%  echo Set fso = CreateObject("Scripting.FileSystemObject")
+>>%vbs% echo If NOT fso.FolderExists(%1) Then
+>>%vbs% echo fso.CreateFolder(%1)
+>>%vbs% echo End If
+>>%vbs% echo set objShell = CreateObject("Shell.Application")
+>>%vbs% echo set FilesInZip=objShell.NameSpace(%2).items
+>>%vbs% echo objShell.NameSpace(%1).CopyHere(FilesInZip)
+>>%vbs% echo Set fso = Nothing
+>>%vbs% echo Set objShell = Nothing
+cscript //nologo %vbs%
+if exist %vbs% del /f /q %vbs%
+
+start /wait c:\AIO\SNAPPY_DRIVER\SDI_auto.bat
+
 pause & cls & goto end_UPDATER
 
 ::========================================================================================================================================
