@@ -833,9 +833,8 @@ pause & cls & goto end_UPDATER
 ::========================================================================================================================================
 
 :DRIVER_UPDATER
-echo this section is for future use...
-md c:\temp
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "c:\temp\SNAPPY_DRIVER.zip"
+Title DRIVER UPDATER
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "c:\AIO\SNAPPY_DRIVER.zip"
 cd /d %~dp0
 Call :UnZipFile "C:\AIO\SNAPPY_DRIVER" "c:\AIO\SNAPPY_DRIVER.zip"
 exit /b
@@ -855,8 +854,24 @@ if exist %vbs% del /f /q %vbs%
 cscript //nologo %vbs%
 if exist %vbs% del /f /q %vbs%
 
-start /wait c:\AIO\SNAPPY_DRIVER\SDI_auto.bat
-
+if /i "%processor_architecture%"=="AMD64" GOTO AMD64
+if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
+if /i "%processor_architecture%"=="x86" GOTO x86
+if error GOTO UNSUPPORTED
+:AMD64
+start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
+echo SNAPPY DRIVER INSTALLER x64
+pause & cls & goto end_UPDATER
+GOTO EXEC
+:x86
+start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
+echo SNAPPY DRIVER INSTALLER x86
+pause & cls & goto end_UPDATER
+:UNSUPPORTED
+echo Unsupported architecture "%processor_architecture%"!
+echo  Not found 'Snappy Driver Installer'!
+echo.
+timeout 6
 pause & cls & goto end_UPDATER
 
 ::========================================================================================================================================
