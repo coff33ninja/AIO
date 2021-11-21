@@ -753,7 +753,7 @@ echo                  ^|      [3] Chocolatey Pre-Set Selections                 
 echo                  ^|                                                               ^|
 echo                  ^|      [4] Chocolatey Self Select                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] BLANK                                                ^|
+echo                  ^|      [5] DRIVER UPDATER                                       ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [6] BLANK                                                ^|
 echo                  ^|                                                               ^|
@@ -770,7 +770,7 @@ if errorlevel  9 goto:EXIT
 if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:TEST_UNKNOWN
 if errorlevel  6 goto:TEST_UNKNOWN
-if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  5 goto:DRIVER_UPDATER
 if errorlevel  4 goto:Chocolatey_GUI
 if errorlevel  3 goto:Chocolatey
 if errorlevel  2 goto:PatchMyPC_OWN_SELECTIONS
@@ -791,7 +791,6 @@ timeout 2 >nul
 pause
 del C:\AIO\PatchMyPC.exe
 del C:\AIO\PatchMyPC.ini
-pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
 :PatchMyPC_OWN_SELECTIONS
@@ -808,7 +807,6 @@ timeout 2 >nul
 pause
 del C:\AIO\PatchMyPC.exe
 del C:\AIO\PatchMyPC.ini
-pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
 :Chocolatey
@@ -816,14 +814,12 @@ cls
 color 0f
 mode con cols=98 lines=60
 TITLE Chocolatey Installer Setup
-echo This section is reserved for future use
-rem This will start a SOFTWARE UPDATE SESSION...
-rem https://docs.chocolatey.org/en-us/features/package-builder
+echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
+echo A bunch of software will be auto installed in accordece with clientelle we worked with...
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "c:\aio\choco_Preset.ps1"
 Powershell -ExecutionPolicy Bypass -File "c:\aio\choco_Preset.ps1"
 timeout 2 >nul
-pause
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
 :Chocolatey_GUI
@@ -838,7 +834,10 @@ powershell choco upgrade all --noop
 powershell choco install chocolateygui
 rem powershell choco install hot-chocolatey
 timeout 2 >nul
-pause
+pause & cls & goto end_COMPUTER_CONFIGURATION
+
+:DRIVER_UPDATER
+echo this section is for future use...
 pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 ::========================================================================================================================================
