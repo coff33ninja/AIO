@@ -587,7 +587,7 @@ PAUSE
 @echo off
 rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "c:\aio\disable-windows-defender.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\disable-windows-defender.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\disable-windows-defender.ps1"  -verb runas
 del "c:\aio\disable-windows-defender.ps1"
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
@@ -646,7 +646,7 @@ ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry /F 1> NUL
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "c:\aio\block-telemetry.ps1"
-Powershell -ExecutionPolicy Bypass -File c:\aio\block-telemetry.ps1
+Powershell -ExecutionPolicy Bypass -File "c:\aio\block-telemetry.ps1"  -verb runas
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "c:\aio\ooshutup10.exe"
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "c:\aio\ooshutup10.cfg"
 start /wait c:\aio\ooshutup10.exe ooshutup10.cfg /quiet
@@ -812,7 +812,7 @@ echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "c:\aio\choco_Preset.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\choco_Preset.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\choco_Preset.ps1"  -verb runas
 timeout 2 >nul
 pause & cls & goto end_UPDATER
 
@@ -1055,7 +1055,7 @@ ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
 powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "c:\aio\Debloater.ps1"
 rem powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "c:\aio\Debloater.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"  -verb runas
 timeout 2 >nul
 pause & cls & goto end_CLEANER
 
