@@ -1,33 +1,3 @@
-choco install adobeair
-choco install adobeshockwaveplayer
-choco install javaruntime
-choco install netfx-repair-tool
-choco install dogtail.dotnet3.5sp1
-choco install dotnet4.0
-choco install dotnet4.5
-choco install dotnet4.6.1
-choco install netfx-4.7.1
-choco install netfx-4.8
-choco install dotnetfx
-choco install silverlight
-choco install vcredist-all
-choco install python2
-choco install python3
-choco install googlechrome
-choco install edgedeflector
-choco install firefox
-choco install k-litecodecpackfull
-choco install k-litecodecpackmega
-choco install vlc
-choco install 7zip
-choco install adobereader
-choco install cdburnerxp
-choco install skype
-choco install winaero-tweaker
-choco install anydesk.install
-choco install teamviewer
-
-
 $Packages = 'googlechrome',
             'git',
             'adobeair',
