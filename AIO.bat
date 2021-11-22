@@ -1045,7 +1045,8 @@ CLS
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "c:\aio\Debloater.ps1"
+powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "c:\aio\Debloater.ps1"
+rem powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "c:\aio\Debloater.ps1"
 Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
 timeout 2 >nul
 pause & cls & goto end_CLEANER
