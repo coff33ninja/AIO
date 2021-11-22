@@ -291,7 +291,7 @@ cls
 
 :CHANGE_IP
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo:
 title IP CONFIGURATION
@@ -335,7 +335,7 @@ cls
 
 :AUTOMATIC_CONFIGURATION_WIFI
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title WIFI AUTOMATIC CONFIGURATION
 cls
 echo:
@@ -347,7 +347,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :AUTOMATIC_CONFIGURATION_ETHERNET
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title ETHERNET AUTOMATIC CONFIGURATION
 cls
 echo:
@@ -359,7 +359,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :WIFI_MANUAL
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title WIFI MANUAL CONFIGURATION
 cls
 echo: 
@@ -377,7 +377,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :ETHERNET_MANUAL
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title ETHERNET MANUAL CONFIGURATION
 cls
 echo:
@@ -395,7 +395,7 @@ pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 :PING
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo:
 echo EXAMPLES
@@ -410,7 +410,7 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 
 :TRACE_ROUTE
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 Set /P config=Enter an IP address or hostname to trace:
 tracert.exe -d -h 64 %config%
@@ -420,7 +420,7 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 
 :SETUP_NETWORK_SHARE
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo:
 title NETWORK SHARE MAP
@@ -437,7 +437,7 @@ pause & ping %COMPUTER_NAME% & goto end_NETWORK_CONFIGURATION
 
 :REMOVE_NETWORK_MAP
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo:
 title REMOVE NETWORK MAP
@@ -450,7 +450,7 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 :WIFI_CONFIURATION
 setlocal enabledelayedexpansion
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 ECHO:
 title WiFi name list
@@ -499,7 +499,7 @@ cls & goto end_NETWORK_CONFIGURATION
 
 :BACKUP_CONFIG
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title  BACKUP NETWORK CONFIGURATION
 cls
 
@@ -545,7 +545,7 @@ cls
 
 :BACKUP_WIFI
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo
 md C:\WIFI
@@ -559,7 +559,7 @@ pause & goto end_NETWORK_CONFIGURATION
 
 :RESTORE_WIFI
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 cls
 echo
 cd C:\WIFI
@@ -575,7 +575,7 @@ pause & goto end_NETWORK_CONFIGURATION
 
 :DEFENDER_TOOLBOX
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title DEFENDER TOOLBOX
 cls
 ECHO:
@@ -630,7 +630,7 @@ pause & cls & goto end_COMPUTER_CONFIGURATION
 
 :MAS
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "c:\aio\MAS.cmd"
 start /wait c:\aio\MAS.cmd
@@ -641,7 +641,7 @@ PAUSE
 
 :TELEMETRY
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry /F 1> NUL
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
@@ -662,7 +662,7 @@ REM THIS SECTION IN PROGRESS...
 
 :UPDATER
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title  UPDATER
 cls
 
@@ -706,7 +706,7 @@ cls
 :WINDOWS_UPDATE
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
@@ -720,7 +720,7 @@ pause & goto end_UPDATER
 :WINDOWS_UPDATE_PAUSER
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
@@ -733,7 +733,7 @@ pause & goto end_UPDATER
 
 :SOFTWARE_UPDATER
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 title  SOFTWARE UPDATER
 cls
 echo                         This section will give options to update software
@@ -774,7 +774,7 @@ cls
 :PatchMyPC
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
@@ -790,7 +790,7 @@ pause & cls & goto end_UPDATER
 :PatchMyPC_OWN_SELECTIONS
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo Select the software in accordence with your own needs...
@@ -806,7 +806,7 @@ pause & cls & goto end_UPDATER
 :Chocolatey
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
 echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
@@ -819,7 +819,7 @@ pause & cls & goto end_UPDATER
 :Chocolatey_GUI
 cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo Select the software in accordence with your own needs...
@@ -833,6 +833,9 @@ pause & cls & goto end_UPDATER
 ::========================================================================================================================================
 
 :DRIVER_UPDATER
+cls
+color 0f
+mode con cols=98 lines=32
 Title DRIVER UPDATER
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "c:\AIO\SNAPPY_DRIVER.zip"
 cd /d %~dp0
@@ -880,8 +883,9 @@ pause & cls & goto end_UPDATER
 ::========================================================================================================================================
 
 :CLEANER
+cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=40
 TITLE PC Cleanup Utility
 ECHO                THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
 echo                     ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
@@ -1024,6 +1028,9 @@ pause & cls & goto end_CLEANER
 
 :Disk_Defragment
 cls
+color 0f
+mode con cols=98 lines=32
+cls
 echo --------------------------------------------------------------------------------
 echo Disk Defragment
 echo --------------------------------------------------------------------------------
@@ -1040,8 +1047,9 @@ echo Disk Defrag successful!
 echo.
 pause & goto end_CLEANER
 
-:Windows_Debloater
-CLS
+:Windows_Debloatercls
+color 0f
+mode con cols=98 lines=32
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
@@ -1051,8 +1059,9 @@ Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"
 timeout 2 >nul
 pause & cls & goto end_CLEANER
 
-:GROUP_POLICY_RESET_AGREEMENT
-CLS
+:GROUP_POLICY_RESET_AGREEMENTcls
+color 0f
+mode con cols=98 lines=32
 TITLE GROUP POLICY RESET
 ECHO The Group Policy Editor is an important tool for Windows OS using which
 ECHO System Administrators can fine-tune system settings.
@@ -1086,6 +1095,8 @@ if errorlevel %GPR%==n goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
 
 :GROUP_POLICY_RESET_AGREEMENT_INCORRECT
 cls
+color 0f
+mode con cols=98 lines=32
 TITLE Incorrect input
 echo Incorrect input, try again.
 pause >nul 
@@ -1094,7 +1105,9 @@ goto GROUP_POLICY_RESET_AGREEMENT
 cls
 
 :GROUP_POLICY_RESET
-CLS
+cls
+color 0f
+mode con cols=98 lines=32
 TITLE GROUP POLICY RESET
 ECHO The Group Policy Editor is an important tool for Windows OS using which
 ECHO System Administrators can fine-tune system settings.
@@ -1124,7 +1137,9 @@ reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsSt
 pause & cls & goto end_CLEANER
 
 :WMI_RESET_AGREEMENT
-CLS
+cls
+color 0f
+mode con cols=98 lines=32
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
 ECHO Full WMI reset (to the state when the operating system was installed)
 ECHO is a serious measurement that should be well thought about, if needed
@@ -1158,6 +1173,8 @@ if errorlevel %WMIR%==n goto WMI_RESET_AGREEMENT_INCORRECT
 
 :WMI_RESET_AGREEMENT_INCORRECT
 cls
+color 0f
+mode con cols=98 lines=32
 TITLE Incorrect input
 echo Incorrect input, try again.
 pause >nul 
@@ -1166,7 +1183,9 @@ goto WMI_RESET_AGREEMENT
 cls
 
 :WMI_RESET
-CLS
+cls
+color 0f
+mode con cols=98 lines=32
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
 ECHO Full WMI reset (to the state when the operating system was installed)
 ECHO is a serious measurement that should be well thought about, if needed
@@ -1243,8 +1262,9 @@ pause & cls & goto end_CLEANER
 ::========================================================================================================================================
 
 :AIO_PRE-SET
+cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 
@@ -1252,8 +1272,9 @@ PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :EXTRAS
+cls
 color 0f
-mode con cols=98 lines=60
+mode con cols=98 lines=32
 ECHO STILL BLANK
 PAUSE GOTO end_COMPUTER_CONFIGURATION
 
