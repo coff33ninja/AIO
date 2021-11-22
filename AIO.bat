@@ -724,7 +724,7 @@ mode con cols=98 lines=32
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\UPDATES_PAUSE_TASK.ps1"
+Powershell -ExecutionPolicy Bypass -File "c:\aio\UPDATES_PAUSE_TASK.ps1"  -verb runas
 timeout 2 >nul
 pause & goto end_UPDATER
 
