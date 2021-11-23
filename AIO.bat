@@ -1480,115 +1480,32 @@ cls & goto COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :EXIT
+cls
 @echo OFF
-CLS
-color 0c
-mode con cols=55 lines=6
-title EXITING...
-ECHO:
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|                                           ^|   0 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##                              ^|   5 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|###                                        ^|  15 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|#########                                 ^|  30 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|###############                            ^|  42 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##################                         ^|  45 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|########################                    ^|  47 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################                  ^|  50 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|#############################               ^|  52 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##############################              ^|  53 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|################################            ^|  65 ^|
-echo ===================================================
-ping localhost -n 2 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##################################          ^|  70 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|######################################      ^|  80 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|########################################    ^|  89 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################################  ^|  90 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|##########################################  ^|  95 ^|
-echo ===================================================
-ping localhost -n 1 >nul
-cls
-echo This Is a work of fiction and will exit promptly...
-echo ===================================================
-echo ^|############################################^| 100 ^|
-echo ===================================================
-echo OK!
-cls
-echo.
+mode con cols=43 lines=6
+title Progress to COMPUTER CONFIGURATION
+set /a "processValue=100"
+set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
+set "tbd=0xB0"
+set "barLength=40"
+( set LF=^
+%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
+)
+FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
+FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
+FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
+FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
+for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
+
+echo EXITING AIO at-%time%!LF!
+for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
+for /L %%N in (0 1 %processValue%) do (
+  set /a showBar=%%N*barLength/processValue
+  set /a percentage=%%N*100/processValue
+  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
+  ping -4 -n 1 127.0.0.1 >nul 
+)
+echo !LF!Finished at %time%
 endlocal
 cls & exit
 ::========================================================================================================================================
