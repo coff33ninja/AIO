@@ -2,8 +2,8 @@
 setlocal
 %SystemRoot%\System32\rundll32.exe shell32.dll,SHCreateLocalServerRunDll {c82192ee-6cb5-4bc0-9ef0-fb818773790a}
 CLS
-MD c:\AIO
-echo. > c:\AIO\log.txt
+MD %USERPROFILE%\AppData\Local\Temp\AIO
+echo. > %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 
 ::========================================================================================================================================
 ::========================================================================================================================================
@@ -86,10 +86,10 @@ echo           [X]
 echo           [X] 
 echo.
 set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
-if %op%==Y goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
-if %op%==Yes goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
-if %op%==yes goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
-if %op%==y goto MainMenu >> c:\AIO\ACCEPTEDTOS.txt
+if %op%==Y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %op%==Yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %op%==yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %op%==y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
 if %op%==N goto exit
 if %op%==No goto exit
 if %op%==no goto exit
@@ -166,9 +166,9 @@ CLS
 Title SYSTEM INFORMATION
 ECHO:
 ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "C:\AIO\HWiNFO32.exe"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "C:\AIO\HWiNFO32.INI"
-start /wait c:\aio\HWiNFO32.exe
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.INI"
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe
 timeout 2 >nul
 GOTO TEST_CONNECTION
 
@@ -181,10 +181,10 @@ cls
 title LIST OF NETWORK CONFIGURATION
 echo This section will display a list of all network configurations registered on the device. > c:\fAIO\log.txt 
 ECHO:
-Echo %Date% %Time% >> c:\AIO\log.txt
+Echo %Date% %Time% >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 ECHO:
 netsh interface ip show config
-netsh interface ip show config >> c:\AIO\log.txt
+netsh interface ip show config >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 pause & GOTO MainMenu
 
 ::========================================================================================================================================
@@ -586,9 +586,8 @@ timeout 5 >nul
 PAUSE
 @echo off
 rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "c:\aio\disable-windows-defender.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\disable-windows-defender.ps1"  -verb runas
-del "c:\aio\disable-windows-defender.ps1"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"  -verb runas
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
 Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
@@ -619,11 +618,9 @@ Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cm
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "c:\aio\Defender_Tools.exe"
-start /wait c:\aio\Defender_Tools.exe 
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe"
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe 
 timeout 2 >nul
-del "c:\aio\Defender_Tools.exe"
-endlocal
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
@@ -632,10 +629,9 @@ pause & cls & goto end_COMPUTER_CONFIGURATION
 color 0f
 mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "c:\aio\MAS.cmd"
-call c:\aio\MAS.cmd
-del c:\aio\MAS.cmd
-PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "%USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd"
+call %USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd
+cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
 
@@ -645,11 +641,11 @@ mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry /F 1> NUL
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "c:\aio\block-telemetry.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\block-telemetry.ps1"  -verb runas
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "c:\aio\ooshutup10.exe"
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "c:\aio\ooshutup10.cfg"
-start /wait c:\aio\ooshutup10.exe ooshutup10.cfg /quiet
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"  -verb runas
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe"
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.cfg"
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
@@ -709,10 +705,10 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "C:\AIO\WUpdater.exe"
-start /wait c:\aio\WUpdater.exe
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe"
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
 timeout 2 >nul
-del C:\AIO\WUpdater.exe
+del %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
 pause & goto end_UPDATER
 
 ::========================================================================================================================================
@@ -723,8 +719,8 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "C:\AIO\UPDATES_PAUSE_TASK.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\UPDATES_PAUSE_TASK.ps1"  -verb runas
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"  -verb runas
 timeout 2 >nul
 pause & goto end_UPDATER
 
@@ -778,13 +774,10 @@ mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
-START /wait C:\AIO\PatchMyPC.exe /auto switch
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
+START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe /auto switch
 timeout 2 >nul
-pause
-del C:\AIO\PatchMyPC.exe
-del C:\AIO\PatchMyPC.ini
 pause & cls & goto end_UPDATER
 
 :PatchMyPC_OWN_SELECTIONS
@@ -794,13 +787,10 @@ mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo Select the software in accordence with your own needs...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "C:\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "C:\AIO\PatchMyPC.ini"
-START /wait C:\AIO\PatchMyPC.exe
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
+START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe
 timeout 2 >nul
-pause
-del C:\AIO\PatchMyPC.exe
-del C:\AIO\PatchMyPC.ini
 pause & cls & goto end_UPDATER
 
 :Chocolatey
@@ -811,8 +801,8 @@ TITLE Chocolatey Installer Setup
 echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "c:\aio\choco_Preset.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\choco_Preset.ps1"  -verb runas
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"  -verb runas
 timeout 2 >nul
 pause & cls & goto end_UPDATER
 
@@ -837,9 +827,9 @@ cls
 color 0f
 mode con cols=98 lines=32
 Title DRIVER UPDATER
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "c:\AIO\SNAPPY_DRIVER.zip"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
 cd /d %~dp0
-Call :UnZipFile "C:\AIO\SNAPPY_DRIVER" "c:\AIO\SNAPPY_DRIVER.zip"
+Call :UnZipFile "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER" "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
 exit /b
 
 :UnZipFile <ExtractTo> <newzipfile>
@@ -862,12 +852,12 @@ if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
 if /i "%processor_architecture%"=="x86" GOTO x86
 if error GOTO UNSUPPORTED
 :AMD64
-start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
+start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x64
 pause & cls & goto end_UPDATER
 GOTO EXEC
 :x86
-start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
+start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x86
 pause & cls & goto end_UPDATER
 :UNSUPPORTED
@@ -1053,9 +1043,9 @@ mode con cols=98 lines=32
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
-powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "c:\aio\Debloater.ps1"
-rem powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "c:\aio\Debloater.ps1"
-Powershell -ExecutionPolicy Bypass -File "c:\aio\Debloater.ps1"  -verb runas
+powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
+rem powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"  -verb runas
 timeout 2 >nul
 pause & cls & goto end_CLEANER
 
@@ -1076,10 +1066,10 @@ ECHO Please reboot once the cleanup is complete.
 ECHO.
 REM REPAIR GAINED FROM https://www.thewindowsclub.com/reset-all-group-policy-settings-to-default
 set /p GPR=      Do you agree to the terms stated above? (Yes or No):
-if %GPR%==Y goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %GPR%==Yes goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %GPR%==yes goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %GPR%==y goto GROUP_POLICY_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %GPR%==Y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %GPR%==Yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %GPR%==yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %GPR%==y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
 if %GPR%==N goto :CLEANER
 if %GPR%==No goto :CLEANER
 if %GPR%==no goto :CLEANER
@@ -1154,10 +1144,10 @@ ECHO system to the state when you can boot – backup your content and better
 ECHO reinstall. It should not be an escape solution.
 REM REPAIR GAINED FROM https://www.optimizationcore.com/system-administration/troubleshooting-wmi-check-full-wmi-reset-cmd-batch/
 set /p WMIR=      Do you agree to the terms stated above? (Yes or No):
-if %WMIR%==Y goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %WMIR%==Yes goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %WMIR%==yes goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
-if %WMIR%==y goto WMI_RESET >> c:\AIO\ACCEPTEDTOS.txt
+if %WMIR%==Y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %WMIR%==Yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %WMIR%==yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+if %WMIR%==y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
 if %WMIR%==N goto :CLEANER
 if %WMIR%==No goto :CLEANER
 if %WMIR%==no goto :CLEANER
@@ -1490,18 +1480,6 @@ cls & goto COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :EXIT
-cls
-TITLE Cleanup
-echo CLEANING UP RESIDUE LEFT OF AIO RESIDUE
-forfiles -p "C:\AIO" -s -m *.bat*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.cmd*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.ps1*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.exe*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.txt*  /C "cmd /c del @path"
-forfiles -p "C:\AIO" -s -m *.ini*  /C "cmd /c del @path"
-goto EXIT_BAR
-
-:EXIT_BAR
 @echo OFF
 CLS
 color 0c
