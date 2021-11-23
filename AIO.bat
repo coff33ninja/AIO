@@ -633,9 +633,9 @@ color 0f
 mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "c:\aio\MAS.cmd"
-start /wait c:\aio\MAS.cmd
+call c:\aio\MAS.cmd
 del c:\aio\MAS.cmd
-PAUSE 
+PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
 
