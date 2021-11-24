@@ -609,13 +609,13 @@ Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_x64.exe -Force; ^
 Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files\KMSSS.exe -Force; ^
 Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files -Force; ^
 Add-MpPreference -ExclusionPath C:\Windows\KMS -Force; ^
-Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd;
+Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt -Force; ^
+Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force;
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
