@@ -208,12 +208,12 @@ echo                  ^|      [3] MICROSOFT ACTIVATION                          
 echo                  ^|                                                               ^|
 echo                  ^|      [4] TELEMETRY                                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|            ####                       ####                    ^|
-echo                  ^|            ####                       ####                    ^|
-echo                  ^|                       ##      ##                              ^|
-echo                  ^|                         #    #                                ^|
-echo                  ^|     #                     ##                              #   ^|
-echo                  ^|      #___________________________________________________#    ^|
+echo                  ^|      [5] Disable Specific Services                            ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|       ___________________________________________________     ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [5] SHUTDOWN OPTIONS       [6] BACK      [7] EXIT        ^|
 echo                  ^|                                                               ^|
@@ -221,9 +221,10 @@ echo                  ^|========================================================
 echo:          
 choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
 
-if errorlevel  7 goto:EXIT
-if errorlevel  6 goto:end_BACKMENU
-if errorlevel  5 goto:SHUTDOWN_OPTIONS
+if errorlevel  8 goto:EXIT
+if errorlevel  7 goto:end_BACKMENU
+if errorlevel  6 goto:SHUTDOWN_OPTIONS
+if errorlevel  5 goto:SERVICES_DISABLE
 if errorlevel  4 goto:TELEMETRY 
 if errorlevel  3 goto:MAS
 if errorlevel  2 goto:DEFENDER_TOOLBOX
@@ -648,6 +649,14 @@ powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/
 start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
+::========================================================================================================================================
+
+:SERVICES_DISABLE
+color 0f
+mode con cols=98 lines=32
+Title SERVICES DISABLE
+
+PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
