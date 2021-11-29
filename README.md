@@ -25,6 +25,6 @@ for the code, files, info, and a basis to work from.
 - [O&OShutup](https://www.oo-software.com/en/shutup10) Used for extra preset telemetry fixes.
 - [SNAPPY DRIVER INSTALLER](https://sdi-tool.org/) Used as a driver update medium.
 
+## Extra's
 Most of the code is still "Dirty" due to learning cmd, bat, vbs and ps1 creation from the ground up.
-
 Hope this will become an excelent toolkit for everyone in the future.
