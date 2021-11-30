@@ -1,4 +1,4 @@
-## ![Logo](https://user-images.githubusercontent.com/63179955/110835559-f6c15b80-82c4-11eb-9105-546daa2c3b42.png) AIO 
+## ![Logo](https://github.com/coff33ninja/AIO/blob/main/AIO-LOGO.png) AIO 
 
 Some scripts are entirely my own, while others include the work of others. Each one has a specific, clearly defined purpose, and unless noted, will work independently of the others.
 It has been setup so that it will automatically call and run as Administrator; and download the files as needed (just to keep system clear from extra clutter). The item in release was build with "update" in mind for when updates occur in the main [AIO](https://github.com/coff33ninja/AIO) package gets updated.
