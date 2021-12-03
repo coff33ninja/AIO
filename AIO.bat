@@ -654,12 +654,37 @@ PAUSE & cls & goto end_COMPUTER_CONFIGURATION
 color 0f
 mode con cols=98 lines=32
 Title SERVICES DISABLE
+echo Currently working on the services list that mostly destroys windows overall performance.
+rem Query the SC service name. SC aka Service Control has different names for the services
+rem and you cannot disable them using the actual service name listed on services.msc.
+rem Instead we need to send a query to get the service name and then we can run a query to disable it 
+rem Get the name of the service you want to disable e.g.
+rem    Apple Mobile Device
+rem    AMD FUEL Service
+rem    ASP.NET State Service
+rem    ...
+rem   Sc Getkeyname "Key Name For Service"
+rem Example
+rem   sc GetKeyName “AMD FUEL Service” (including the quotes!)
+
+rem Sc does not account for typos.
+rem If you do not enter the service name EXACTLY as seen on the services.msc
+rem list, then it will give you the error “The specified service does not
+rem exist as an installed service”, no matter what! 
+
+rem To configure the services you need to modify,
+rem add the following to the string showed in the example below:
+rem Example
+rem    sc config “AMD Fuel Service” start= disabled
+
+rem In the query above you can replace disabled with the following states:
+rem    boot | system | auto | demand | disabled | delayed-auto 
 
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
-REM THIS SECTION IN PROGRESS...
+REM UPDATE SECTION FOR WINDOWS, APPLICATIONS AND DRIVERS
 
 ::========================================================================================================================================
 ::========================================================================================================================================
