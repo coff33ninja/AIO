@@ -720,7 +720,7 @@ echo                  ^|                          [5] GO BACK            [6] EXI
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
 if errorlevel  6 goto:EXIT
 if errorlevel  5 goto:end_COMPUTER_CONFIGURATION
