@@ -85,23 +85,23 @@ echo               but not limited to github projects by Builtbybel, Massgravel 
 echo           [X] 
 echo           [X] 
 echo.
-set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
-if %op%==Y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %op%==Yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %op%==yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %op%==y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %op%==N goto exit
-if %op%==No goto exit
-if %op%==no goto exit
-if %op%==n goto exit
-if errorlevel %op%==Y goto Incorrect
-if errorlevel %op%==Yes goto Incorrect
-if errorlevel %op%==yes goto Incorrect
-if errorlevel %op%==y goto Incorrect
-if errorlevel %op%==N goto Incorrect
-if errorlevel %op%==No goto Incorrect
-if errorlevel %op%==no goto Incorrect
-if errorlevel %op%==n goto Incorrect
+  set /p op=      Do you agree to the terms and conditions as stated above? (Yes or No):
+    if %op%==Y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+    if %op%==Yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+    if %op%==yes goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+    if %op%==y goto MainMenu >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+    if %op%==N goto exit
+    if %op%==No goto exit
+    if %op%==no goto exit
+    if %op%==n goto exit
+    if errorlevel %op%==Y goto Incorrect
+    if errorlevel %op%==Yes goto Incorrect
+    if errorlevel %op%==yes goto Incorrect
+    if errorlevel %op%==y goto Incorrect
+    if errorlevel %op%==N goto Incorrect
+    if errorlevel %op%==No goto Incorrect
+    if errorlevel %op%==no goto Incorrect
+    if errorlevel %op%==n goto Incorrect
 echo
 cls
 
@@ -166,9 +166,9 @@ CLS
 Title SYSTEM INFORMATION
 ECHO:
 ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.INI"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe"
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.INI"
+   start /wait %USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe
 timeout 2 >nul
 GOTO TEST_CONNECTION
 
@@ -183,8 +183,8 @@ echo This section will display a list of all network configurations registered o
 ECHO:
 Echo %Date% %Time% >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 ECHO:
-netsh interface ip show config
-netsh interface ip show config >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
+   netsh interface ip show config
+   netsh interface ip show config >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 pause & GOTO MainMenu
 
 ::========================================================================================================================================
@@ -284,7 +284,7 @@ mode con cols=98 lines=60
 cls
 title LIST OF NETWORK CONFIGURATION
 echo This section will display a list of all network configurations registered on device.
-netsh interface ip show config
+   netsh interface ip show config
 pause & mode con cols=98 lines=30 & goto end_NETWORK_CONFIGURATION
 cls
 
@@ -340,8 +340,8 @@ mode con cols=98 lines=32
 title WIFI AUTOMATIC CONFIGURATION
 cls
 echo:
-netsh interface ipv4 set address name="Wi-Fi" source=dhcp
-netsh interface ipv4 set dnsservers name"Wi-Fi" source=dhcp
+   netsh interface ipv4 set address name="Wi-Fi" source=dhcp
+   netsh interface ipv4 set dnsservers name"Wi-Fi" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -352,8 +352,8 @@ mode con cols=98 lines=32
 title ETHERNET AUTOMATIC CONFIGURATION
 cls
 echo:
-netsh interface ipv4 set address name="Ethernet" source=dhcp
-netsh interface ipv4 set dnsservers name"Ethernet" source=dhcp
+   netsh interface ipv4 set address name="Ethernet" source=dhcp
+   netsh interface ipv4 set dnsservers name"Ethernet" source=dhcp
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -366,12 +366,12 @@ cls
 echo: 
 echo TYPE IN THE NESSESARY CONFIG IN THE FOLLOWING ORDER:
 echo:
-netsh interface ipv4 set address name="Wi-Fi" static %WIFI-IP% %WIFI-SUBNET% %WIFI-GATEWAY%
-Set /P %WIFI-IP%=Enter an IP address:
-Set /P %WIFI-SUBNET%=Enter SUBNET MASK:
-Set /P %WIFI-GATEWAY%=Enter GATEWAY:
-netsh interface ipv4 set dns name="Wi-Fi" %WIFI-DNS% primary
-Set /P %WIFI-DNS%=ENTER DNS:
+   netsh interface ipv4 set address name="Wi-Fi" static %WIFI-IP% %WIFI-SUBNET% %WIFI-GATEWAY%
+   Set /P %WIFI-IP%=Enter an IP address:
+   Set /P %WIFI-SUBNET%=Enter SUBNET MASK:
+   Set /P %WIFI-GATEWAY%=Enter GATEWAY:
+   netsh interface ipv4 set dns name="Wi-Fi" %WIFI-DNS% primary
+   Set /P %WIFI-DNS%=ENTER DNS:
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -384,12 +384,12 @@ cls
 echo:
 echo TYPE IN THE NESSESARY CONFIG IN THE FOLLOWING ORDER:
 echo:
-netsh interface ipv4 set address name="Ethernet" static %ETHER-IP% %ETHER-SUBNET% %ETHER-GATEWAY%
-Set /P %ETHER-IP%=Enter an IP address:
-Set /P %ETHER-SUBNET%=Enter SUBNET MASK:
-Set /P %ETHER-GATEWAY%=Enter GATEWAY:
-netsh interface ipv4 set dns name="Wi-Fi" %ETHER-DNS% primary
-Set /P %ETHER-DNS%=ENTER DNS:
+   netsh interface ipv4 set address name="Ethernet" static %ETHER-IP% %ETHER-SUBNET% %ETHER-GATEWAY%
+   Set /P %ETHER-IP%=Enter an IP address:
+   Set /P %ETHER-SUBNET%=Enter SUBNET MASK:
+   Set /P %ETHER-GATEWAY%=Enter GATEWAY:
+   netsh interface ipv4 set dns name="Wi-Fi" %ETHER-DNS% primary
+   Set /P %ETHER-DNS%=ENTER DNS:
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -403,8 +403,8 @@ echo EXAMPLES
 echo 8.8.8.8 for GOOGLE
 echo 1.1.1.1 for CLOUDFLARE
 echo:
-Set /P pinghost=Enter an IP address or hostname to ping:
-ping.exe %pinghost% -t
+   Set /P pinghost=Enter an IP address or hostname to ping:
+   ping %pinghost% -t
 pause & cls & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -413,8 +413,8 @@ pause & cls & goto end_NETWORK_CONFIGURATION
 color 0f
 mode con cols=98 lines=32
 cls
-Set /P config=Enter an IP address or hostname to trace:
-tracert.exe -d -h 64 %config%
+   Set /P config=Enter an IP address or hostname to trace:
+   tracert -d -h 64 %config%
 pause & cls & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -425,13 +425,13 @@ mode con cols=98 lines=32
 cls
 echo:
 title NETWORK SHARE MAP
-net use %driveletter%: \\%COMPUTER_NAME%\%SHARE_NAME% /user:%USERNAME% %PASSWORD% /PERSISTENT:%YES_NO%
-Set /P %Driveletter%=Enter an Letter to use for map:
-Set /P %COMPUTER_NAME%=Enter an IP address or hostname for map:
-Set /P %SHARE_NAME%=Enter an folder share name for map:
-Set /P %YES_NO%=TYPE IN ONLY YES OR NO TO MAKE PERMANENT:
-Set /P %USERNAME%=Enter USER ACCOUNT SHARE NAME (LEAVE BLANK IF THERE IS NONE):
-Set /P %PASSWORD%=Enter Enter USER ACCOUNT PASSWORD (LEAVE BLANK IF THERE IS NONE):
+  net use %driveletter%: \\%COMPUTER_NAME%\%SHARE_NAME% /user:%USERNAME% %PASSWORD% /PERSISTENT:%YES_NO%
+   Set /P %Driveletter%=Enter an Letter to use for map:
+   Set /P %COMPUTER_NAME%=Enter an IP address or hostname for map:
+   Set /P %SHARE_NAME%=Enter an folder share name for map:
+   Set /P %YES_NO%=TYPE IN ONLY YES OR NO TO MAKE PERMANENT:
+   Set /P %USERNAME%=Enter USER ACCOUNT SHARE NAME (LEAVE BLANK IF THERE IS NONE):
+   Set /P %PASSWORD%=Enter Enter USER ACCOUNT PASSWORD (LEAVE BLANK IF THERE IS NONE):
 pause & ping %COMPUTER_NAME% & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -442,8 +442,8 @@ mode con cols=98 lines=32
 cls
 echo:
 title REMOVE NETWORK MAP
-net use %REMOVELETTER%: /delete
-Set /P %REMOVELETTER%=ENTER MAPPED DRIVE LETTER TO REMOVE:
+   net use %REMOVELETTER%: /delete
+   Set /P %REMOVELETTER%=ENTER MAPPED DRIVE LETTER TO REMOVE:
 pause & cls & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -468,27 +468,27 @@ echo.
 echo To view the WiFi password note down the name and press Y to continue,
 echo If not then press N to go back to previous menu.
 echo.
-set /p menu="Do you want to continue? (Y/N): "
-if %menu%==Y goto WiFiYes
-if %menu%==y goto WiFiYes
-if %menu%==N goto WiFiNo
-if %menu%==n goto WiFiNo
+   set /p menu="Do you want to continue? (Y/N): "
+   if %menu%==Y goto WiFiYes
+   if %menu%==y goto WiFiYes
+   if %menu%==N goto WiFiNo
+   if %menu%==n goto WiFiNo
 cls
 echo.
 echo Please answer me!...
 echo.
-set /p pause="Press any key to continue!... "
-goto WiFiYes
+   set /p pause="Press any key to continue!... "
+   goto WiFiYes
 
 :WiFiYes
 echo.
-for /f "tokens=2delims=:" %%a in ('netsh wlan show profile ^|findstr ":"') do (
-    set "ssid=%%~a"
-    call :getpwd "%%ssid:~1%%"
+  for /f "tokens=2delims=:" %%a in ('netsh wlan show profile ^|findstr ":"') do (
+   set "ssid=%%~a"
+   call :getpwd "%%ssid:~1%%"
 )
 :getpwd
-set "ssid=%*"
-for /f "tokens=2delims=:" %%i in ('netsh wlan show profile name^="%ssid:"=%" key^=clear ^| findstr /C:"Key Content"') do echo ssid: %ssid% pass: %%i
+   set "ssid=%*"
+   for /f "tokens=2delims=:" %%i in ('netsh wlan show profile name^="%ssid:"=%" key^=clear ^| findstr /C:"Key Content"') do echo ssid: %ssid% pass: %%i
 pause
 echo.
 cls & goto end_NETWORK_CONFIGURATION
@@ -549,10 +549,10 @@ color 0f
 mode con cols=98 lines=32
 cls
 echo
-md C:\WIFI
+  md C:\WIFI
 echo This will backup the WiFi config to C:\WIFI
-netsh wlan export profile key=clear folder=C:\wifi
-cd c:\wifi
+   netsh wlan export profile key=clear folder=C:\wifi
+  cd c:\wifi
 start .
 pause & goto end_NETWORK_CONFIGURATION
 
@@ -563,13 +563,13 @@ color 0f
 mode con cols=98 lines=32
 cls
 echo
-cd C:\WIFI
+  cd C:\WIFI
 dir
-netsh wlan add profile filename="c:\wifi\%WIFINAME%.xml" user=all
+   netsh wlan add profile filename="c:\wifi\%WIFINAME%.xml" user=all
 echo Enter complete file name excluding .xml
 echo exapmle: WIFI-TSUNAMI
 echo the .xml will be added automatically
-Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
+   Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
 pause & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -587,40 +587,40 @@ timeout 5 >nul
 PAUSE
 @echo off
 rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"  -verb runas
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"
+   Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"  -verb runas
 @echo off
-START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147735507 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147736914 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147743522 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147734094 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147743421 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147765679 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 251873 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 213927 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ThreatIDDefaultAction_Ids 2147722906 -ThreatIDDefaultAction_Actions Allow -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\KMSAutoS -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjHook.dll -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjPatcher.exe -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_x64.exe -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files\KMSSS.exe -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files -Force; ^
-Add-MpPreference -ExclusionPath C:\Windows\KMS -Force; ^
-Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt -Force; ^
-Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force;
+  START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147735507 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147736914 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147743522 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147734094 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147743421 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147765679 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 251873 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 213927 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ThreatIDDefaultAction_Ids 2147722906 -ThreatIDDefaultAction_Actions Allow -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\KMSAutoS -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjHook.dll -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\System32\SppExtComObjPatcher.exe -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_x64.exe -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files\KMSSS.exe -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\AAct_Tools\AAct_files -Force; ^
+  Add-MpPreference -ExclusionPath C:\Windows\KMS -Force; ^
+  Add-MpPreference -ExclusionPath C:\WINDOWS\Temp\_MAS -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Info.txt -Force; ^
+  Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cmd -Force;
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe 
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe"
+   start /wait %USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe 
 timeout 2 >nul
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
@@ -630,8 +630,8 @@ pause & cls & goto end_COMPUTER_CONFIGURATION
 color 0f
 mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "%USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd"
-call %USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "%USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd"
+   call %USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd
 cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
@@ -640,13 +640,12 @@ cls & goto end_COMPUTER_CONFIGURATION
 color 0f
 mode con cols=98 lines=32
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
-rem reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry /F 1> NUL
-reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"  -verb runas
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe"
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.cfg"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
+   reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"
+   Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"  -verb runas
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe"
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.cfg"
+   start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
@@ -714,10 +713,10 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
-timeout 2 >nul
-del %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe"
+   start /wait %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
+  timeout 2 >nul
+   del %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
 pause & goto end_UPDATER
 
 ::========================================================================================================================================
@@ -728,8 +727,8 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"  -verb runas
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"
+   Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"  -verb runas
 timeout 2 >nul
 pause & goto end_UPDATER
 
@@ -783,9 +782,9 @@ mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
-START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe /auto switch
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
+   START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe /auto switch
 timeout 2 >nul
 pause & cls & goto end_UPDATER
 
@@ -796,9 +795,9 @@ mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo Select the software in accordence with your own needs...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
-START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
+   START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe
 timeout 2 >nul
 pause & cls & goto end_UPDATER
 
@@ -809,9 +808,9 @@ mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
 echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
 echo A bunch of software will be auto installed in accordece with clientelle we worked with...
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"  -verb runas
+   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+   powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"
+   Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"  -verb runas
 timeout 2 >nul
 pause & cls & goto end_UPDATER
 
@@ -822,9 +821,9 @@ mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
 echo This will start a SOFTWARE UPDATE SESSION...
 echo Select the software in accordence with your own needs...
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-powershell choco upgrade all --noop
-powershell choco install chocolateygui
+   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+   powershell choco upgrade all --noop
+   powershell choco install chocolateygui
 rem powershell choco install hot-chocolatey
 timeout 2 >nul
 pause & cls & goto end_UPDATER
@@ -836,37 +835,37 @@ cls
 color 0f
 mode con cols=98 lines=32
 Title DRIVER UPDATER
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
-cd /d %~dp0
-Call :UnZipFile "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER" "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
+ powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
+ cd /d %~dp0
+ Call :UnZipFile "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER" "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
 exit /b
 
 :UnZipFile <ExtractTo> <newzipfile>
-set vbs="%temp%\_.vbs"
-if exist %vbs% del /f /q %vbs%
->%vbs%  echo Set fso = CreateObject("Scripting.FileSystemObject")
->>%vbs% echo If NOT fso.FolderExists(%1) Then
->>%vbs% echo fso.CreateFolder(%1)
->>%vbs% echo End If
->>%vbs% echo set objShell = CreateObject("Shell.Application")
->>%vbs% echo set FilesInZip=objShell.NameSpace(%2).items
->>%vbs% echo objShell.NameSpace(%1).CopyHere(FilesInZip)
->>%vbs% echo Set fso = Nothing
->>%vbs% echo Set objShell = Nothing
-cscript //nologo %vbs%
-if exist %vbs% del /f /q %vbs%
+   set vbs="%temp%\_.vbs"
+   if exist %vbs% del /f /q %vbs%
+   >%vbs%  echo Set fso = CreateObject("Scripting.FileSystemObject")
+   >>%vbs% echo If NOT fso.FolderExists(%1) Then
+   >>%vbs% echo fso.CreateFolder(%1)
+   >>%vbs% echo End If
+   >>%vbs% echo set objShell = CreateObject("Shell.Application")
+   >>%vbs% echo set FilesInZip=objShell.NameSpace(%2).items
+   >>%vbs% echo objShell.NameSpace(%1).CopyHere(FilesInZip)
+   >>%vbs% echo Set fso = Nothing
+   >>%vbs% echo Set objShell = Nothing
+   cscript //nologo %vbs%
+   if exist %vbs% del /f /q %vbs%
 
-if /i "%processor_architecture%"=="AMD64" GOTO AMD64
-if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
-if /i "%processor_architecture%"=="x86" GOTO x86
-if error GOTO UNSUPPORTED
+   if /i "%processor_architecture%"=="AMD64" GOTO AMD64
+   if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
+   if /i "%processor_architecture%"=="x86" GOTO x86
+   if error GOTO UNSUPPORTED
 :AMD64
-start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
+  start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x64
 pause & cls & goto end_UPDATER
 GOTO EXEC
 :x86
-start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
+  start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x86
 pause & cls & goto end_UPDATER
 :UNSUPPORTED
@@ -914,111 +913,111 @@ echo                  ^|                                                        
 echo                  ^|===============================================================^|
 echo:          
 choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
-CLS
-if errorlevel 7 goto :EXIT
-if errorlevel 6 goto :end_BACKMENU
-if errorlevel 5 goto :WMI_RESET_AGREEMENT
-if errorlevel 4 goto :GROUP_POLICY_RESET_AGREEMENT
-if errorlevel 3 goto :Windows_Debloater
-if errorlevel 2 goto :Disk_Defragment
-if errorlevel 1 goto :Disk_Cleanup
-goto error
+ CLS
+ if errorlevel 7 goto :EXIT
+ if errorlevel 6 goto :end_BACKMENU
+ if errorlevel 5 goto :WMI_RESET_AGREEMENT
+ if errorlevel 4 goto :GROUP_POLICY_RESET_AGREEMENT
+ if errorlevel 3 goto :Windows_Debloater
+ if errorlevel 2 goto :Disk_Defragment
+ if errorlevel 1 goto :Disk_Cleanup
+ goto error
 
 :Disk_Cleanup
 cls
 echo.
 title DISK CLEANUP
 echo.
-del /f /q "%userprofile%\Cookies\*.*"
-del /f /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
-del /f /q "%userprofile%\AppData\Local\Temp\*.*"
-del /s /f /q "c:\windows\temp\*.*"
-rd /s /q "c:\windows\temp"
-md "c:\windows\temp"
-del /s /f /q "C:\WINDOWS\Prefetch"
-del /s /f /q "%temp%\*.*"
-rd /s /q "%temp%"
-md %temp%
-deltree /y "c:\windows\tempor~1"
-deltree /y "c:\windows\temp"
-deltree /y "c:\windows\tmp"
-deltree /y "c:\windows\ff*.tmp"
-deltree /y "c:\windows\history"
-deltree /y "c:\windows\cookies"
-deltree /y "c:\windows\recent"
-deltree /y "c:\windows\spool\printers"
-del c:\WIN386.SWP 
-del /f /s /q "%systemdrive%\*.tmp"
-del /f /s /q "%systemdrive%\*._mp"
-del /f /s /q "%systemdrive%\*.log"
-del /f /s /q "%systemdrive%\*.gid"
-del /f /s /q "%systemdrive%\*.chk"
-del /f /s /q "%systemdrive%\*.old"
-del /f /s /q "%systemdrive%\recycled\*.*"
-del /f /s /q "%windir%\*.bak"
-del /f /s /q "%windir%\prefetch\*.*"
-rd /s /q "%windir%\temp & md %windir%\temp"
-del /f /q "%userprofile%\cookies\*.*"
-del /f /q "%userprofile%\recent\*.*"
-del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
-del /f /s /q "userprofile%\Local Settings\Temp\*.*"
-del /f /s /q "%userprofile%\recent\*.*"
-if exist "C:\WINDOWS\temp"del /f /q "C:WINDOWS\temp\*.*"
-if exist "C:\WINDOWS\tmp" del /f /q "C:\WINDOWS\tmp\*.*"
-if exist "C:\tmp" del /f /q "C:\tmp\*.*"
-if exist "C:\temp" del /f /q "C:\temp\*.*"
-if exist "%temp%" del /f /q "%temp%\*.*"
-if exist "%tmp%" del /f /q "%tmp%\*.*"
-if exist "C:\WINDOWS\Users\*.zip" del "C:\WINDOWS\Users\*.zip" /f /q
-if exist "C:\WINDOWS\Users\*.exe" del "C:\WINDOWS\Users\*.exe" /f /q
-if exist "C:\WINDOWS\Users\*.gif" del "C:\WINDOWS\Users\*.gif" /f /q
-if exist "C:\WINDOWS\Users\*.jpg" del "C:\WINDOWS\Users\*.jpg" /f /q
-if exist "C:\WINDOWS\Users\*.png" del "C:\WINDOWS\Users\*.png" /f /q
-if exist "C:\WINDOWS\Users\*.bmp" del "C:\WINDOWS\Users\*.bmp" /f /q
-if exist "C:\WINDOWS\Users\*.avi" del "C:\WINDOWS\Users\*.avi" /f /q
-if exist "C:\WINDOWS\Users\*.mpg" del "C:\WINDOWS\Users\*.mpg" /f /q
-if exist "C:\WINDOWS\Users\*.mpeg" del "C:\WINDOWS\Users\*.mpeg" /f /q
-if exist "C:\WINDOWS\Users\*.ra" del "C:\WINDOWS\Users\*.ra" /f /q
-if exist "C:\WINDOWS\Users\*.ram" del "C:\WINDOWS\Users\*.ram"/f /q
-if exist "C:\WINDOWS\Users\*.mp3" del "C:\WINDOWS\Users\*.mp3" /f /q
-if exist "C:\WINDOWS\Users\*.mov" del "C:\WINDOWS\Users\*.mov" /f /q
-if exist "C:\WINDOWS\Users\*.qt" del "C:\WINDOWS\Users\*.qt" /f /q
-if exist "C:\WINDOWS\Users\*.asf" del "C:\WINDOWS\Users\*.asf" /f /q
-if exist "C:\WINDOWS\Users\AppData\Temp\*.zip" del "C:\WINDOWS\Users\Users\*.zip /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.exe" del "C:\WINDOWS\Users\Users\*.exe /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.gif" del "C:\WINDOWS\Users\Users\*.gif /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.jpg" del "C:\WINDOWS\Users\Users\*.jpg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.png" del "C:\WINDOWS\Users\Users\*.png /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.bmp" del "C:\WINDOWS\Users\Users\*.bmp /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.avi" del "C:\WINDOWS\Users\Users\*.avi /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mpg" del "C:\WINDOWS\Users\Users\*.mpg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mpeg" del "C:\WINDOWS\Users\Users\*.mpeg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.ra" del "C:\WINDOWS\Users\Users\*.ra /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.ram" del "C:\WINDOWS\Users\Users\*.ram /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mp3" del "C:\WINDOWS\Users\Users\*.mp3 /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.asf" del "C:\WINDOWS\Users\Users\*.asf /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.qt" del "C:\WINDOWS\Users\Users\*.qt /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mov" del "C:\WINDOWS\Users\Users\*.mov /f /q"
-if exist "C:\WINDOWS\ff*.tmp" del "C:\WINDOWS\ff*.tmp /f /q"
-if exist "C:\WINDOWS\ShellIconCache" del /f /q "C:\WINDOWS\ShellI~1\*.*"
-DEL /S /Q "%TMP%\*.*"
-DEL /S /Q "%TEMP%\*.*"
-DEL /S /Q "%WINDIR%\Temp\*.*"
-DEL /S /Q "%USERPROFILE%\Local Settings\Temp\*.*"
-DEL /S /Q "%USERPROFILE%\Appdata\Local\BraveSoftware\Brave-Browser\User Data\Default\Cache"
-DEL /S /Q "%LocalAppData%\Temp"
+  del /f /q "%userprofile%\Cookies\*.*"
+  del /f /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
+  del /f /q "%userprofile%\AppData\Local\Temp\*.*"
+  del /s /f /q "c:\windows\temp\*.*"
+  rd /s /q "c:\windows\temp"
+  md "c:\windows\temp"
+  del /s /f /q "C:\WINDOWS\Prefetch"
+  del /s /f /q "%temp%\*.*"
+  rd /s /q "%temp%"
+  md %temp%
+  deltree /y "c:\windows\tempor~1"
+  deltree /y "c:\windows\temp"
+  deltree /y "c:\windows\tmp"
+  deltree /y "c:\windows\ff*.tmp"
+  deltree /y "c:\windows\history"
+  deltree /y "c:\windows\cookies"
+  deltree /y "c:\windows\recent"
+  deltree /y "c:\windows\spool\printers"
+  del c:\WIN386.SWP 
+  del /f /s /q "%systemdrive%\*.tmp"
+  del /f /s /q "%systemdrive%\*._mp"
+  del /f /s /q "%systemdrive%\*.log"
+  del /f /s /q "%systemdrive%\*.gid"
+  del /f /s /q "%systemdrive%\*.chk"
+  del /f /s /q "%systemdrive%\*.old"
+  del /f /s /q "%systemdrive%\recycled\*.*"
+  del /f /s /q "%windir%\*.bak"
+  del /f /s /q "%windir%\prefetch\*.*"
+  rd /s /q "%windir%\temp & md %windir%\temp"
+  del /f /q "%userprofile%\cookies\*.*"
+  del /f /q "%userprofile%\recent\*.*"
+  del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+  del /f /s /q "userprofile%\Local Settings\Temp\*.*"
+  del /f /s /q "%userprofile%\recent\*.*"
+  if exist "C:\WINDOWS\temp"del /f /q "C:WINDOWS\temp\*.*"
+  if exist "C:\WINDOWS\tmp" del /f /q "C:\WINDOWS\tmp\*.*"
+  if exist "C:\tmp" del /f /q "C:\tmp\*.*"
+  if exist "C:\temp" del /f /q "C:\temp\*.*"
+  if exist "%temp%" del /f /q "%temp%\*.*"
+  if exist "%tmp%" del /f /q "%tmp%\*.*"
+  if exist "C:\WINDOWS\Users\*.zip" del "C:\WINDOWS\Users\*.zip" /f /q
+  if exist "C:\WINDOWS\Users\*.exe" del "C:\WINDOWS\Users\*.exe" /f /q
+  if exist "C:\WINDOWS\Users\*.gif" del "C:\WINDOWS\Users\*.gif" /f /q
+  if exist "C:\WINDOWS\Users\*.jpg" del "C:\WINDOWS\Users\*.jpg" /f /q
+  if exist "C:\WINDOWS\Users\*.png" del "C:\WINDOWS\Users\*.png" /f /q
+  if exist "C:\WINDOWS\Users\*.bmp" del "C:\WINDOWS\Users\*.bmp" /f /q
+  if exist "C:\WINDOWS\Users\*.avi" del "C:\WINDOWS\Users\*.avi" /f /q
+  if exist "C:\WINDOWS\Users\*.mpg" del "C:\WINDOWS\Users\*.mpg" /f /q
+  if exist "C:\WINDOWS\Users\*.mpeg" del "C:\WINDOWS\Users\*.mpeg" /f /q
+  if exist "C:\WINDOWS\Users\*.ra" del "C:\WINDOWS\Users\*.ra" /f /q
+  if exist "C:\WINDOWS\Users\*.ram" del "C:\WINDOWS\Users\*.ram"/f /q
+  if exist "C:\WINDOWS\Users\*.mp3" del "C:\WINDOWS\Users\*.mp3" /f /q
+  if exist "C:\WINDOWS\Users\*.mov" del "C:\WINDOWS\Users\*.mov" /f /q
+  if exist "C:\WINDOWS\Users\*.qt" del "C:\WINDOWS\Users\*.qt" /f /q
+  if exist "C:\WINDOWS\Users\*.asf" del "C:\WINDOWS\Users\*.asf" /f /q
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.zip" del "C:\WINDOWS\Users\Users\*.zip /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.exe" del "C:\WINDOWS\Users\Users\*.exe /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.gif" del "C:\WINDOWS\Users\Users\*.gif /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.jpg" del "C:\WINDOWS\Users\Users\*.jpg /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.png" del "C:\WINDOWS\Users\Users\*.png /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.bmp" del "C:\WINDOWS\Users\Users\*.bmp /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.avi" del "C:\WINDOWS\Users\Users\*.avi /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.mpg" del "C:\WINDOWS\Users\Users\*.mpg /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.mpeg" del "C:\WINDOWS\Users\Users\*.mpeg /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.ra" del "C:\WINDOWS\Users\Users\*.ra /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.ram" del "C:\WINDOWS\Users\Users\*.ram /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.mp3" del "C:\WINDOWS\Users\Users\*.mp3 /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.asf" del "C:\WINDOWS\Users\Users\*.asf /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.qt" del "C:\WINDOWS\Users\Users\*.qt /f /q"
+  if exist "C:\WINDOWS\Users\AppData\Temp\*.mov" del "C:\WINDOWS\Users\Users\*.mov /f /q"
+  if exist "C:\WINDOWS\ff*.tmp" del "C:\WINDOWS\ff*.tmp /f /q"
+  if exist "C:\WINDOWS\ShellIconCache" del /f /q "C:\WINDOWS\ShellI~1\*.*"
+  DEL /S /Q "%TMP%\*.*"
+  DEL /S /Q "%TEMP%\*.*"
+  DEL /S /Q "%WINDIR%\Temp\*.*"
+  DEL /S /Q "%USERPROFILE%\Local Settings\Temp\*.*"
+  DEL /S /Q "%USERPROFILE%\Appdata\Local\BraveSoftware\Brave-Browser\User Data\Default\Cache"
+  DEL /S /Q "%LocalAppData%\Temp"
 
-DEL /S /Q "C:\Program Files (x86)\Google\Temp"
-DEL /S /Q "C:\Program Files (x86)\Steam\steamapps\temp"
-DEL /S /Q "U:\Games\steamapps\temp"
-DEL /S /Q "C:\ProgramData\Microsoft\Windows\WER\Temp"
-DEL /S /Q "C:\Users\All Users\Microsoft\Windows\WER\Temp"
-DEL /S /Q "C:\Windows\Temp"
-DEL /S /Q "C:\Windows\System32\DriverStore\Temp"
-DEL /S /Q "C:\Windows\WinSxS\Temp"
+  DEL /S /Q "C:\Program Files (x86)\Google\Temp"
+  DEL /S /Q "C:\Program Files (x86)\Steam\steamapps\temp"
+  DEL /S /Q "U:\Games\steamapps\temp"
+  DEL /S /Q "C:\ProgramData\Microsoft\Windows\WER\Temp"
+  DEL /S /Q "C:\Users\All Users\Microsoft\Windows\WER\Temp"
+  DEL /S /Q "C:\Windows\Temp"
+  DEL /S /Q "C:\Windows\System32\DriverStore\Temp"
+  DEL /S /Q "C:\Windows\WinSxS\Temp"
 
-cleanmgr /VERYLOWDISK /sagerun:0
-ipconfig /flushdns
+ cleanmgr /VERYLOWDISK /sagerun:0
+ ipconfig /flushdns
 echo.
 cls
 echo Disk Cleanup successful!
@@ -1051,11 +1050,10 @@ color 0f
 mode con cols=98 lines=32
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
-timeout 2 >nul
-powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
-rem powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/4.CLEANER_REPAIR/Debloater.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"  -verb runas
-timeout 2 >nul
+ timeout 2 >nul
+  powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
+  Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"  -verb runas
+ timeout 2 >nul
 pause & cls & goto end_CLEANER
 
 :GROUP_POLICY_RESET_AGREEMENTcls
@@ -1075,22 +1073,22 @@ ECHO Please reboot once the cleanup is complete.
 ECHO.
 REM REPAIR GAINED FROM https://www.thewindowsclub.com/reset-all-group-policy-settings-to-default
 set /p GPR=      Do you agree to the terms stated above? (Yes or No):
-if %GPR%==Y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==Yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==N goto :CLEANER
-if %GPR%==No goto :CLEANER
-if %GPR%==no goto :CLEANER
-if %GPR%==n goto :CLEANER
-if errorlevel %GPR%==Y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==Yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==N goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==No goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==no goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==n goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if %GPR%==Y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+  if %GPR%==Yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+  if %GPR%==yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+  if %GPR%==y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+  if %GPR%==N goto :CLEANER
+  if %GPR%==No goto :CLEANER
+  if %GPR%==no goto :CLEANER
+  if %GPR%==n goto :CLEANER
+  if errorlevel %GPR%==Y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==Yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==N goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==No goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==no goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
+  if errorlevel %GPR%==n goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
 
 :GROUP_POLICY_RESET_AGREEMENT_INCORRECT
 cls
@@ -1119,20 +1117,20 @@ ECHO and save yourself the pain of reinstalling Windows again. This section is P
 ECHO so that you won't have to look through forums to find a solution.
 ECHO Please reboot once the cleanup is complete.
 ECHO.
-RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
-RD /S /Q "%WinDir%\System32\GroupPolicy"
-gpupdate /force
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies" /f
-reg delete "HKCU\Software\Microsoft\WindowsSelfHost" /f
-reg delete "HKCU\Software\Policies" /f
-reg delete "HKLM\Software\Microsoft\Policies" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
-reg delete "HKLM\Software\Microsoft\WindowsSelfHost" /f
-reg delete "HKLM\Software\Policies" /f
-reg delete "HKLM\Software\WOW6432Node\Microsoft\Policies" /f
-reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /f
-reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
+   RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
+   RD /S /Q "%WinDir%\System32\GroupPolicy"
+   gpupdate /force
+   reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+   reg delete "HKCU\Software\Microsoft\WindowsSelfHost" /f
+   reg delete "HKCU\Software\Policies" /f
+   reg delete "HKLM\Software\Microsoft\Policies" /f
+   reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies" /f
+   reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
+   reg delete "HKLM\Software\Microsoft\WindowsSelfHost" /f
+   reg delete "HKLM\Software\Policies" /f
+   reg delete "HKLM\Software\WOW6432Node\Microsoft\Policies" /f
+   reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /f
+   reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
 pause & cls & goto end_CLEANER
 
 :WMI_RESET_AGREEMENT
@@ -1153,22 +1151,22 @@ ECHO system to the state when you can boot – backup your content and better
 ECHO reinstall. It should not be an escape solution.
 REM REPAIR GAINED FROM https://www.optimizationcore.com/system-administration/troubleshooting-wmi-check-full-wmi-reset-cmd-batch/
 set /p WMIR=      Do you agree to the terms stated above? (Yes or No):
-if %WMIR%==Y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==Yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==N goto :CLEANER
-if %WMIR%==No goto :CLEANER
-if %WMIR%==no goto :CLEANER
-if %WMIR%==n goto :CLEANER
-if errorlevel %WMIR%==Y goto V
-if errorlevel %WMIR%==Yes goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==yes goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==y goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==N goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==No goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==no goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==n goto WMI_RESET_AGREEMENT_INCORRECT
+ if %WMIR%==Y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+ if %WMIR%==Yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+ if %WMIR%==yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+ if %WMIR%==y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
+ if %WMIR%==N goto :CLEANER
+ if %WMIR%==No goto :CLEANER
+ if %WMIR%==no goto :CLEANER
+ if %WMIR%==n goto :CLEANER
+ if errorlevel %WMIR%==Y goto V
+ if errorlevel %WMIR%==Yes goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==yes goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==y goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==N goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==No goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==no goto WMI_RESET_AGREEMENT_INCORRECT
+ if errorlevel %WMIR%==n goto WMI_RESET_AGREEMENT_INCORRECT
 
 :WMI_RESET_AGREEMENT_INCORRECT
 cls
@@ -1201,12 +1199,12 @@ PAUSE
 ECHO FULL WMI REPOSITORY RESET
 echo:
 ECHO To merge current WMI repository with factory defaults
-winmgmt /salvagerepository
+   winmgmt /salvagerepository
 PAUSE
 rem need if command here
 
 ECHO If this still doesn’t help, make full reset of the WMI respository:
-winmgmt /resetrepository
+   winmgmt /resetrepository
 PAUSE
 rem need if command here
 
@@ -1214,47 +1212,47 @@ rem need if command here
 
 ECHO If previous attempt failed, then we must make use of an older method:
 REM Turn winmgmt service Startup type to Disabled
-sc config winmgmt start = disabled
+   sc config winmgmt start = disabled
 REM Stop winmgmt service
-net stop winmgmt /y
+   net stop winmgmt /y
 
 REM Register / Reregister Service DLLs
-regsvr32 /s %systemroot%\system32\scecli.dll 
-regsvr32 /s %systemroot%\system32\userenv.dll
+   regsvr32 /s %systemroot%\system32\scecli.dll 
+   regsvr32 /s %systemroot%\system32\userenv.dll
 
 REM Enter WBEM folder
-cd /d %systemroot%\system32\wbem 
+   cd /d %systemroot%\system32\wbem 
 REM Remove “repository” folder
-rd /S /Q repository
+   rd /S /Q repository
 REM Register / Reregister Service DLLs
-for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
-for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
-for /f %%s in ('dir /b *.mof') do mofcomp %%s 
-for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+   for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
+   for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
+   for /f %%s in ('dir /b *.mof') do mofcomp %%s 
+   for /f %%s in ('dir /b *.mfl') do mofcomp %%s
 
 REM Register / Reregister wmiprvse Service
-wmiprvse /regserver
+   wmiprvse /regserver
 REM Register / Reregister winmgmt Service
-winmgmt /regserver
+   winmgmt /regserver
 
 REM Enter WBEM folder in SysWOW64
-cd /d %systemroot%\SysWOW64\wbem\
+   cd /d %systemroot%\SysWOW64\wbem\
 REM Remove “repository” folder
-rd /S /Q repository
+   rd /S /Q repository
 REM Register / Reregister Service DLLs
-for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
-for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
-for /f %%s in ('dir /b *.mof') do mofcomp %%s 
-for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+   for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
+   for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
+   for /f %%s in ('dir /b *.mof') do mofcomp %%s 
+   for /f %%s in ('dir /b *.mfl') do mofcomp %%s
 
 REM Turn winmgmt service Startup type to Automatic
-sc config winmgmt start = auto
+   sc config winmgmt start = auto
 REM Stop winmgmt service
-net start winmgmt
+   net start winmgmt
 
 echo After you run it, there might be “Manageability” errors
 echo on Servers (maybe even clients), so you need to run again:
-winmgmt /resetrepository
+   winmgmt /resetrepository
 
 pause & cls & goto end_CLEANER
 ::========================================================================================================================================
@@ -1284,10 +1282,135 @@ PAUSE GOTO end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 ::========================================================================================================================================
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::========================================================================================================================================
 ::========================================================================================================================================
 
 REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
 
+::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_AIO_PRE-SET
