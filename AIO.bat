@@ -1089,46 +1089,12 @@ cls
 color 0f
 mode con cols=98 lines=32
 TITLE GROUP POLICY RESET
-ECHO The Group Policy Editor is an important tool for Windows OS using which
-ECHO System Administrators can fine-tune system settings.
-ECHO It has several infrastructural configuration options that allow you to make
-ECHO adjustments to the specific performance and security settings for users and computers.
-ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
-ECHO line where your computer starts behaving in an unwanted way. This is when you
-ECHO know that it’s time to reset all Group Policy settings to default
-ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
-ECHO so that you won't have to look through forums to find a solution.
-ECHO Please reboot once the cleanup is complete.
-ECHO.
-REM REPAIR GAINED FROM https://www.thewindowsclub.com/reset-all-group-policy-settings-to-default
-set /p GPR=      Do you agree to the terms stated above? (Yes or No):
-if %GPR%==Y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==Yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==yes goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==y goto GROUP_POLICY_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %GPR%==N goto :CLEANER
-if %GPR%==No goto :CLEANER
-if %GPR%==no goto :CLEANER
-if %GPR%==n goto :CLEANER
-if errorlevel %GPR%==Y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==Yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==yes goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==y goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==N goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==No goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==no goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-if errorlevel %GPR%==n goto GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-
-:GROUP_POLICY_RESET_AGREEMENT_INCORRECT
-cls
-color 0f
-mode con cols=98 lines=32
-TITLE Incorrect input
-echo Incorrect input, try again.
-pause >nul 
-CLS
-goto GROUP_POLICY_RESET_AGREEMENT
-cls
+echo GROUP POLICY AGREEMENT
+timeout 2 >nul
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('The Group Policy Editor is an important tool for Windows OS using which System Administrators can fine-tune system settings. It has several infrastructural configuration options that allow you to make adjustments to the specific performance and security settings for users and computers. Sometimes you might end up tweaking your Group Policy Editor a bit further down the line here your computer starts behaving in an unwanted way. This is when you know that its time to reset all Group Policy settings to default and save yourself the pain of reinstalling Windows again. This section is Pre-Setup so that you wont have to look through forums to find a solution. Please reboot once the cleanup is complete. Press YES if you understand. Press NO to go back to the previous section.', 'GROUP POLICY RESET AGREEMENT', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
+set /p OUT=<%TEMP%\out.tmp
+if %OUT%==Yes cls & GOTO GROUP_POLICY_RESET
+if %OUT%==No cls & goto CLEANER
 
 :GROUP_POLICY_RESET
 cls
@@ -1167,46 +1133,12 @@ cls
 color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
-ECHO Full WMI reset (to the state when the operating system was installed)
-ECHO is a serious measurement that should be well thought about, if needed
-ECHO at all. After the reset, you will need to reinstall any software that
-ECHO uses WMI repository. If, for example, your Server is System Center
-ECHO Configuration Manager Distribution Point or Pull Distribution Point,
-ECHO then you should not have any problem resetting (though you will need
-ECHO to reinstall SCCM Client). However, keep in mind that if there are
-ECHO other uses for the server, you might need to check it afterwards.
-ECHO If you’re in a case, when you need to reset WMI and it fixed your
-ECHO system to the state when you can boot – backup your content and better
-ECHO reinstall. It should not be an escape solution.
-REM REPAIR GAINED FROM https://www.optimizationcore.com/system-administration/troubleshooting-wmi-check-full-wmi-reset-cmd-batch/
-set /p WMIR=      Do you agree to the terms stated above? (Yes or No):
-if %WMIR%==Y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==Yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==yes goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==y goto WMI_RESET >> %USERPROFILE%\AppData\Local\Temp\AIO\ACCEPTEDTOS.txt
-if %WMIR%==N goto :CLEANER
-if %WMIR%==No goto :CLEANER
-if %WMIR%==no goto :CLEANER
-if %WMIR%==n goto :CLEANER
-if errorlevel %WMIR%==Y goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==Yes goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==yes goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==y goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==N goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==No goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==no goto WMI_RESET_AGREEMENT_INCORRECT
-if errorlevel %WMIR%==n goto WMI_RESET_AGREEMENT_INCORRECT
-
-:WMI_RESET_AGREEMENT_INCORRECT
-cls
-color 0f
-mode con cols=98 lines=32
-TITLE Incorrect input
-echo Incorrect input, try again.
-pause >nul 
-CLS
-goto WMI_RESET_AGREEMENT
-cls
+echo WINDOWS MANAGEMENT INSTRUMENTATION RESET AGREEMENT
+timeout 2 >nul
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Full WMI reset to the state when the operating system was installed is a serious measurement that should be well thought about, if needed at all. After the reset, you will need to reinstall any software that uses WMI repository. If, for example, your Server is System Center Configuration Manager Distribution Point or Pull Distribution Point, then you should not have any problem resetting though you will need to reinstall SCCM Client. However, keep in mind that if there are other uses for the server, you might need to check it afterwards. If youre in a case, when you need to reset WMI and it fixed your system to the state when you can boot – backup your content and better reinstall. It should not be an escape solution. Press YES if you understand. Press NO to go back to the previous section.', 'WINDOWS MANAGEMENT INSTRUMENTATION RESET AGREEMENT', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
+set /p OUT=<%TEMP%\out.tmp
+if %OUT%==Yes cls & GOTO WMI_RESET
+if %OUT%==No cls & goto CLEANER
 
 :WMI_RESET
 cls
