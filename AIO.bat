@@ -163,14 +163,68 @@ cls
 
 :INFORMATION
 CLS
-Title SYSTEM INFORMATION
+Title SYSTEM INFO
+mode con cols=98 lines=15
 ECHO:
-ECHO    THIS OPTION DETAILS WINDOWS, HARDWARE, AND NETWORKING CONFIGURATION.
+ECHO                      HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
+echo:
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] QUICK INFORMATION CONFIGURATION                      ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] HWINFO32 THIRD PARTY APPLICATION                     ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:
+choice /C:123 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3] : "
+echo:
+if errorlevel  3 goto:end_BACKMENU
+if errorlevel  2 goto:HWINFO32
+if errorlevel  1 goto:QUICK_INFO
+cls
+::========================================================================================================================================
+
+:QUICK_INFO
+cls
+TITLE QUICK INFO
+echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
+start /wait C:\AIO\Basic-Computer-Information-Report.html
+timeout 2 >nul
+goto email_confirmation
+rem pause & cls & goto end_BACKMENU
+
+:email_confirmation
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Hello', 'Hey', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
+set /p OUT=<%TEMP%\out.tmp
+if %OUT%==Yes goto email_Yes
+if %OUT%==No goto email_no
+:email_Yes
+goto email
+:email_NO
+goto end_BACKMENU
+
+:email
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/mailsend1.19.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\mailsend1.19.exe"
+echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
+start /wait %USERPROFILE%\AppData\Local\Temp\mailsend1.19.exe -t hltworkshop@salnet.co.za -f salnetmail@salnet.co.za -port 587 -auth -smtp mail.salnet.co.za -sub subject -M message -Attach file a=C:\AIO\Basic-Computer-Information-Report.html -user salnetmail@salnet.co.za -pass salnetmail!@#
+goto end_BACKMENU
+
+
+::========================================================================================================================================
+
+:HWINFO32
+cls
+TITLE HWINFO32 THIRD PARTY APPLICATION
+echo THIS WILL LOAD AN THIRD PARTY APPLICATION TO PREVIEW USEFULL INFORMATION
+echo ABOUT YOUR DEVICE AND SYSTEM RECOURSES
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.INI"
 start /wait %USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe
 timeout 2 >nul
-GOTO TEST_CONNECTION
+pause & cls & GOTO TEST_CONNECTION
 
 ::========================================================================================================================================
 
@@ -179,13 +233,13 @@ color 0f
 mode con cols=98 lines=60
 cls
 title LIST OF NETWORK CONFIGURATION
-echo This section will display a list of all network configurations registered on the device. > c:\fAIO\log.txt 
+echo This section will display a list of all network configurations registered on the device. > c:\AIO\log.txt 
 ECHO:
 Echo %Date% %Time% >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 ECHO:
 netsh interface ip show config
 netsh interface ip show config >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
-pause & GOTO MainMenu
+pause & GOTO end_BACKMENU
 
 ::========================================================================================================================================
 ::========================================================================================================================================
