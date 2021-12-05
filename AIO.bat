@@ -1547,6 +1547,8 @@ cls & exit
 REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
 ::========================================================================================================================================
 :EASTER
+echo you have been lied tool
+pause & cls & goto end_BACKMENU
 ::========================================================================================================================================
 
 
@@ -1650,7 +1652,7 @@ echo                  ^|                                                        
 echo                  ^|===============================================================^|
 echo.
 choice /c 12345678 /m "Enter your choice:"
-if errorlevel 8 goto :end
+if errorlevel 8 goto :end_BACKMENU
 if errorlevel 7 (
 cls
 echo.
