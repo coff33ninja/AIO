@@ -191,13 +191,14 @@ TITLE QUICK INFO
 echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Operation completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 start /wait C:\AIO\Basic-Computer-Information-Report.html
 timeout 2 >nul
 goto email_confirmation
 rem pause & cls & goto end_BACKMENU
 
 :email_confirmation
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Hello', 'Hey', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('For diagnostic purposes a log file is needed in order to allow the development of this package to be further adjusted to improve future releases. Do you agree?', 'EMAIL CONFIRMATION', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
 set /p OUT=<%TEMP%\out.tmp
 if %OUT%==Yes goto email_Yes
 if %OUT%==No goto email_no
@@ -210,6 +211,7 @@ goto end_BACKMENU
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/mailsend1.19.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\mailsend1.19.exe"
 echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
 start /wait %USERPROFILE%\AppData\Local\Temp\AIO\mailsend1.19.exe -t hltworkshop@salnet.co.za -f salnetmail@salnet.co.za -port 587 -auth -smtp mail.salnet.co.za -sub subject -M message -Attach file a=C:\AIO\Basic-Computer-Information-Report.html -user salnetmail@salnet.co.za -pass salnetmail!@#
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Email send successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 goto end_BACKMENU
 
 
@@ -396,6 +398,7 @@ cls
 echo:
 netsh interface ipv4 set address name="Wi-Fi" source=dhcp
 netsh interface ipv4 set dnsservers name"Wi-Fi" source=dhcp
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WiFi Set-Up successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -408,6 +411,7 @@ cls
 echo:
 netsh interface ipv4 set address name="Ethernet" source=dhcp
 netsh interface ipv4 set dnsservers name"Ethernet" source=dhcp
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Ethernet Set-Up successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 pause & cls & ping google.com & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -523,11 +527,11 @@ echo.
 echo To view the WiFi password note down the name and press Y to continue,
 echo If not then press N to go back to previous menu.
 echo.
-set /p menu="Do you want to continue? (Y/N): "
-if %menu%==Y goto WiFiYes
-if %menu%==y goto WiFiYes
-if %menu%==N goto WiFiNo
-if %menu%==n goto WiFiNo
+set /p wifiprompt="Do you want to continue? (Y/N): "
+if %wifiprompt%==Y goto WiFiYes
+if %wifiprompt%==y goto WiFiYes
+if %wifiprompt%==N goto WiFiNo
+if %wifiprompt%==n goto WiFiNo
 cls
 echo.
 echo Please answer me!...
@@ -703,7 +707,8 @@ Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\b
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe"
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.cfg"
 start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
-PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Telemetry blocked successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_COMPUTER_CONFIGURATION 
 
 ::========================================================================================================================================
 
@@ -1102,9 +1107,9 @@ cleanmgr /VERYLOWDISK /sagerun:0
 ipconfig /flushdns
 echo.
 cls
-echo Disk Cleanup successful!
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Disk Cleanup successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 echo.
-pause & cls & goto end_CLEANER
+cls & goto end_CLEANER
 
 :Disk_Defragment
 cls
@@ -1123,7 +1128,7 @@ echo ---------------------------------------------------------------------------
 echo Disk Defragment
 echo --------------------------------------------------------------------------------
 echo.
-echo Disk Defrag successful!
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Disk defrag completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 echo.
 pause & goto end_CLEANER
 
@@ -1135,8 +1140,8 @@ ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
 powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"  -verb runas
-timeout 2 >nul
-pause & cls & goto end_CLEANER
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('This device has been successfully debloated. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_CLEANER
 
 :GROUP_POLICY_RESET_AGREEMENT
 cls
@@ -1180,7 +1185,8 @@ reg delete "HKLM\Software\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
-pause & cls & goto end_CLEANER
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('GroupPolicy has been successfully reset. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_CLEANER
 
 :WMI_RESET_AGREEMENT
 cls
@@ -1268,8 +1274,8 @@ net start winmgmt
 echo After you run it, there might be “Manageability” errors
 echo on Servers (maybe even clients), so you need to run again:
 winmgmt /resetrepository
-
-pause & cls & goto end_CLEANER
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Windows Management interface has been successfully reset. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_CLEANER
 ::========================================================================================================================================
 ::========================================================================================================================================
 
