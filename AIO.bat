@@ -209,7 +209,7 @@ goto end_BACKMENU
 :email
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/mailsend1.19.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\mailsend1.19.exe"
 echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
-start /wait %USERPROFILE%\AppData\Local\Temp\mailsend1.19.exe -t hltworkshop@salnet.co.za -f salnetmail@salnet.co.za -port 587 -auth -smtp mail.salnet.co.za -sub subject -M message -Attach file a=C:\AIO\Basic-Computer-Information-Report.html -user salnetmail@salnet.co.za -pass salnetmail!@#
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\mailsend1.19.exe -t hltworkshop@salnet.co.za -f salnetmail@salnet.co.za -port 587 -auth -smtp mail.salnet.co.za -sub subject -M message -Attach file a=C:\AIO\Basic-Computer-Information-Report.html -user salnetmail@salnet.co.za -pass salnetmail!@#
 goto end_BACKMENU
 
 
