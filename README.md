@@ -19,6 +19,7 @@ My thanks goes out to:
 - [Builtbybel](https://github.com/builtbybel/),
 - [massgravel](https://github.com/massgravel/Microsoft-Activation-Scripts/),
 - [slavanap](https://github.com/slavanap/Windows10ManualUpdate/),
+- [muquit](https://github.com/muquit/mailsend)
 - [darius-vr](https://github.com/darius-vr/),
 - [StackOverFlow](https://stackoverflow.com/)
 for the code, files, info, and a basis to work from. 
