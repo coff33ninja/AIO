@@ -946,11 +946,12 @@ if /i "%processor_architecture%"=="AMD64" GOTO AMD64
 if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
 if /i "%processor_architecture%"=="x86" GOTO x86
 if error GOTO UNSUPPORTED
+
 :AMD64
 start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x64
 pause & cls & goto end_UPDATER
-GOTO EXEC
+
 :x86
 start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x86
@@ -1337,7 +1338,7 @@ for /L %%N in (0 1 %processValue%) do (
 )
 echo !LF!Finished at %time%
 endlocal
-cls & goto AIO_PRE-SET
+cls & goto end_BACKMENU
 
 ::========================================================================================================================================
 ::========================================================================================================================================
