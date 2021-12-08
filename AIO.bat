@@ -213,7 +213,7 @@ powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/gui.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\gui.exe"
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/Microsoft.Exchange.WebServices.dll" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\Microsoft.Exchange.WebServices.dll"
 echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\chefsender.exe /smtp-server:smtp-mail.outlook.com /to:hltworkshop@outlook.com /smtp-user:"hltworkshop@outlook.com" /smtp-password:"HLTP@ssw0rd1" /port:587 /ssl /from-name:TEST /from-mail:hltworkshop@outlook.com /sub:"ComputerINFO" /html /attach:"C:\AIO\Basic-Computer-Information-Report.html"
+start /wait "%USERPROFILE%\AppData\Local\Temp\AIO\chefsender.exe" /smtp-server:smtp-mail.outlook.com /to:coff33ninja69@gmail.com /smtp-user:"hltworkshop@outlook.com" /smtp-password:"HLTP@ssw0rd1" /port:587 /ssl /from-name:TEST /from-mail:hltworkshop@outlook.com /sub:"ComputerINFO" /html /attach:"C:\aio\Basic-Computer-Information-Report.html"
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Email send successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 goto end_BACKMENU
 
