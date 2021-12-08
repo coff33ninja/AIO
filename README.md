@@ -13,9 +13,9 @@ If any changes or improvements are needed and you have the know-how feel free to
 
 ## Pre-requisites
 
-Active Internet Connection
-Windows PowerShell version 5.0 or above
-.Net Framework 4.5 and above
+- Active Internet Connection
+- Windows PowerShell version 5.0 or above
+- .Net Framework 4.5 and above
 
 ## Credits
 
