@@ -576,9 +576,9 @@ echo                  ^|                                                        
 echo                  ^|      [2] RESTORE WIFI CONFIGURATION                           ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] BLANK                                                ^|
+echo                  ^|      [3] NETWORK INTERFACES CONFIGURATION BACKUP              ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] BLANK                                                ^|
+echo                  ^|      [4] NETWORK INTERFACES CONFIGURATION RESTORE             ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [5] BLANK                                                ^|
 echo                  ^|                                                               ^|
@@ -598,8 +598,8 @@ if errorlevel  8 goto:TEST_UNKNOWN
 if errorlevel  7 goto:TEST_UNKNOWN
 if errorlevel  6 goto:TEST_UNKNOWN
 if errorlevel  5 goto:TEST_UNKNOWN
-if errorlevel  4 goto:TEST_UNKNOWN
-if errorlevel  3 goto:TEST_UNKNOWN
+if errorlevel  4 goto:RESTORE_IP
+if errorlevel  3 goto:Backup_IP
 if errorlevel  2 goto:RESTORE_WIFI
 if errorlevel  1 goto:BACKUP_WIFI
 cls
@@ -608,13 +608,14 @@ cls
 
 :BACKUP_WIFI
 color 0f
+Title WIFI BACKUP
 mode con cols=98 lines=32
 cls
 echo
-md C:\WIFI
-echo This will backup the WiFi config to C:\WIFI
-netsh wlan export profile key=clear folder=C:\wifi
-cd c:\wifi
+md C:\network\WIFI
+cd C:\network\WIFI
+echo This will backup the WiFi config to C:\network\WIFI
+netsh wlan export profile key=clear folder=C:\network\WIFI
 start .
 pause & goto end_NETWORK_CONFIGURATION
 
@@ -622,17 +623,50 @@ pause & goto end_NETWORK_CONFIGURATION
 
 :RESTORE_WIFI
 color 0f
+Title WIFI RESTORE
 mode con cols=98 lines=32
 cls
 echo
-cd C:\WIFI
+cd C:\network\WIFI
 dir
-netsh wlan add profile filename="c:\wifi\%WIFINAME%.xml" user=all
+netsh wlan add profile filename="C:\network\WIFI\%WIFINAME%.xml" user=all
 echo Enter complete file name excluding .xml
 echo exapmle: WIFI-TSUNAMI
 echo the .xml will be added automatically
 Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
 pause & goto end_NETWORK_CONFIGURATION
+
+::========================================================================================================================================
+
+:Backup_IP
+color 0f
+Title NETWORK INTERFACES CONFIGURATION BACKUP
+mode con cols=98 lines=32
+cls
+echo
+md C:\network\Interfaces
+cd C:\network\Interfaces
+echo This section will backupp all the network interfaces confiuration to C:\network\Interfaces
+netsh interface dump > C:\network\Interfaces\netcfg.txt
+start .
+pause & goto end_NETWORK_CONFIGURATION
+
+::========================================================================================================================================
+
+:RESTORE_IP
+color 0f
+Title NETWORK INTERFACES CONFIGURATION RESTORE
+mode con cols=98 lines=32
+cls
+echo
+cd C:\network\Interfaces
+dir
+echo This section will restore all the network interfaces confiuration from C:\network\Interfaces
+netsh exec C:\network\C:\network\Interfaces\netcfg.txt
+start .
+pause & goto end_NETWORK_CONFIGURATION
+
+::========================================================================================================================================
 
 ::========================================================================================================================================
 
