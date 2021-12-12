@@ -820,7 +820,7 @@ echo:
 choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
 if errorlevel  6 goto:EXIT
-if errorlevel  5 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  5 goto:end_BACKMENU
 if errorlevel  4 goto:DRIVER_UPDATER
 if errorlevel  3 goto:SOFTWARE_UPDATER
 if errorlevel  2 goto:WINDOWS_UPDATE_PAUSER
@@ -890,7 +890,7 @@ echo:
 choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
 if errorlevel  6 goto:EXIT
-if errorlevel  5 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  5 goto:end_UPDATER
 if errorlevel  4 goto:Chocolatey_GUI
 if errorlevel  3 goto:Chocolatey
 if errorlevel  2 goto:PatchMyPC_OWN_SELECTIONS
