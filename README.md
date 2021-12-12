@@ -34,3 +34,21 @@ for the code, files, info, and a basis to work from.
 ## Extra's
 Most of the code is still "Dirty" due to learning cmd, bat, vbs and ps1 creation from the ground up.
 Hope this will become an excelent toolkit for everyone in the future.
+
+# &#x1f4c8; GitHub Stats
+
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=coff33ninja&hide=java,html,tex&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21&langs_count=3" />
+</a>
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=coff33ninja&show_icons=true&line_height=27&count_private=true&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21" alt="Martin's GitHub Stats" />
+</a>
+
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coff33ninja&repo=python-project-blueprint&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21" />
+</a>
+
+
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coff33ninja&repo=go-project-blueprint&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21" />
+</a>    
