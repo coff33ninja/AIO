@@ -276,11 +276,11 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|       ___________________________________________________     ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] SHUTDOWN OPTIONS       [6] BACK      [7] EXIT        ^|
+echo                  ^|      [6] SHUTDOWN OPTIONS       [7] BACK      [8] EXIT        ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
+choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
 if errorlevel  8 goto:EXIT
 if errorlevel  7 goto:end_BACKMENU
@@ -582,24 +582,20 @@ echo                  ^|      [3] NETWORK INTERFACES CONFIGURATION BACKUP       
 echo                  ^|                                                               ^|
 echo                  ^|      [4] NETWORK INTERFACES CONFIGURATION RESTORE             ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] BLANK                                                ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] BLANK                                                ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] BLANK                                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|                                                 [5] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:12345 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5] : "
 
-if errorlevel  9 goto:end_NETWORK_CONFIGURATION
-if errorlevel  8 goto:TEST_UNKNOWN
-if errorlevel  7 goto:TEST_UNKNOWN
-if errorlevel  6 goto:TEST_UNKNOWN
-if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  5 goto:end_NETWORK_CONFIGURATION
 if errorlevel  4 goto:RESTORE_IP
 if errorlevel  3 goto:Backup_IP
 if errorlevel  2 goto:RESTORE_WIFI
