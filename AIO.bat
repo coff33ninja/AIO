@@ -752,6 +752,9 @@ color 0f
 mode con cols=98 lines=32
 Title SERVICES DISABLE
 echo Currently working on the services list that mostly destroys windows overall performance.
+echo Press any key to continue . . .
+timeout 2 >nul
+
 rem Query the SC service name. SC aka Service Control has different names for the services
 rem and you cannot disable them using the actual service name listed on services.msc.
 rem Instead we need to send a query to get the service name and then we can run a query to disable it 
@@ -777,7 +780,56 @@ rem    sc config “AMD Fuel Service” start= disabled
 rem In the query above you can replace disabled with the following states:
 rem    boot | system | auto | demand | disabled | delayed-auto 
 
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('IF YOU WOULD LIKE TO CONTRIBUTE TO THE SERVICES PLEASE RERUN AIO AND GO TO 1.INFORMATION THEN ONTO 1.QUICK INFORMATION CONFIGURATION AND ACCEPT AGREEMENT FOR THE DIAGNOSTICS POPUP TO FURTHER INVESTIGATE EXTRA SERVICES FOR FUTURE USE. Do you agree?', 'EMAIL CONFIRMATION', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\AIO\sout.tmp
+set /p SOUT=<%TEMP%\AIO\sout.tmp
+if %SOUT%==Yes goto YES_ALLOWED
+if %SOUT%==No goto NO_DISALLOWED
+:YES_ALLOWED
+goto SERVICES_ALLOWED
+:NO_DISALLOWED
+goto SERVICES_DISALLOWED
+
+:SERVICES_ALLOWED
+@echo off
+echo DISABLING KNOWN WINDOWS SERVICES
+timeout 2 >nul
+sc config "bits" start= disabled
+sc config "BDESVC" start= disabled
+sc config "BcastDVRUserService_7c360" start= disabled
+sc config "GoogleChromeElevationService" start= disabled
+sc config "gupdate" start= disabled
+sc config "gupdatem" start= disabled
+sc config "vmickvpexchange" start= disabled
+sc config "vmicguestinterface" start= disabled
+sc config "vmicshutdown" start= disabled
+sc config "vmicheartbeat" start= disabled
+sc config "vmcompute" start= disabled
+sc config "vmicvmsession" start= disabled
+sc config "vmicrdv" start= disabled
+sc config "vmictimesync" start= disabled
+sc config "vmicvss" start= disabled
+sc config "WdNisSvc" start= disabled
+sc config "WinDefend" start= disabled
+sc config "MicrosoftEdgeElevationServ" start= disabledice
+sc config "edgeupdate" start= disabled
+sc config "edgeupdatem" start= disabled
+sc config "MozillaMaintenance" start= disabled
+sc config "SysMain" start= disabled
+sc config "TeamViewer" start= disabled
+sc config "Sense" start= disabled
+sc config "MixedRealityOpenXRSvc" start= disabled
+sc config "WSearch" start= manual
+sc config "XboxGipSvc" start= disabled
+sc config "XblAuthManager" start= disabled
+sc config "XblGameSave" start= disabled
+sc config "XboxNetApiSvc" start= Disabled
+echo If any errors occured during disabling phase please rerun AIO as Administrator.
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+
+:SERVICES_DISALLOWED
+Echo 
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('NO SERVICES WAS DISABLED BY PRESSING NO... Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
