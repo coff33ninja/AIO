@@ -26,7 +26,7 @@ My thanks goes out to:
 - [slavanap](https://github.com/slavanap/Windows10ManualUpdate/),
 - [darius-vr](https://github.com/darius-vr/),
 - [StackOverFlow](https://stackoverflow.com/)
-for the code, files, info, and a basis to work from. 
+for the code, info, and a basis to work from. 
 - [O&OShutup](https://www.oo-software.com/en/shutup10) Used for extra preset telemetry fixes.
 - [SNAPPY DRIVER INSTALLER](https://sdi-tool.org/) Used as a driver update medium.
 
