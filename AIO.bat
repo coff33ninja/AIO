@@ -271,20 +271,21 @@ echo                  ^|      [4] TELEMETRY                                     
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Disable Specific Services                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
+echo                  ^|      [6] BACKUPPER                                            ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|       ___________________________________________________     ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] SHUTDOWN OPTIONS       [7] BACK      [8] EXIT        ^|
+echo                  ^|      [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT        ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  8 goto:EXIT
-if errorlevel  7 goto:end_BACKMENU
-if errorlevel  6 goto:SHUTDOWN_OPTIONS
+if errorlevel  9 goto:EXIT
+if errorlevel  8 goto:end_BACKMENU
+if errorlevel  7 goto:SHUTDOWN_OPTIONS
+if errorlevel  6 goto:BACKUP_CONFIG
 if errorlevel  5 goto:SERVICES_DISABLE
 if errorlevel  4 goto:TELEMETRY 
 if errorlevel  3 goto:MAS
@@ -320,14 +321,13 @@ echo                  ^|                                                        
 echo                  ^|      [7] REMOVE NETWORK MAP                                   ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] NETWORK BACKUP                         [9] Go back   ^|
+echo                  ^|                                                 [8] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
-if errorlevel  9 goto:end_COMPUTER_CONFIGURATION
-if errorlevel  8 goto:BACKUP_CONFIG
+if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
 if errorlevel  5 goto:WIFI_CONFIURATION
@@ -583,19 +583,21 @@ echo                  ^|                                                        
 echo                  ^|      [4] NETWORK INTERFACES CONFIGURATION RESTORE             ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
+echo                  ^|      [5] BACKUP DRIVERS                                       ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
+echo                  ^|      [6] RESTORE DRIVERS                                      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                 [5] Go back   ^|
+echo                  ^|                                                 [7] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:12345 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5] : "
+choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
-if errorlevel  5 goto:end_NETWORK_CONFIGURATION
+if errorlevel  7 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  6 goto:RESTORE_DRIVERS
+if errorlevel  5 goto:BACHUP_DRIVERS
 if errorlevel  4 goto:RESTORE_IP
 if errorlevel  3 goto:Backup_IP
 if errorlevel  2 goto:RESTORE_WIFI
@@ -610,10 +612,10 @@ Title WIFI BACKUP
 mode con cols=98 lines=32
 cls
 echo
-md C:\network\WIFI
-cd C:\network\WIFI
-echo This will backup the WiFi config to C:\network\WIFI
-netsh wlan export profile key=clear folder=C:\network\WIFI
+md C:\AIO_BACKUP\NETWORK\WIFI
+cd C:\AIO_BACKUP\NETWORK\WIFI
+echo This will backup the WiFi config to C:\AIO_BACKUP\NETWORK\WIFI
+netsh wlan export profile key=clear folder=C:\AIO_BACKUP\NETWORK\WIFI
 start .
 pause & goto end_NETWORK_CONFIGURATION
 
@@ -625,9 +627,9 @@ Title WIFI RESTORE
 mode con cols=98 lines=32
 cls
 echo
-cd C:\network\WIFI
+cd C:\AIO_BACKUP\NETWORK\WIFI
 dir
-netsh wlan add profile filename="C:\network\WIFI\%WIFINAME%.xml" user=all
+netsh wlan add profile filename="C:\AIO_BACKUP\NETWORK\WIFI\%WIFINAME%.xml" user=all
 echo Enter complete file name excluding .xml
 echo exapmle: WIFI-TSUNAMI
 echo the .xml will be added automatically
@@ -642,10 +644,10 @@ Title NETWORK INTERFACES CONFIGURATION BACKUP
 mode con cols=98 lines=32
 cls
 echo
-md C:\network\Interfaces
-cd C:\network\Interfaces
-echo This section will backupp all the network interfaces confiuration to C:\network\Interfaces
-netsh interface dump > C:\network\Interfaces\netcfg.txt
+md C:\AIO_BACKUP\NETWORK\Interfaces
+cd C:\AIO_BACKUP\NETWORK\Interfaces
+echo This section will backupp all the network interfaces confiuration to C:\AIO_BACKUP\NETWORK\Interfaces
+netsh interface dump > C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
 pause & goto end_NETWORK_CONFIGURATION
 
@@ -657,12 +659,40 @@ Title NETWORK INTERFACES CONFIGURATION RESTORE
 mode con cols=98 lines=32
 cls
 echo
-cd C:\network\Interfaces
+cd C:\AIO_BACKUP\NETWORK\Interfaces
 dir
-echo This section will restore all the network interfaces confiuration from C:\network\Interfaces
-netsh exec C:\network\C:\network\Interfaces\netcfg.txt
+echo This section will restore all the network interfaces confiuration from C:\AIO_BACKUP\NETWORK\Interfaces
+netsh exec C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
 pause & goto end_NETWORK_CONFIGURATION
+
+::========================================================================================================================================
+
+:BACHUP_DRIVERS
+color 0f
+Title DRIVERS BACKUP
+mode con cols=98 lines=32
+cls
+echo
+md C:\AIO_BACKUP\DRIVERS_EXPORT
+cd C:\AIO_BACKUP\DRIVERS_EXPORT
+powershell.exe Dism /Online /Export-Driver /Destination:C:\AIO_BACKUP\DRIVERS_EXPORT
+echo.The operation completed successfully.
+pause & goto end_COMPUTER_CONFIGURATION
+
+::========================================================================================================================================
+
+:RESTORE_DRIVERS
+color 0f
+Title DRIVERS RESTORE
+mode con cols=98 lines=32
+cls
+echo
+cd C:\AIO_BACKUP\DRIVERS_EXPORT
+dir
+powershell.exe Dism /Online /Add-Driver /Driver:C:\AIO_BACKUP\DRIVERS_EXPORT
+echo.The operation completed successfully.
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
