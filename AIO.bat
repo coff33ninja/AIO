@@ -617,7 +617,7 @@ cd C:\AIO_BACKUP\NETWORK\WIFI
 echo This will backup the WiFi config to C:\AIO_BACKUP\NETWORK\WIFI
 netsh wlan export profile key=clear folder=C:\AIO_BACKUP\NETWORK\WIFI
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -634,7 +634,7 @@ echo Enter complete file name excluding .xml
 echo exapmle: WIFI-TSUNAMI
 echo the .xml will be added automatically
 Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -649,7 +649,7 @@ cd C:\AIO_BACKUP\NETWORK\Interfaces
 echo This section will backupp all the network interfaces confiuration to C:\AIO_BACKUP\NETWORK\Interfaces
 netsh interface dump > C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -664,7 +664,7 @@ dir
 echo This section will restore all the network interfaces confiuration from C:\AIO_BACKUP\NETWORK\Interfaces
 netsh exec C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
