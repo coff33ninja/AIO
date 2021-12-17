@@ -1401,6 +1401,7 @@ cls & goto end_CLEANER
 cls
 color 0f
 mode con cols=98 lines=32
+Title AIO PRE-SETUP
 ECHO STILL BLANK
 PAUSE GOTO end_BACKMENU
 
@@ -1411,6 +1412,7 @@ PAUSE GOTO end_BACKMENU
 cls
 color 0f
 mode con cols=98 lines=32
+Title EXTRA ITEMS
 ECHO STILL BLANK
 PAUSE GOTO end_BACKMENU
 
