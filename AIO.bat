@@ -192,8 +192,8 @@ echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Operation completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-powershell rename-item -path "C:\\AIO\Basic-Computer-Information-Report.html" -newname "%YOURNAMEHERE%-REPORT.HTML"
-set %YOURNAMEHERE%=PLEASE ENTER YOUR NAME HERE:
+rem powershell rename-item -path "C:\\AIO\Basic-Computer-Information-Report.html" -newname "%YOURNAMEHERE%-REPORT.HTML"
+rem set %YOURNAMEHERE%=PLEASE ENTER YOUR NAME HERE:
 start /wait C:\AIO\Basic-Computer-Information-Report.html
 
 timeout 2 >nul
@@ -1284,7 +1284,7 @@ ECHO It has several infrastructural configuration options that allow you to make
 ECHO adjustments to the specific performance and security settings for users and computers.
 ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
 ECHO line where your computer starts behaving in an unwanted way. This is when you
-ECHO know that it’s time to reset all Group Policy settings to default
+ECHO know that its time to reset all Group Policy settings to default
 ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
 ECHO so that you won't have to look through forums to find a solution.
 ECHO Please reboot once the cleanup is complete.
