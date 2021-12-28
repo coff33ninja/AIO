@@ -172,7 +172,7 @@ function CustomInputBox([string] $title, [string] $message, [string] $defaultTex
 
 
 $userInput = CustomInputBox "User Name" "Please enter your name." ""
-if ( $userInput -ne $null ) {
+if ($null -ne $userInput) {
     $Report | Out-File .\[$userInput]-Basic-Computer-Information-Report.html
 }
 else {
