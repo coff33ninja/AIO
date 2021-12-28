@@ -80,7 +80,7 @@ $header = @"
 $ComputerName = "<h1>Computer name: $env:computername</h1>"
 
 #The command below will get the Operating System information, convert the result to HTML code as table and store it to a variable
-$OSinfo = Get-CimInstance -Class Win32_OperatingSystem | ConvertTo-Html -As List -Property Version,Caption,BuildNumber,Manufacturer -Fragment -PreContent "<h2>Operating System Information</h2>"
+$OSinfo = Get-CimInstance -Class Win32_OperatingSystem | ConvertTo-Html -As List -Property Version, Caption, BuildNumber, Manufacturer, OSArchitecture -Fragment -PreContent "<h2>Operating System Information</h2>"
 
 #The command below will get the Operating System HotFix information, convert the result to HTML code as table and store it to a variable
 $HotFixinfo = Get-CimInstance -Class Win32_QuickFixEngineering | ConvertTo-Html -As List -Property HotFixId -Fragment -PreContent "<h2>Operating System HotFix Information</h2>"
