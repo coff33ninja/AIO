@@ -67,7 +67,7 @@ echo      ####################################################
 echo      #  Read, Agree and Accept - Terms as Stated (TaS)  #
 echo      ####################################################
 echo:
-echo           AIO version - 1.4
+echo           AIO version - 1.5
 echo           Copyright (C) 2021  Coff33ninja - Darius-vr
 echo:
 echo               This program is distributed in order to simplify Windows Configuration,
