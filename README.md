@@ -10,6 +10,7 @@ but WITHOUT ANY GUARANTEE; including, but not limited to, the implied guarantee 
 See the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) General Public License for more details.
 These scripts have been tested on Windows 10 v2004/21H1 and early official release of Windows 11. They may or may not work on older versions of Windows.
 If any changes or improvements are needed and you have the know-how feel free to start a - [DISCUSSION](https://github.com/coff33ninja/AIO/discussions), any idea is welcome.
+Future releases will include wget and a stripped down version of AIO for older versions of windows.
 
 ## Pre-requisites
 
