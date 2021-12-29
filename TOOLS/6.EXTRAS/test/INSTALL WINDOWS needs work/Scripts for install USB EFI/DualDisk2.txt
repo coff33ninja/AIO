@@ -1,0 +1,74 @@
+rem DISKPART script for dual disk system,
+rem Windows on primary disk (Disk0).
+rem ---------------------------------------------------
+rem Select secondary disk, wipe it empty, convert to GPT
+rem 
+select disk 1
+clean
+convert gpt
+rem
+rem ---------------------------------------------------
+rem Create & format 100 MB EFI System partition 
+rem 
+create partition efi size=100
+format quick fs=fat32 label="System"
+assign letter="S"
+rem
+rem ---------------------------------------------------
+rem Create 128 MB MSR partition (will not be formatted)
+rem 
+create partition msr size=128
+rem
+rem ---------------------------------------------------
+rem Create OS partition using all available space, 
+rem shrink it with 550 MB to leave space at end of disk
+rem 
+create partition primary 
+shrink minimum=550
+rem
+rem ---------------------------------------------------
+rem Format OS partition, label it, assign drive letter
+rem W. Windows Setup will change this drive letter to C
+rem when installed. It is important now to use a not
+rem reserved letter, therefore we use a letter from
+rem end of alphabet
+rem 
+format quick fs=ntfs label="Windows"
+assign letter="W"
+rem
+rem ---------------------------------------------------
+rem Create & format WinRE recovery partition at the 
+rem end of the disk. Not defining the size, it will use
+rem all available space, 550 MB that is left we shrunk
+rem OS partition. Notice that ID and GPT attributes must
+rem be set exactly as shown! 
+rem 
+create partition primary
+format quick fs=ntfs label="WinRE"
+assign letter="R"
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x8000000000000001
+rem
+rem ---------------------------------------------------
+rem Select primary disk, wipe it empty, convert to GPT
+rem 
+select disk 0
+clean
+convert gpt
+rem
+rem ---------------------------------------------------
+rem Create 128 MB MSR partition (will not be formatted)
+rem 
+create partition msr size=128
+rem
+rem ---------------------------------------------------
+rem Create data partition using all available space. 
+rem 
+create partition primary 
+format quick fs=ntfs label="Data"
+assign
+rem
+rem ---------------------------------------------------
+rem Exit Diskpart 
+rem 
+exit

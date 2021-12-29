@@ -208,9 +208,11 @@ goto email
 goto end_BACKMENU
 
 :email
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/mailsend1.19.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\mailsend1.19.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/chefsender.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\chefsender.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/gui.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\gui.exe"
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/Microsoft.Exchange.WebServices.dll" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\Microsoft.Exchange.WebServices.dll"
 echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\mailsend1.19.exe -t hltworkshop@salnet.co.za -f salnetmail@salnet.co.za -port 587 -auth -smtp mail.salnet.co.za -sub subject -M message -Attach file a=C:\AIO\Basic-Computer-Information-Report.html -user salnetmail@salnet.co.za -pass salnetmail!@#
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\chefsender.exe /smtp-server:"smtp-mail.outlook.com" /to:"coff33ninja69@gmail.com" /smtp-user:"hltworkshop@outlook.com" /smtp-password:"HLTP@ssw0rd1" /port:"587" /ssl /from-name:TEST /from-mail:"hltworkshop@outlook.com" /sub:"ComputerINFO" /html /attach:"C:\aio\*.html"
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Email send successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 goto end_BACKMENU
 
@@ -266,20 +268,21 @@ echo                  ^|      [4] TELEMETRY                                     
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Disable Specific Services                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
+echo                  ^|      [6] BACKUPPER                                            ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|       ___________________________________________________     ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] SHUTDOWN OPTIONS       [6] BACK      [7] EXIT        ^|
+echo                  ^|      [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT        ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
-if errorlevel  8 goto:EXIT
-if errorlevel  7 goto:end_BACKMENU
-if errorlevel  6 goto:SHUTDOWN_OPTIONS
+if errorlevel  9 goto:EXIT
+if errorlevel  8 goto:end_BACKMENU
+if errorlevel  7 goto:SHUTDOWN_OPTIONS
+if errorlevel  6 goto:BACKUP_CONFIG
 if errorlevel  5 goto:SERVICES_DISABLE
 if errorlevel  4 goto:TELEMETRY 
 if errorlevel  3 goto:MAS
@@ -315,14 +318,13 @@ echo                  ^|                                                        
 echo                  ^|      [7] REMOVE NETWORK MAP                                   ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] NETWORK BACKUP                         [9] Go back   ^|
+echo                  ^|                                                 [8] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
-if errorlevel  9 goto:end_COMPUTER_CONFIGURATION
-if errorlevel  8 goto:BACKUP_CONFIG
+if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
 if errorlevel  5 goto:WIFI_CONFIURATION
@@ -577,24 +579,22 @@ echo                  ^|      [3] NETWORK INTERFACES CONFIGURATION BACKUP       
 echo                  ^|                                                               ^|
 echo                  ^|      [4] NETWORK INTERFACES CONFIGURATION RESTORE             ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] BLANK                                                ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] BLANK                                                ^|
+echo                  ^|      [5] BACKUP DRIVERS                                       ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] BLANK                                                ^|
+echo                  ^|      [6] RESTORE DRIVERS                                      ^|
+echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] BLANK                                  [9] Go back   ^|
+echo                  ^|                                                 [7] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
-if errorlevel  9 goto:end_NETWORK_CONFIGURATION
-if errorlevel  8 goto:TEST_UNKNOWN
-if errorlevel  7 goto:TEST_UNKNOWN
-if errorlevel  6 goto:TEST_UNKNOWN
-if errorlevel  5 goto:TEST_UNKNOWN
+if errorlevel  7 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  6 goto:RESTORE_DRIVERS
+if errorlevel  5 goto:BACHUP_DRIVERS
 if errorlevel  4 goto:RESTORE_IP
 if errorlevel  3 goto:Backup_IP
 if errorlevel  2 goto:RESTORE_WIFI
@@ -609,12 +609,12 @@ Title WIFI BACKUP
 mode con cols=98 lines=32
 cls
 echo
-md C:\network\WIFI
-cd C:\network\WIFI
-echo This will backup the WiFi config to C:\network\WIFI
-netsh wlan export profile key=clear folder=C:\network\WIFI
+md C:\AIO_BACKUP\NETWORK\WIFI
+cd C:\AIO_BACKUP\NETWORK\WIFI
+echo This will backup the WiFi config to C:\AIO_BACKUP\NETWORK\WIFI
+netsh wlan export profile key=clear folder=C:\AIO_BACKUP\NETWORK\WIFI
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -624,14 +624,14 @@ Title WIFI RESTORE
 mode con cols=98 lines=32
 cls
 echo
-cd C:\network\WIFI
+cd C:\AIO_BACKUP\NETWORK\WIFI
 dir
-netsh wlan add profile filename="C:\network\WIFI\%WIFINAME%.xml" user=all
+netsh wlan add profile filename="C:\AIO_BACKUP\NETWORK\WIFI\%WIFINAME%.xml" user=all
 echo Enter complete file name excluding .xml
 echo exapmle: WIFI-TSUNAMI
 echo the .xml will be added automatically
 Set /P %WIFINAME%=ENTER PEVIEWED WIFI NAME TO ADD WIFI BACK:
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -641,12 +641,12 @@ Title NETWORK INTERFACES CONFIGURATION BACKUP
 mode con cols=98 lines=32
 cls
 echo
-md C:\network\Interfaces
-cd C:\network\Interfaces
-echo This section will backupp all the network interfaces confiuration to C:\network\Interfaces
-netsh interface dump > C:\network\Interfaces\netcfg.txt
+md C:\AIO_BACKUP\NETWORK\Interfaces
+cd C:\AIO_BACKUP\NETWORK\Interfaces
+echo This section will backupp all the network interfaces confiuration to C:\AIO_BACKUP\NETWORK\Interfaces
+netsh interface dump > C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -656,12 +656,40 @@ Title NETWORK INTERFACES CONFIGURATION RESTORE
 mode con cols=98 lines=32
 cls
 echo
-cd C:\network\Interfaces
+cd C:\AIO_BACKUP\NETWORK\Interfaces
 dir
-echo This section will restore all the network interfaces confiuration from C:\network\Interfaces
-netsh exec C:\network\C:\network\Interfaces\netcfg.txt
+echo This section will restore all the network interfaces confiuration from C:\AIO_BACKUP\NETWORK\Interfaces
+netsh exec C:\AIO_BACKUP\NETWORK\Interfaces\netcfg.txt
 start .
-pause & goto end_NETWORK_CONFIGURATION
+pause & goto end_COMPUTER_CONFIGURATION
+
+::========================================================================================================================================
+
+:BACHUP_DRIVERS
+color 0f
+Title DRIVERS BACKUP
+mode con cols=98 lines=32
+cls
+echo
+md C:\AIO_BACKUP\DRIVERS_EXPORT
+cd C:\AIO_BACKUP\DRIVERS_EXPORT
+powershell.exe Dism /Online /Export-Driver /Destination:C:\AIO_BACKUP\DRIVERS_EXPORT
+echo.The operation completed successfully.
+pause & goto end_COMPUTER_CONFIGURATION
+
+::========================================================================================================================================
+
+:RESTORE_DRIVERS
+color 0f
+Title DRIVERS RESTORE
+mode con cols=98 lines=32
+cls
+echo
+cd C:\AIO_BACKUP\DRIVERS_EXPORT
+dir
+powershell.exe Dism /Online /Add-Driver /Driver:C:\AIO_BACKUP\DRIVERS_EXPORT
+echo.The operation completed successfully.
+pause & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -751,6 +779,9 @@ color 0f
 mode con cols=98 lines=32
 Title SERVICES DISABLE
 echo Currently working on the services list that mostly destroys windows overall performance.
+echo Press any key to continue . . .
+timeout 2 >nul
+
 rem Query the SC service name. SC aka Service Control has different names for the services
 rem and you cannot disable them using the actual service name listed on services.msc.
 rem Instead we need to send a query to get the service name and then we can run a query to disable it 
@@ -776,7 +807,56 @@ rem    sc config “AMD Fuel Service” start= disabled
 rem In the query above you can replace disabled with the following states:
 rem    boot | system | auto | demand | disabled | delayed-auto 
 
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('IF YOU WOULD LIKE TO CONTRIBUTE TO THE SERVICES PLEASE RERUN AIO AND GO TO 1.INFORMATION THEN ONTO 1.QUICK INFORMATION CONFIGURATION AND ACCEPT AGREEMENT FOR THE DIAGNOSTICS POPUP TO FURTHER INVESTIGATE EXTRA SERVICES FOR FUTURE USE. Do you agree?', 'EMAIL CONFIRMATION', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\AIO\sout.tmp
+set /p SOUT=<%TEMP%\AIO\sout.tmp
+if %SOUT%==Yes goto YES_ALLOWED
+if %SOUT%==No goto NO_DISALLOWED
+:YES_ALLOWED
+goto SERVICES_ALLOWED
+:NO_DISALLOWED
+goto SERVICES_DISALLOWED
+
+:SERVICES_ALLOWED
+@echo off
+echo DISABLING KNOWN WINDOWS SERVICES
+timeout 2 >nul
+sc config "bits" start= disabled
+sc config "BDESVC" start= disabled
+sc config "BcastDVRUserService_7c360" start= disabled
+sc config "GoogleChromeElevationService" start= disabled
+sc config "gupdate" start= disabled
+sc config "gupdatem" start= disabled
+sc config "vmickvpexchange" start= disabled
+sc config "vmicguestinterface" start= disabled
+sc config "vmicshutdown" start= disabled
+sc config "vmicheartbeat" start= disabled
+sc config "vmcompute" start= disabled
+sc config "vmicvmsession" start= disabled
+sc config "vmicrdv" start= disabled
+sc config "vmictimesync" start= disabled
+sc config "vmicvss" start= disabled
+sc config "WdNisSvc" start= disabled
+sc config "WinDefend" start= disabled
+sc config "MicrosoftEdgeElevationServ" start= disabledice
+sc config "edgeupdate" start= disabled
+sc config "edgeupdatem" start= disabled
+sc config "MozillaMaintenance" start= disabled
+sc config "SysMain" start= disabled
+sc config "TeamViewer" start= disabled
+sc config "Sense" start= disabled
+sc config "MixedRealityOpenXRSvc" start= disabled
+sc config "WSearch" start= manual
+sc config "XboxGipSvc" start= disabled
+sc config "XblAuthManager" start= disabled
+sc config "XblGameSave" start= disabled
+sc config "XboxNetApiSvc" start= Disabled
+echo If any errors occured during disabling phase please rerun AIO as Administrator.
 PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+
+:SERVICES_DISALLOWED
+Echo 
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('NO SERVICES WAS DISABLED BY PRESSING NO... Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+cls & goto end_COMPUTER_CONFIGURATION 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
@@ -819,7 +899,7 @@ echo:
 choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
 if errorlevel  6 goto:EXIT
-if errorlevel  5 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  5 goto:end_BACKMENU
 if errorlevel  4 goto:DRIVER_UPDATER
 if errorlevel  3 goto:SOFTWARE_UPDATER
 if errorlevel  2 goto:WINDOWS_UPDATE_PAUSER
@@ -889,7 +969,7 @@ echo:
 choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
 
 if errorlevel  6 goto:EXIT
-if errorlevel  5 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  5 goto:end_UPDATER
 if errorlevel  4 goto:Chocolatey_GUI
 if errorlevel  3 goto:Chocolatey
 if errorlevel  2 goto:PatchMyPC_OWN_SELECTIONS
@@ -1201,7 +1281,7 @@ ECHO It has several infrastructural configuration options that allow you to make
 ECHO adjustments to the specific performance and security settings for users and computers.
 ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
 ECHO line where your computer starts behaving in an unwanted way. This is when you
-ECHO know that it’s time to reset all Group Policy settings to default
+ECHO know that its time to reset all Group Policy settings to default
 ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
 ECHO so that you won't have to look through forums to find a solution.
 ECHO Please reboot once the cleanup is complete.
@@ -1318,8 +1398,9 @@ cls & goto end_CLEANER
 cls
 color 0f
 mode con cols=98 lines=32
+Title AIO PRE-SETUP
 ECHO STILL BLANK
-PAUSE GOTO end_COMPUTER_CONFIGURATION
+PAUSE GOTO end_BACKMENU
 
 ::========================================================================================================================================
 ::========================================================================================================================================
@@ -1328,8 +1409,9 @@ PAUSE GOTO end_COMPUTER_CONFIGURATION
 cls
 color 0f
 mode con cols=98 lines=32
+Title EXTRA ITEMS
 ECHO STILL BLANK
-PAUSE GOTO end_COMPUTER_CONFIGURATION
+PAUSE GOTO end_BACKMENU
 
 ::========================================================================================================================================
 ::========================================================================================================================================

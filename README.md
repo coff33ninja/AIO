@@ -24,13 +24,25 @@ My thanks goes out to:
 - [Builtbybel](https://github.com/builtbybel/),
 - [massgravel](https://github.com/massgravel/Microsoft-Activation-Scripts/),
 - [slavanap](https://github.com/slavanap/Windows10ManualUpdate/),
-- [muquit](https://github.com/muquit/mailsend)
 - [darius-vr](https://github.com/darius-vr/),
 - [StackOverFlow](https://stackoverflow.com/)
-for the code, files, info, and a basis to work from. 
+for the code, info, and a basis to work from. 
 - [O&OShutup](https://www.oo-software.com/en/shutup10) Used for extra preset telemetry fixes.
 - [SNAPPY DRIVER INSTALLER](https://sdi-tool.org/) Used as a driver update medium.
 
 ## Extra's
 Most of the code is still "Dirty" due to learning cmd, bat, vbs and ps1 creation from the ground up.
 Hope this will become an excelent toolkit for everyone in the future.
+
+# &#x1f4c8; GitHub Stats
+
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=coff33ninja&hide=java,html,tex&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21&langs_count=3" />
+</a>
+
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=coff33ninja&show_icons=true&line_height=27&count_private=true&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21" alt="coff33ninja's GitHub Stats" />
+</a>
+<a href="https://github.com/coff33ninja/AIO">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coff33ninja&repo=AIO&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21" />
+</a>
