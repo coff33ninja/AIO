@@ -192,7 +192,7 @@ echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Operation completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-start /wait C:\AIO\Basic-Computer-Information-Report.html
+start /wait C:\Windows\Temp\Basic-Computer-Information-Report.html
 timeout 2 >nul
 goto email_confirmation
 rem pause & cls & goto end_BACKMENU
