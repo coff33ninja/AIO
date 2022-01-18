@@ -58,7 +58,7 @@ echo:
 echo                       Press the corresponding number to go to desired section:
 echo:
 echo                  ^|===============================================================^|
-echo                  ^|                       AIO v1.6 MAIN MENU                      ^| 
+echo                  ^|               AIO v1.6 aria2 version MAIN MENU                ^| 
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [1] INFORMATION                                          ^|
