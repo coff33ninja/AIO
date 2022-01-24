@@ -38,29 +38,11 @@ setlocal & pushd .
 cd /d %~dp0
 if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
-md C:\AIO
+:DOWNLOADER
+
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO.cmd" -O "C:\AIO\AIO.cmd"
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO-LOGO.ico" -O "C:\AIO-LOGO.ico"
 
-set WrkDir=C:\AIO
-set LinkName=AIO.lnk
-set filname=AIO.cmd
-set ThePath=C:\AIO\AIO.cmd
-set comment=1234-5678
-set icon=C:\AIO-LOGO.ico
-
-mshta VBScript:Execute("Set Shell=CreateObject(""WScript.Shell""):Set Link=Shell.CreateShortcut(""!LinkName!""):Link.TargetPath=""!ThePath!"":Link.WorkingDirectory=""!WrkDir!"":Link.Description=""!comment!"":Link.IconLocation=""!icon!"":Link.Save:close"^)
-
-if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AIO" (
-  del /Q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AIO"
-) else (
-  mkdir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AIO"
-)
-
-copy /y AIO.lnk "%USERPROFILE%\Desktop\" >nul 2>nul
-move /y *.lnk "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AIO\" >nul 2>nul
-
 call C:\AIO\AIO.cmd
 
-exit
 
