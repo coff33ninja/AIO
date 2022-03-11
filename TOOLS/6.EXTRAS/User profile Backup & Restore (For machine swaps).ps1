@@ -1,5 +1,10 @@
-$destination = "\\SERVER\Share\backups"
+Add-Type -AssemblyName System.Windows.Forms
+$browser = New-Object System.Windows.Forms.FolderBrowserDialog
+$null = $browser.ShowDialog()
+$path = $browser.SelectedPath
+####### $destination = "\\SERVER\Share\backups" (original)
 
+$destination = "$path"
 $folder = "Desktop",
 "Downloads",
 "Favorites",
@@ -19,22 +24,19 @@ $appData = Get-Content env:localAPPDATA
 
 
 ###### Restore data section ######
-if ([IO.Directory]::Exists($destination + "\" + $username + "\")) 
-{ 
+if ([IO.Directory]::Exists($destination + "\" + $username + "\")) { 
 
 	$caption = "Choose Action";
 	$message = "A backup folder for $username already exists, would you like to restore the data to the local machine?";
-	$Yes = new-Object System.Management.Automation.Host.ChoiceDescription "&Yes","Yes";
-	$No = new-Object System.Management.Automation.Host.ChoiceDescription "&No","No";
-	$choices = [System.Management.Automation.Host.ChoiceDescription[]]($Yes,$No);
-	$answer = $host.ui.PromptForChoice($caption,$message,$choices,0)
+	$Yes = new-Object System.Management.Automation.Host.ChoiceDescription "&Yes", "Yes";
+	$No = new-Object System.Management.Automation.Host.ChoiceDescription "&No", "No";
+	$choices = [System.Management.Automation.Host.ChoiceDescription[]]($Yes, $No);
+	$answer = $host.ui.PromptForChoice($caption, $message, $choices, 0)
 
-	if ($answer -eq 0) 
-	{
+	if ($answer -eq 0) {
 		
 		write-host -ForegroundColor green "Restoring data to local machine for $username"
-		foreach ($f in $folder)
-		{	
+		foreach ($f in $folder) {	
 			$currentLocalFolder = $userprofile + "\" + $f
 			$currentRemoteFolder = $destination + "\" + $username + "\" + $f
 			write-host -ForegroundColor cyan "  $f..."
@@ -49,8 +51,7 @@ if ([IO.Directory]::Exists($destination + "\" + $username + "\"))
 		write-host -ForegroundColor green "Restore Complete!"
 	}
 	
-	else
-	{
+	else {
 		write-host -ForegroundColor yellow "Aborting process"
 		exit
 	}
@@ -59,8 +60,7 @@ if ([IO.Directory]::Exists($destination + "\" + $username + "\"))
 }
 
 ###### Backup Data section ########
-else 
-{ 
+else { 
 		
 	Write-Host -ForegroundColor green "Outlook is about to close, save any unsaved emails then press any key to continue ..."
 
@@ -70,8 +70,7 @@ else
 
 	write-host -ForegroundColor green "Backing up data from local machine for $username"
 	
-	foreach ($f in $folder)
-	{	
+	foreach ($f in $folder) {	
 		$currentLocalFolder = $userprofile + "\" + $f
 		$currentRemoteFolder = $destination + "\" + $username + "\" + $f
 		$currentFolderSize = (Get-ChildItem -ErrorAction silentlyContinue $currentLocalFolder -Recurse -Force | Measure-Object -ErrorAction silentlyContinue -Property Length -Sum ).Sum / 1MB
@@ -83,13 +82,11 @@ else
 	
 	
 	$oldStylePST = [IO.Directory]::GetFiles($appData + "\Microsoft\Outlook", "*.pst") 
-	foreach($pst in $oldStylePST)	
-	{ 
-		if ((test-path -path ($destination + "\" + $username + "\Documents\Outlook Files\oldstyle")) -eq 0){new-item -type directory -path ($destination + "\" + $username + "\Documents\Outlook Files\oldstyle") | out-null}
+	foreach ($pst in $oldStylePST) { 
+		if ((test-path -path ($destination + "\" + $username + "\Documents\Outlook Files\oldstyle")) -eq 0) { new-item -type directory -path ($destination + "\" + $username + "\Documents\Outlook Files\oldstyle") | out-null }
 		write-host -ForegroundColor yellow "  $pst..."
 		Copy-Item $pst ($destination + "\" + $username + "\Documents\Outlook Files\oldstyle")
 	}    
 	
 	write-host -ForegroundColor green "Backup complete!"
-	
-}
+}	
