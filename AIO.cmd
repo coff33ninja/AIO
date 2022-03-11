@@ -742,7 +742,7 @@ Reg add HKLM\SOFTWARE\Policies\Microsoft\MRT /v "DontOfferThroughWUAU" /t REG_DW
 Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "SecurityHealth" /f
 Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run /v "SecurityHealth" /f
 Reg add HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
-Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f,STDOUT
+Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance /v "Enabled" /t REG_DWORD /d 0 /f
 Reg delete HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService /f
 
 pause & cls & goto end_COMPUTER_CONFIGURATION
@@ -839,7 +839,7 @@ sc config "vmictimesync" start= disabled
 sc config "vmicvss" start= disabled
 sc config "WdNisSvc" start= disabled
 sc config "WinDefend" start= disabled
-sc config "MicrosoftEdgeElevationServ" start= disabledice
+sc config "MicrosoftEdgeElevationServ" start= disabled
 sc config "edgeupdate" start= disabled
 sc config "edgeupdatem" start= disabled
 sc config "MozillaMaintenance" start= disabled
