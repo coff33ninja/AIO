@@ -632,19 +632,51 @@ pause & goto end_COMPUTER_CONFIGURATION
 :DEFENDER_TOOLBOX
 color 0f
 mode con cols=98 lines=32
+title  WINDOWS DEFENDER TOOLBOX
+cls
+
+echo:
+echo:
+echo                                      WINDOWS DEFENDER TOOLBOX
+echo                  ^|===============================================================^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|      [1] WINDOWS DEFENDER TOOLBOX                             ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] REMOVE WINDOWS DEFENDER (NOT ADVISED)                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                          [3] GO BACK            [4] EXIT      ^|
+echo                  ^|                                                               ^|
+echo                  ^|===============================================================^|
+echo:          
+choice /C:1234 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4] : "
+
+if errorlevel  4 goto:EXIT
+if errorlevel  3 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  2 goto:REMOVE_WINDOWS_DEFENDER
+if errorlevel  1 goto:WINDOWS_DEFENDER
+cls
+
+:DISABLE_WINDOWS_DEFENDER
 title DEFENDER TOOLBOX
+color 0f
+mode con cols=98 lines=32
 cls
 ECHO:
 ECHO THIS SECTION WILL ADD CERTAIN FIREWALL EXCEPTIONS FOR WINDOWS
 ECHO WINDOWS ACTIVATION TOOLKITS AS WELL AS GIVE MEENS TO DISABLE
 ECHO WINDOWS DEFENDER TO ALLOW THE TOOLKITS TO PROPERLY FUNTION.
+rem this section still needs work
 timeout 5 >nul
 PAUSE
+
 @echo off
-rem Powershell -ExecutionPolicy Bypass -File "%~dp0%SOFTWARE\ACTIVATION_AND_DEFENDER_TOOLS\defender_toolkit.ps1"
 Powershell -ExecutionPolicy Bypass Set-MpPreference -DisableRealtimeMonitoring 1
 powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"  -verb runas
+
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
 Add-MpPreference -ThreatIDDefaultAction_Ids 2147685180 -ThreatIDDefaultAction_Actions Allow -Force; ^
@@ -680,6 +712,39 @@ start /wait %USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe
 timeout 2 >nul
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
+:REMOVE_WINDOWS_DEFENDER
+title REMOVE WINDOWS DEFENDER
+color 0f
+mode con cols=98 lines=32
+cls
+ECHO:
+ECHO This script makes use of the install_wim_tweak.exe to run API in the system to remove Windows Defender.\n\nThe install_wim_tweak.exe will be
+ECHO automatically downloaded and executed. This script must be run as administrator and the system restarted after finish. If Windows complains
+ECHO afterwards about the system being unprotected, right click the notification and hide it.
+ECHO This script changes can not be reverted.
+ECHO STILL WORKING OUT THE FINE DETAILS
+timeout 2 >nul
+powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/install_wim_tweak.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe"
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /o /l,SHOWCLI
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /o /c Windows-Defender /r,SHOWCLI
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /h /o /l,SHOWCLI
+Reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v SmartScreenEnabled /t REG_SZ /d "Off" /f,STDOUT
+Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f,STDOUT
+Reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 0 /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 2 /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 1 /f,STDOUT
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d 1 /f,STDOUT
+Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d 1 /f,STDOUT
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f,STDOUT
+Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f,STDOUT
+Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f,STDOUT
+Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f,STDOUT
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f,STDOUT
+
+pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :MAS
