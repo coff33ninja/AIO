@@ -657,7 +657,7 @@ choice /C:1234 /N /M ">                   Enter Your Choice in the Keyboard [1,2
 if errorlevel  4 goto:EXIT
 if errorlevel  3 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  2 goto:REMOVE_WINDOWS_DEFENDER
-if errorlevel  1 goto:WINDOWS_DEFENDER
+if errorlevel  1 goto:DISABLE_WINDOWS_DEFENDER
 cls
 
 :DISABLE_WINDOWS_DEFENDER
