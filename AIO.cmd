@@ -721,28 +721,29 @@ ECHO:
 ECHO This script makes use of the install_wim_tweak.exe to run API in the system to remove Windows Defender.\n\nThe install_wim_tweak.exe will be
 ECHO automatically downloaded and executed. This script must be run as administrator and the system restarted after finish. If Windows complains
 ECHO afterwards about the system being unprotected, right click the notification and hide it.
-ECHO This script changes can not be reverted.
+ECHO This script changes can not be reverted. USE AT OWN RISK!
 ECHO STILL WORKING OUT THE FINE DETAILS
 timeout 2 >nul
 powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/install_wim_tweak.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /o /l,SHOWCLI
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /o /c Windows-Defender /r,SHOWCLI
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ /h /o /l,SHOWCLI
-Reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v SmartScreenEnabled /t REG_SZ /d "Off" /f,STDOUT
-Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f,STDOUT
-Reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 0 /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 2 /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 1 /f,STDOUT
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d 1 /f,STDOUT
-Reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d 1 /f,STDOUT
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f,STDOUT
-Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f,STDOUT
-Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f,STDOUT
-Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f,STDOUT
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f,STDOUT
+setx install_wim_tweak %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /m
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /o /l,SHOWCLI
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /o /c Windows-Defender /r,SHOWCLI
+start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /h /o /l,SHOWCLI
+Reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v SmartScreenEnabled /t REG_SZ /d "Off" /f
+Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
+Reg add HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter /v "EnabledV9" /t REG_DWORD /d "0" /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v SpyNetReporting /t REG_DWORD /d 0 /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v SubmitSamplesConsent /t REG_DWORD /d 2 /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v DontReportInfectionInformation /t REG_DWORD /d 1 /f
+Reg delete HKLM\SYSTEM\CurrentControlSet\Services\Sense /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\MRT /v "DontReportInfectionInformation" /t REG_DWORD /d 1 /f
+Reg add HKLM\SOFTWARE\Policies\Microsoft\MRT /v "DontOfferThroughWUAU" /t REG_DWORD /d 1 /f
+Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "SecurityHealth" /f
+Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run /v "SecurityHealth" /f
+Reg add HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f,STDOUT
+Reg delete HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService /f
 
 pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
