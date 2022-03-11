@@ -2,6 +2,7 @@
 
 Some scripts are entirely my own, while others include the work of others. Each one has a specific, clearly defined purpose, and unless noted, will work independently of the others.
 It has been setup so that it will automatically call and run as Administrator; and download the files as needed (just to keep system clear from extra clutter). The item in release was build with "update" in mind for when updates occur in the main [AIO](https://github.com/coff33ninja/AIO) package gets updated.
+Please disable you're Anti-Virus as certian Anti-Virus software may detect this application as false-possitive, Anti-Virus may be re-enabled once the application has finished running.
 
 ## Disclaimer
 
@@ -10,6 +11,7 @@ but WITHOUT ANY GUARANTEE; including, but not limited to, the implied guarantee 
 See the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) General Public License for more details.
 These scripts have been tested on Windows 10 v2004/21H1 and early official release of Windows 11. They may or may not work on older versions of Windows.
 If any changes or improvements are needed and you have the know-how feel free to start a - [DISCUSSION](https://github.com/coff33ninja/AIO/discussions), any idea is welcome.
+Future releases will include wget and a stripped down version of AIO for older versions of windows.
 
 ## Pre-requisites
 
