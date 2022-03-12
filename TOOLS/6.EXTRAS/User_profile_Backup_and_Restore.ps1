@@ -2,7 +2,7 @@
 Write-Host -ForegroundColor green "Please select the specified folder where the backups must be stored to."
 Write-Host -ForegroundColor green "Press any key to continue..."
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-
+Clear-Host
 Add-Type -AssemblyName System.Windows.Forms
 $browser = New-Object System.Windows.Forms.FolderBrowserDialog
 $null = $browser.ShowDialog()
@@ -72,7 +72,7 @@ else {
 	$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 	
 	Get-Process | Where-Object { $_.Name -Eq "OUTLOOK" } | Stop-Process
-
+	Clear-Host
 	write-host -ForegroundColor green "Backing up data from local machine for $username"
 	
 	foreach ($f in $folder) {	
