@@ -1,8 +1,13 @@
+###### Location selector section ######
+Write-Host -ForegroundColor green "Please select the specified folder where the backups must be stored to."
+Write-Host -ForegroundColor green "Press any key to continue..."
+$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
 Add-Type -AssemblyName System.Windows.Forms
 $browser = New-Object System.Windows.Forms.FolderBrowserDialog
 $null = $browser.ShowDialog()
 $path = $browser.SelectedPath
-####### $destination = "\\SERVER\Share\backups" (original)
+
 
 $destination = "$path"
 $folder = "Desktop",
@@ -15,7 +20,7 @@ $folder = "Desktop",
 "AppData\Local\Mozilla",
 "AppData\Local\Google",
 "AppData\Roaming\Mozilla"
-
+##"$Input = Read-Host -Prompt" "If you want to add another location to backup please select here" (need to ad yes or no with popup screen to select path containin data)
 ###############################################################################################################
 
 $username = Get-Content env:username
