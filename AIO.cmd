@@ -518,15 +518,16 @@ echo                  ^|      [5] BACKUP DRIVERS                                
 echo                  ^|                                                               ^|
 echo                  ^|      [6] RESTORE DRIVERS                                      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
+echo                  ^|      [7] USER DATA BACKUP                                     ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                 [7] Go back   ^|
+echo                  ^|                                                 [8] Go back   ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
+choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
-if errorlevel  7 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
+if errorlevel  7 goto:USER_DATA
 if errorlevel  6 goto:RESTORE_DRIVERS
 if errorlevel  5 goto:BACHUP_DRIVERS
 if errorlevel  4 goto:RESTORE_IP
@@ -625,6 +626,21 @@ powershell.exe Dism /Online /Add-Driver /Driver:C:\AIO_BACKUP\DRIVERS_EXPORT
 echo.The operation completed successfully.
 pause & goto end_COMPUTER_CONFIGURATION
 
+::========================================================================================================================================
+
+:USER_DATA
+color 0f
+Title USER DATA BACKUP AND RESTORE
+mode con cols=98 lines=32
+cls
+echo
+echo This section is still a work in progress, STAY TUNED!
+@echo off
+Powershell -ExecutionPolicy Bypass Set-MpPreference -DisableRealtimeMonitoring 1
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/6.EXTRAS/User_profile_Backup_&_Restore.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_&_Restore.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_&_Restore.ps1"  -verb runas
+echo.The operation completed successfully.
+pause & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 ::========================================================================================================================================
