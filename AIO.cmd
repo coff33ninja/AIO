@@ -637,8 +637,8 @@ echo
 echo This section is still a work in progress, STAY TUNED!
 @echo off
 Powershell -ExecutionPolicy Bypass Set-MpPreference -DisableRealtimeMonitoring 1
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/6.EXTRAS/User_profile_Backup_&_Restore.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_&_Restore.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_&_Restore.ps1"  -verb runas
+powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/6.EXTRAS/User_profile_Backup_and_Restore.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_and_Restore.ps1"
+Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_and_Restore.ps1"  -verb runas
 echo.The operation completed successfully.
 pause & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
