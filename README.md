@@ -4,6 +4,13 @@ Some scripts are entirely my own, while others include the work of others. Each 
 It has been setup so that it will automatically call and run as Administrator; and download the files as needed (just to keep system clear from extra clutter). The item in release was build with "update" in mind for when updates occur in the main [AIO](https://github.com/coff33ninja/AIO) package gets updated.
 Please disable you're Anti-Virus as certian Anti-Virus software may detect this application as false-possitive, Anti-Virus may be re-enabled once the application has finished running.
 
+
+## Limitations and Instructions
+
+In [RELEASES](https://github.com/coff33ninja/AIO/releases) section please use 'ARIA' version due to limitations of windows and powershell if you come across any issues with installer.
+I won't update the installers or versioning number due to the choice of keeping most of the code online for the time being.
+
+
 ## Disclaimer
 
 This program is distributed in order to simplify Windows Configuration,
@@ -13,11 +20,13 @@ These scripts have been tested on Windows 10 v2004/21H1 and early official relea
 If any changes or improvements are needed and you have the know-how feel free to start a - [DISCUSSION](https://github.com/coff33ninja/AIO/discussions), any idea is welcome.
 Future releases will include wget and a stripped down version of AIO for older versions of windows.
 
+
 ## Pre-requisites
 
 - Active Internet Connection
 - Windows PowerShell version 5.0 or above
 - .Net Framework 4.5 and above
+
 
 ## Credits
 
@@ -31,6 +40,7 @@ My thanks goes out to:
 for the code, info, and a basis to work from. 
 - [O&OShutup](https://www.oo-software.com/en/shutup10) Used for extra preset telemetry fixes.
 - [SNAPPY DRIVER INSTALLER](https://sdi-tool.org/) Used as a driver update medium.
+
 
 ## Extra's
 Most of the code is still "Dirty" due to learning cmd, bat, vbs and ps1 creation from the ground up.
