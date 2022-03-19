@@ -69,7 +69,7 @@ echo                  ^|      [3] UPDATER                                       
 echo                  ^|                                                               ^|
 echo                  ^|      [4] CLEANER                                              ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] AIO PRE-SET                                          ^|
+echo                  ^|      [5] WINDOWS INSTALL (WORK IN PROGRESS)                   ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -86,7 +86,7 @@ if errorlevel  9 goto:EASTER
 if errorlevel  8 goto:EXIT
 if errorlevel  7 goto:SHUTDOWN_OPTIONS
 if errorlevel  6 goto:EXTRAS
-if errorlevel  5 goto:AIO_PRE-SET
+if errorlevel  5 goto:WIN_INSTALL
 if errorlevel  4 goto:CLEANER
 if errorlevel  3 goto:UPDATER
 if errorlevel  2 goto:COMPUTER_CONFIGURATION
@@ -1412,7 +1412,7 @@ cls & goto end_CLEANER
 ::========================================================================================================================================
 ::========================================================================================================================================
 
-:AIO_PRE-SET
+:WIN_INSTALL
 cls
 color 0f
 mode con cols=98 lines=32
@@ -1444,7 +1444,7 @@ REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
 
 ::========================================================================================================================================
 
-:end_AIO_PRE-SET
+:end_WIN_INSTALL
 cls
 @echo OFF
 mode con cols=43 lines=6
