@@ -1,0 +1,46 @@
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+  <settings pass="windowsPE"><component name="Microsoft-Windows-Setup" processorArchitecture="amd64" language="neutral"
+   xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
+    <UserData><ProductKey><Key>AAAAA-VVVVV-EEEEE-YYYYY-OOOOO</Key><WillShowUI>OnError</WillShowUI></ProductKey></UserData>
+    <ComplianceCheck><DisplayReport>Never</DisplayReport></ComplianceCheck><Diagnostics><OptIn>false</OptIn></Diagnostics>
+    <DynamicUpdate><Enable>true</Enable><WillShowUI>Never</WillShowUI></DynamicUpdate><EnableNetwork>true</EnableNetwork>
+  </component></settings>
+  
+  <settings pass="specialize"><component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" language="neutral"
+   xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
+    <RunSynchronous>
+      <RunSynchronousCommand wcm:action="add"><Order>1</Order>
+        <Path>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t reg_dword /d 1 /f</Path>
+        <Description>offline local account via OOBE\BYPASSNRO on every site but literally no one credits AveYo</Description>
+      </RunSynchronousCommand>
+      <RunSynchronousCommand wcm:action="add"><Order>2</Order>
+        <Path>reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v TargetReleaseVersion /d 1 /t reg_dword /f</Path>
+        <Description>hide unsupported nag on update settings</Description>
+      </RunSynchronousCommand>
+      <RunSynchronousCommand wcm:action="add"><Order>3</Order>
+        <Path>reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v TargetReleaseVersionInfo /d 25H1 /f</Path>
+        <Description>hide unsupported nag on update settings - 25H1 is not a typo ;)</Description>
+      </RunSynchronousCommand>
+    </RunSynchronous>
+  </component></settings>
+  
+  <settings pass="oobeSystem"><component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" language="neutral" 
+   xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
+    <OOBE>
+      <HideLocalAccountScreen>false</HideLocalAccountScreen><HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+      <HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE><ProtectYourPC>3</ProtectYourPC><!-- privacy opt-out -->
+    </OOBE>  
+    <FirstLogonCommands>
+      <SynchronousCommand wcm:action="add"><Order>1</Order>
+        <CommandLine>reg add "HKCU\Control Panel\UnsupportedHardwareNotificationCache" /v SV1 /d 0 /t reg_dword /f</CommandLine>
+        <Description>hide unsupported nag on desktop - release</Description>
+      </SynchronousCommand><SynchronousCommand wcm:action="add"><Order>2</Order>
+        <CommandLine>reg add "HKCU\Control Panel\UnsupportedHardwareNotificationCache" /v SV2 /d 0 /t reg_dword /f</CommandLine>
+        <Description>hide unsupported nag on desktop - dev - originally shared by awuctl @ MDL</Description>
+      </SynchronousCommand>
+    </FirstLogonCommands>
+  </component></settings>
+</unattend>
