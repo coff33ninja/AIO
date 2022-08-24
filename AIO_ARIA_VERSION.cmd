@@ -275,9 +275,9 @@ cls
 color 0f
 mode con cols=98 lines=60
 cls
-title LIST OF NETWORK CONFIGURATION
-echo This section will display a list of all network configurations registered on device.
-netsh interface ip show config
+ECHO THIS SECTION WILL RUN A CLI BASED SPEED TEST TO DETECT INTERNET STABILITY
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/speedtest.exe -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
+start /wait C:\AIO\speedtest.exe
 pause & mode con cols=98 lines=30 & goto end_NETWORK_CONFIGURATION
 cls
 
@@ -294,38 +294,45 @@ echo                      SELECT ONE OF THE FOLLOWING TO SETUP NETWORK SETTINGS
 echo:
 echo                  ^|===============================================================^|
 echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] WIFI AUTOMATIC CONFIGURATION                         ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] ETHERNET AUTOMATIC CONFIGURATION                     ^|
+echo                  ^|      [1] LIST ADAPTERS                                        ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] WIFI MANUAL                                          ^|
+echo                  ^|      [2] WIFI AUTOMATIC CONFIGURATION                         ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] ETHERNET MANUAL                                      ^|
+echo                  ^|      [3] ETHERNET AUTOMATIC CONFIGURATION                     ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] WIFI MANUAL                                          ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] ETHERNET MANUAL                                      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                      [5] GO BACK              ^|
+echo                  ^|                                      [6] GO BACK              ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
 ECHO:
-choice /c 12345 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5]"
+choice /c 123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6]"
 
-if errorlevel 5 goto:end_NETWORK_CONFIGURATION
-if errorlevel 4 goto:ETHERNET_MANUAL
-if errorlevel 3 goto:WIFI_MANUAL
-if errorlevel 2 goto:AUTOMATIC_CONFIGURATION_ETHERNET
-if errorlevel 1 goto:AUTOMATIC_CONFIGURATION_WIFI
+if errorlevel 6 goto:end_NETWORK_CONFIGURATION
+if errorlevel 5 goto:ETHERNET_MANUAL
+if errorlevel 4 goto:WIFI_MANUAL
+if errorlevel 3 goto:AUTOMATIC_CONFIGURATION_ETHERNET
+if errorlevel 2 goto:AUTOMATIC_CONFIGURATION_WIFI
+if errorlevel 1 goto:LIST_ADAPTERS
 cls
 
 ::========================================================================================================================================
+
+:LIST_ADAPTERS
+title LIST OF NETWORK CONFIGURATION
+echo This section will display a list of all network configurations registered on device.
+Netsh interface ip show config
+pause & cls goto end_NETWORK_CONFIGURATION
 
 :AUTOMATIC_CONFIGURATION_WIFI
 color 0f
@@ -1117,28 +1124,30 @@ echo                  ^|      [1] Disk Cleanup                                  
 echo                  ^|                                                               ^|
 echo                  ^|      [2] Disk Defragment                                      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] Windows Debloater                                    ^|
+echo                  ^|      [3] DISK CHECK                                           ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Group Policy Reset - USE AT OWN RISK                 ^|
+echo                  ^|      [4] DISM AND SFC WINDOWS REPAIR                          ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] WMI RESET - USE AT OWN RISK                          ^|
+echo                  ^|      [5] Windows Debloater                                    ^|
 echo                  ^|                                                               ^|
+echo                  ^|      [6] Group Policy Reset - USE AT OWN RISK                 ^|
 echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
+echo                  ^|      [7] WMI RESET - USE AT OWN RISK                          ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                          [6] GO BACK            [7] EXIT      ^|
+echo                  ^|                          [8] GO BACK            [9] EXIT      ^|
 echo                  ^|                                                               ^|
 echo                  ^|===============================================================^|
 echo:          
-choice /C:1234567 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7] : "
+choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 CLS
-if errorlevel 7 goto :EXIT
-if errorlevel 6 goto :end_BACKMENU
-if errorlevel 5 goto :WMI_RESET_AGREEMENT
-if errorlevel 4 goto :GROUP_POLICY_RESET_AGREEMENT
+if errorlevel 9 goto :EXIT
+if errorlevel 8 goto :end_BACKMENU
+if errorlevel 7 goto :WMI_RESET_AGREEMENT
+if errorlevel 6 goto :GROUP_POLICY_RESET_AGREEMENT
+if errorlevel 5 goto :DISM_and_SFC
+if errorlevel 4 goto :DISK_CHECK
 if errorlevel 3 goto :Windows_Debloater
 if errorlevel 2 goto :Disk_Defragment
 if errorlevel 1 goto :Disk_Cleanup
@@ -1265,6 +1274,61 @@ echo.
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Disk defrag completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 echo.
 pause & goto end_CLEANER
+
+:DISK_CHECK
+color 0f
+mode con cols=98 lines=32
+TITLE DISK CHECK
+CHKDSK %DLETTER%: /R /I /F /X
+Set /P %DLETTER%=ENTER DRIVE LETTER THAT NEEDS ATTENTION:
+pause & goto end_CLEANER
+
+:DISM_and_SFC
+color 0f
+mode con cols=98 lines=32
+TITLE DISM
+cls
+echo ------------------------------------------------
+echo Windows component files check - procedure 1 of 3
+echo ------------------------------------------------
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+echo --------------------------------------------------
+echo Phase 1 of 2 completed
+echo --------------------------------------------------
+Dism.exe /online /Cleanup-Image /SPSuperseded
+echo --------------------------------------------------
+echo Phase 2 of 2 completed
+echo PRESS ANY KEY TO CONTINUE.
+pause >null
+del null
+cls
+echo --------------------------------------------------------------
+echo Checking the integrity of the Windows image - procedure 2 of 3
+echo --------------------------------------------------------------
+DISM /Online /Cleanup-Image /CheckHealth
+echo --------------------------------------------------
+echo Phase 1 of 3 completed
+echo --------------------------------------------------
+DISM /Online /Cleanup-Image /ScanHealth
+echo --------------------------------------------------
+echo Phase 2 of 3 completed
+echo --------------------------------------------------
+DISM /Online /Cleanup-Image /RestoreHealth
+echo --------------------------------------------------
+echo Phase 3 of 3 completed 
+echo PRESS ANY KEY TO CONTINUE.
+pause >null
+del null
+cls
+echo -------------------------------------------------
+echo Running System file check - procedure 3 of 3
+echo -------------------------------------------------
+sfc /scannow
+echo --------------------------------------------------------------------------------
+echo If SFC found some errors and could not repair, re-run the script after a reboot.
+echo --------------------------------------------------------------------------------
+del null
+pause & cls & goto end_CLEANER
 
 :Windows_Debloater
 color 0f
