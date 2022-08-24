@@ -1146,9 +1146,9 @@ if errorlevel 9 goto :EXIT
 if errorlevel 8 goto :end_BACKMENU
 if errorlevel 7 goto :WMI_RESET_AGREEMENT
 if errorlevel 6 goto :GROUP_POLICY_RESET_AGREEMENT
-if errorlevel 5 goto :DISM_and_SFC
-if errorlevel 4 goto :DISK_CHECK
-if errorlevel 3 goto :Windows_Debloater
+if errorlevel 5 goto :Windows_Debloater
+if errorlevel 4 goto :DISM_and_SFC
+if errorlevel 3 goto :DISK_CHECK
 if errorlevel 2 goto :Disk_Defragment
 if errorlevel 1 goto :Disk_Cleanup
 goto error
