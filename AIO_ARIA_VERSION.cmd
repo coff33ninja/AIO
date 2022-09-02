@@ -57,28 +57,27 @@ mode con cols=98 lines=32
 echo:
 echo                       Press the corresponding number to go to desired section:
 echo:
-echo                  ^|===============================================================^|
-echo                  ^|                       AIO v1.7 MAIN MENU                      ^| 
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] INFORMATION                                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] COMPUTER CONFIGURATION                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] UPDATER                                              ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] CLEANER                                              ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] WINDOWS INSTALL (WORK IN PROGRESS)                   ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] EXTRAS                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] SHUTDOWN OPTIONS                     [8] EXIT        ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
+echo                [7;31m                                                                   [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m       [1] INFORMATION                                         [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [2] COMPUTER CONFIGURATION                              [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [3] UPDATER                                             [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [4] CLEANER                                             [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [5] WINDOWS INSTALL (WORK IN PROGRESS)                  [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [6] EXTRAS                                              [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
+echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
+echo                [7;31m  [0m       [96m[5][0m SHUTDOWN OPTIONS                   [41m  [0m  [93m[6][0m EXIT     [7;31m  [0m
+echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
+echo                [7;31m                                                                   [0m
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 

@@ -57,28 +57,27 @@ mode con cols=98 lines=32
 echo:
 echo                       Press the corresponding number to go to desired section:
 echo:
-echo                  ^|===============================================================^|
-echo                  ^|                       AIO v1.7 MAIN MENU                      ^| 
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] INFORMATION                                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] COMPUTER CONFIGURATION                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] UPDATER                                              ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] CLEANER                                              ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] WINDOWS INSTALL (WORK IN PROGRESS)                   ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] EXTRAS                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] SHUTDOWN OPTIONS                     [8] EXIT        ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
+echo                [7;31m                                                                   [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m       [1] INFORMATION                                         [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [2] COMPUTER CONFIGURATION                              [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [3] UPDATER                                             [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [4] CLEANER                                             [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [5] WINDOWS INSTALL (WORK IN PROGRESS)                  [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [6] EXTRAS                                              [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
+echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
+echo                [7;31m  [0m       [96m[5][0m SHUTDOWN OPTIONS                   [41m  [0m  [93m[6][0m EXIT     [7;31m  [0m
+echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
+echo                [7;31m                                                                   [0m
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
 
@@ -98,20 +97,21 @@ cls
 :INFORMATION
 CLS
 Title SYSTEM INFO
-mode con cols=98 lines=15
+mode con cols=88 lines=13
 ECHO:
-ECHO                      HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
+ECHO              HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
 echo:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] QUICK INFORMATION CONFIGURATION                      ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] HWINFO32 THIRD PARTY APPLICATION                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
+echo                [7;31m                                                       [0m
+echo                [7;31m  [0m                                                   [7;31m  [0m
+echo                [7;31m  [0m        [1] QUICK INFORMATION CONFIGURATION        [7;31m  [0m
+echo                [7;31m  [0m                                                   [7;31m  [0m
+echo                [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
+echo                [7;31m  [0m                                                   [7;31m  [0m
+echo                [7;31m  [0m        [2] HWINFO32 THIRD PARTY APPLICATION       [7;31m  [0m
+echo                [7;31m  [0m                                                   [7;31m  [0m
+echo                [7;31m                                                       [0m
 echo:
-choice /C:123 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3] : "
+choice /C:123 /N /M ">              Enter Your Choice in the Keyboard [1,2,3] : "
 echo:
 if errorlevel  3 goto:end_BACKMENU
 if errorlevel  2 goto:HWINFO32
@@ -188,28 +188,29 @@ mode con cols=98 lines=32
 echo:
 echo                       Press the corresponding number to go to desired section:
 echo:
-echo                  ^|===============================================================^|
-echo                  ^|                COMPUTER CONFIGURATION MAIN MENU               ^| 
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] NETWORK SETUP                                        ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] DEFENDER TOOLBOX                                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] MICROSOFT ACTIVATION                                 ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] TELEMETRY                                            ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] Disable Specific Services                            ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] BACKUPPER                                            ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|       ___________________________________________________     ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT        ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
+echo                [7;31m                                                                   [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m                COMPUTER CONFIGURATION MAIN MENU               [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m 
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [1] NETWORK SETUP                                        [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [2] DEFENDER TOOLBOX                                     [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [3] MICROSOFT ACTIVATION                                 [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [4] TELEMETRY                                            [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [5] Disable Specific Services                            [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [6] BACKUPPER                                            [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m  [0m      [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT        [7;31m  [0m
+echo                [7;31m  [0m                                                               [7;31m  [0m
+echo                [7;31m                                                                   [0m
 echo:          
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
