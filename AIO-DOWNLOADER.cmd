@@ -143,8 +143,8 @@ setlocal
 CLS
 echo.
 echo NOW DOWNLOADING AIO WITH WGET
-wget ‐P "C:\AIO" https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO.cmd
-wget ‐P "C:\AIO" https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO-LOGO.ico
+wget -q ‐P "C:\AIO" https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO.cmd
+wget -q ‐P "C:\AIO" https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO-LOGO.ico
 move .\AIO.cmd C:\AIO
 move .\AIO-LOGO.ico C:\AIO
 call C:\AIO\AIO.cmd
