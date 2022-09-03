@@ -109,6 +109,8 @@ echo                [7;31m  [0m       [41m                                   
 echo                [7;31m  [0m                                                   [7;31m  [0m
 echo                [7;31m  [0m        [2] HWINFO32 THIRD PARTY APPLICATION       [7;31m  [0m
 echo                [7;31m  [0m                                                   [7;31m  [0m
+echo                [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
+echo                [7;31m  [0m                                     [3] BACK      [7;31m  [0m
 echo                [7;31m                                                       [0m
 echo:
 choice /C:123 /N /M ">              Enter Your Choice in the Keyboard [1,2,3] : "
