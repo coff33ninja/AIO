@@ -75,7 +75,7 @@ echo                [7;31m  [0m       [6] EXTRAS                              
 echo                [7;31m  [0m                                                               [7;31m  [0m 
 echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
 echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
-echo                [7;31m  [0m       [96m[5][0m SHUTDOWN OPTIONS                   [41m  [0m  [93m[6][0m EXIT     [7;31m  [0m
+echo                [7;31m  [0m       [96m[7][0m SHUTDOWN OPTIONS                   [41m  [0m  [93m[8][0m EXIT     [7;31m  [0m
 echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
 echo                [7;31m                                                                   [0m
 echo:          
@@ -97,23 +97,25 @@ cls
 :INFORMATION
 CLS
 Title SYSTEM INFO
-mode con cols=88 lines=13
+mode con cols=70 lines=19
 ECHO:
-ECHO              HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
+ECHO      HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
 echo:
-echo                [7;31m                                                       [0m
-echo                [7;31m  [0m                                                   [7;31m  [0m
-echo                [7;31m  [0m        [1] QUICK INFORMATION CONFIGURATION        [7;31m  [0m
-echo                [7;31m  [0m                                                   [7;31m  [0m
-echo                [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
-echo                [7;31m  [0m                                                   [7;31m  [0m
-echo                [7;31m  [0m        [2] HWINFO32 THIRD PARTY APPLICATION       [7;31m  [0m
-echo                [7;31m  [0m                                                   [7;31m  [0m
-echo                [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
-echo                [7;31m  [0m                                     [3] BACK      [7;31m  [0m
-echo                [7;31m                                                       [0m
+echo        [7;31m                                                       [0m
+echo        [7;31m  [0m                                                   [7;31m  [0m
+echo        [7;31m  [0m        [1] QUICK INFORMATION CONFIGURATION        [7;31m  [0m
+echo        [7;31m  [0m                                                   [7;31m  [0m
+echo        [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
+echo        [7;31m  [0m                                                   [7;31m  [0m
+echo        [7;31m  [0m        [2] HWINFO32 THIRD PARTY APPLICATION       [7;31m  [0m
+echo        [7;31m  [0m                                                   [7;31m  [0m
+echo        [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
+echo        [7;31m  [0m                                   [41m [0m               [7;31m  [0m
+echo        [7;31m  [0m                                   [41m [0m  [3] BACK     [7;31m  [0m
+echo        [7;31m  [0m                                   [41m [0m               [7;31m  [0m
+echo        [7;31m                                                       [0m
 echo:
-choice /C:123 /N /M ">              Enter Your Choice in the Keyboard [1,2,3] : "
+choice /C:123 /N /M ">      Enter Your Choice in the Keyboard [1,2,3] : "
 echo:
 if errorlevel  3 goto:end_BACKMENU
 if errorlevel  2 goto:HWINFO32
@@ -186,35 +188,35 @@ pause & GOTO end_BACKMENU
 
 :COMPUTER_CONFIGURATION
 title COMPUTER_CONFIGURATION
-mode con cols=98 lines=32
+mode con cols=85 lines=30
 echo:
-echo                       Press the corresponding number to go to desired section:
+echo                Press the corresponding number to go to desired section:
 echo:
-echo                [7;31m                                                                   [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m                COMPUTER CONFIGURATION MAIN MENU               [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [1] NETWORK SETUP                                        [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [2] DEFENDER TOOLBOX                                     [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [3] MICROSOFT ACTIVATION                                 [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [4] TELEMETRY                                            [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [5] Disable Specific Services                            [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [6] BACKUPPER                                            [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m      [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT        [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m                                                                   [0m
+echo          [7;31m                                                                   [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m                COMPUTER CONFIGURATION MAIN MENU               [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m 
+echo          [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [1] NETWORK SETUP                                       [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [2] DEFENDER TOOLBOX                                    [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [3] MICROSOFT ACTIVATION                                [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [4] TELEMETRY                                           [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [5] Disable Specific Services                           [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [6] BACKUPPER                                           [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m  [0m       [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT       [7;31m  [0m
+echo          [7;31m  [0m                                                               [7;31m  [0m
+echo          [7;31m                                                                   [0m
 echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
+choice /C:123456789 /N /M ">              Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
 if errorlevel  9 goto:EXIT
 if errorlevel  8 goto:end_BACKMENU
@@ -1750,7 +1752,30 @@ REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
 ::========================================================================================================================================
 :EASTER
 cls
-echo you have been lied tool
+mode con cols=41 lines=24
+echo [41m                                         [0m
+echo [41m                                         [0m
+echo [41m                                         [0m
+echo [41m     [0m                               [41m     [0m
+echo [41m     [0m  ###########################  [41m     [0m
+echo [41m     [0m  ###########################  [41m     [0m
+echo [41m     [0m  ##########   ##   #########  [41m     [0m
+echo [41m     [0m  #########    #    #########  [41m     [0m
+echo [41m     [0m  ##########  ###   #########  [41m     [0m
+echo [41m     [0m  ########### #### ##########  [41m     [0m
+echo [41m     [0m  #########    #    #########  [41m     [0m
+echo [41m     [0m  ##########   ##   #########  [41m     [0m
+echo [41m     [0m  ###########################  [41m     [0m
+echo [41m     [0m  ######   ##    #  ##  #####  [41m     [0m
+echo [41m     [0m          #  #   # #  #        [41m     [0m
+echo [41m     [0m         ######  # #  #        [41m     [0m
+echo [41m     [0m        ##    ## #  ##         [41m     [0m
+echo [41m                    [0m  [41m                   [0m
+echo [41m                  [0m      [41m                 [0m
+echo [41m              [0m              [41m             [0m
+echo [41m                                         [0m
+echo [41m                                         [0m
+echo [41m                                         [0m
 pause & cls & goto end_BACKMENU
 ::========================================================================================================================================
 
