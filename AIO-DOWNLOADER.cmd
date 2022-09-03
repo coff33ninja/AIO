@@ -197,7 +197,7 @@ title AIO - ARIA2 DOWNLOAD METHOD
 md C:\ARIA2
 copy .\bin\x64\aria2c.exe C:\ARIA2
 cd C:\ARIA2
-setx ARIA C:\AIO\aria2c.exe /m
+setx ARIA C:\ARIA2\aria2c.exe /m
 aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO_ARIA_VERSION.cmd -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
 aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/AIO-LOGO.ico -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
 call C:\AIO\AIO_ARIA_VERSION.cmd
