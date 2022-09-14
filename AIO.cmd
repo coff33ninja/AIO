@@ -1515,231 +1515,42 @@ REM THIS SECTION RESERVED FOR PROGRESS BAR ANIMATION
 ::========================================================================================================================================
 
 :end_WIN_INSTALL
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to MainMenu
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to AIO PRE-SET menu at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto end_BACKMENU
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_CLEANER
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to MainMenu
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to CLEANER menu at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto CLEANER
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_UPDATER
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to MainMenu
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to UPDATER menu at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto UPDATER
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_BACKMENU
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to MainMenu
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to Main Menu at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto MainMenu
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_NETWORK_CONFIGURATION
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to NETWORK CONFIGURATION
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to NETWORK CONFIGURATION at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :end_COMPUTER_CONFIGURATION
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to COMPUTER CONFIGURATION
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo Going back to COMPUTER CONFIGURATION at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & goto COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :EXIT
-cls
-@echo OFF
-mode con cols=43 lines=6
-title Progress to COMPUTER CONFIGURATION
-set /a "processValue=100"
-set "bar=0xDB" Character used by progress bar (SUPPORTS HEX)
-set "tbd=0xB0"
-set "barLength=40"
-( set LF=^
-%=-----------DO NOT REMOVE THIS LINE. the LF variable is for future use in a function, it's currently useless-----------=%
-)
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!bar!"') do set "bar=%%B"
-FOR /F %%B in ('FORFILES /P "%~dp0." /M "%~nx0" /C "cmd /c echo(!tbd!"') do set "tbd=%%B"
-FOR /F %%B in ('copy /Z "%~f0" nul') do set "CR=%%B"
-FOR /F %%B in ('prompt $E ^& ^<nul cmd /k') do set "ESC=%%B"
-for /l %%N in (0,1,%barLength%) do set "emptybar=!emptybar! "
-
-echo EXITING AIO at-%time%!LF!
-for /l %%N in (0 1 !barLength!) do echo(!LF!%ESC%[2A%ESC%[%%NC%tbd%
-for /L %%N in (0 1 %processValue%) do (
-  set /a showBar=%%N*barLength/processValue
-  set /a percentage=%%N*100/processValue
-  echo(Processing: %%N / %processValue% = !percentage!%%!LF!%ESC%[2A%ESC%[!showBar!C%bar%
-  ping -4 -n 1 127.0.0.1 >nul 
-)
-echo !LF!Finished at %time%
-endlocal
 cls & exit
 ::========================================================================================================================================
 ::========================================================================================================================================
