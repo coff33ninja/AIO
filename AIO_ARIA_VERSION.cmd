@@ -122,10 +122,11 @@ cls
 cls
 TITLE QUICK INFO
 echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
-aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1 -d, --dir=%USERPROFILE%\AppData\Local\Temp\AIO\ --allow-overwrite="true" --disable-ipv6
+rem testing enviromental methods of saving items due to microsoft accounts with spaces and special characters giving issues to the script
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1 -d, --dir=%Temp%\AIO\ --allow-overwrite="true" --disable-ipv6
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Operation completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-start /wait C:\Windows\Temp\Basic-Computer-Information-Report.html
+start /wait %Temp%\AIO\Basic-Computer-Information-Report.html
 timeout 2 >nul
 goto email_confirmation
 
