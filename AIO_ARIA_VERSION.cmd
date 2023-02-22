@@ -777,10 +777,11 @@ color 0f
 mode con cols=98 lines=32
 cls
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
+powershell.exe -Command "irm https://massgrave.dev/get | iex"
 rem powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "%USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd"
 rem call %USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd
-call C:\AIO\MAS.cmd
-cls & goto end_COMPUTER_CONFIGURATION 
+rem call C:\AIO\MAS.cmd
+cls & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
