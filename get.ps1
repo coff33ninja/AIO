@@ -7,7 +7,7 @@ $DownloadURL2 = 'https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-n
 
 $rand = Get-Random -Maximum 1000
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
-$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\AIO_$rand.cmd" }
+$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\AIO_ARIA_VERSION_$rand.cmd" } else { "$env:TEMP\AIO_ARIA_VERSION_$rand.cmd" }
 
 try {
     $response = Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing
