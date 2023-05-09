@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 $DownloadURL = 'https://github.com/coff33ninja/AIO/blob/testing-irm-new-layout/AIO_ARIA_VERSION.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/AIO.cmd'
+$DownloadURL2 = 'https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/AIO_ARIA_VERSION.cmd'
 
 $rand = Get-Random -Maximum 1000
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
