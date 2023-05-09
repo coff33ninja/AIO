@@ -23,5 +23,5 @@ Set-Content -Path $FilePath -Value $content
 
 Start-Process $FilePath $ScriptArgs -Wait
 
-$FilePaths = @("$env:TEMP\MAS*.cmd", "$env:SystemRoot\Temp\AIO*.cmd")
+$FilePaths = @("$env:TEMP\AIO_ARIA_VERSION*.cmd", "$env:SystemRoot\Temp\AIO_ARIA_VERSION*.cmd")
 foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
