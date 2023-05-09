@@ -21,7 +21,7 @@ $prefix = "@REM $rand `r`n"
 $content = $prefix + $response
 Set-Content -Path $FilePath -Value $content
 
-Start-Process $FilePath $ScriptArgs -Wait
+Start-Process $FilePath $ScriptArgs
 
 $FilePaths = @("$env:TEMP\AIO*.cmd", "$env:SystemRoot\Temp\AIO*.cmd")
 foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
