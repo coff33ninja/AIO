@@ -125,6 +125,7 @@ if (-not (Test-Path 'C:\temp')) {
 # Download the AIO.cmd file using different download tools with failover approach
 $downloaded = $false
 $urls = @(
+    'https://github.com/coff33ninja/AIO/raw/testing-irm-new-layout/AIO.cmd',
     'https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/AIO.cmd'
 )
 $tools = @(
@@ -154,12 +155,13 @@ if (-not $downloaded) {
 # Download the cmdmenusel.exe file using different download tools with failover approach
 $downloaded = $false
 $urls = @(
+    'https://github.com/coff33ninja/AIO/raw/testing-irm-new-layout/Files/cmdmenusel.exe',
     'https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/cmdmenusel.exe'
 )
 $tools = @(
     { curl $urls[0] -O 'C:\temp\files\cmdmenusel.exe' -s },
     { wget -O -P 'C:\temp\files\cmdmenusel.exe' $urls[0] },
-    { aria2c $urls[0] -d C:\temp\files --allow-overwrite="true" --disable-ipv6 },
+    { aria2c $urls[0] -d C:\temp --allow-overwrite="true" --disable-ipv6 },
     { Invoke-RestMethod $urls[0] -OutFile 'C:\temp\files\cmdmenusel.exe' },
     { Invoke-WebRequest $urls[0] -OutFile 'C:\temp\files\cmdmenusel.exe' }
 )
@@ -203,4 +205,4 @@ $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
 
 # I just hate leaving my trash behind XD
 
-https://github.com/MScholtes/PS2EXE
+# https://chat.openai.com/share/d798da1a-ecaf-46ab-8c48-d50c67dac788
