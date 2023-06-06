@@ -1,3 +1,10 @@
+# Enable script from running
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+Set-ExecutionPolicy -ExecutionPolicy unrestricted
+Set-ExecutionPolicy -ExecutionPolicy unrestricted -Scope Process
+Pause
+
 # Set the console window size and title
 $Host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(98, 32)
 $Host.UI.RawUI.WindowTitle = 'SOFTWARE UPDATER'
@@ -203,4 +210,4 @@ $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
 
 # I just hate leaving my trash behind XD
 
-https://github.com/MScholtes/PS2EXE
+# https://github.com/MScholtes/PS2EXE

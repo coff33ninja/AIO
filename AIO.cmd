@@ -1739,8 +1739,286 @@ cls && goto CLEANER
 cls
 color 0f
 mode con cols=98 lines=32
-Title AIO PRE-SETUP
-ECHO STILL BLANK
+Title Windows setup test
+ECHO This is currently the script for deploying Windows via the Dism and diskpart.
+ECHO Unfortunately it is currently in a testing phase and not in active development due to certain Windows limitations.
+ECHO Do you want to continue [Y/N]?
+choice /c YN
+if %errorlevel%==1 goto yes
+if %errorlevel%==2 goto no
+:WIN_INSTALL_yes
+echo yes
+goto :Continue_Windows_Setup
+:no
+echo no
+PAUSE GOTO end_BACKMENU
+:Continue_Windows_Setup
+CLS
+ECHO Prepare Hard Disk for Windows Deployment
+ECHO -----------------------------------------
+ECHO.
+
+ECHO List disk > list.txt
+diskpart /s list.txt
+pause
+REM Close the file before deleting it
+type nul > list.txt
+DEL list.txt
+
+ECHO.
+SET /p disk="Which disk number would you like to prepare? (e.g. 0): "
+IF [%disk%] == [] GOTO INIT
+ECHO.
+
+ECHO --WARNING-- This will FORMAT the selected disk and ERASE ALL DATA
+ECHO.
+ECHO You selected disk ---^> %disk%
+ECHO.
+
+CHOICE /C YN /M "Is this correct? [Y/N]"
+IF %ERRORLEVEL% == 2 GOTO INIT
+IF %ERRORLEVEL% == 1 GOTO Disktype_selector
+
+CLS
+ECHO Preperation Aborted, No changes have been made...
+ECHO.
+PAUSE
+
+
+:Disktype_selector
+echo.
+echo DO you want to install Windows in a MBR or a GPT environment for %disk% drive?
+echo.
+echo 1. GPT
+echo 2. MBR
+choice /C:12 /n /m "Choose your environment to install Windows"
+
+IF %ERRORLEVEL% == 2 goto:INITMBR
+IF %ERRORLEVEL% == 1 goto:INITGPT
+
+:INITMBR
+SET "BOOTDRV="
+FOR %%b IN (Q P O N M L K J I) DO (
+    IF NOT EXIST "%%b:" (
+        SET "BOOTDRV=%%b"
+        GOTO :BREAK_B
+    )
+)
+:BREAK_B
+
+SET "DATADRV="
+FOR %%c IN (Z Y X W V U T S R) DO (
+    IF NOT EXIST "%%c:" (
+        SET "DATADRV=%%c"
+        GOTO :BREAK_C
+    )
+)
+:BREAK_C
+
+IF NOT DEFINED BOOTDRV (
+    ECHO No available drive letter for BOOT partition found.
+    GOTO End
+)
+
+IF NOT DEFINED DATADRV (
+    ECHO No available drive letter for DATA partition found.
+    GOTO End
+)
+
+echo Create MBR partition structure...
+echo.
+echo List disk > list.txt
+echo Select disk %disk% >> list.txt
+echo Clean >> list.txt
+echo Create partition primary size=350 >> list.txt
+echo Format quick fs=ntfs label="System Reserved" >> list.txt
+echo Assign letter=%BOOTDRV% >> list.txt
+echo Active >> list.txt
+echo Create partition primary >> list.txt
+echo Format quick fs=ntfs label="Windows" >> list.txt
+echo Assign letter=%DATADRV% >> list.txt
+echo Exit >> list.txt
+diskpart /s list.txt
+REM Close the file before deleting it
+type nul > list.txt
+DEL list.txt
+
+GOTO WINRE_PARTITION
+
+:INITGPT
+SET "BOOTDRV="
+FOR %%b IN (Q P O N M L K J I) DO (
+    IF NOT EXIST "%%b:" (
+        SET "BOOTDRV=%%b"
+        GOTO :BREAK_B
+    )
+)
+:BREAK_B
+
+SET "DATADRV="
+FOR %%c IN (Z Y X W V U T S R) DO (
+    IF NOT EXIST "%%c:" (
+        SET "DATADRV=%%c"
+        GOTO :BREAK_C
+    )
+)
+:BREAK_C
+
+IF NOT DEFINED BOOTDRV (
+    ECHO No available drive letter for BOOT partition found.
+    GOTO End
+)
+
+IF NOT DEFINED DATADRV (
+    ECHO No available drive letter for DATA partition found.
+    GOTO End
+)
+
+echo Create GPT partition structure...
+echo.
+echo List disk > list.txt
+echo Select disk %disk% >> list.txt
+echo Clean >> list.txt
+echo Convert GPT >> list.txt
+echo Create partition efi size=100 >> list.txt
+echo Format quick fs=fat32 label="System Reserved" >> list.txt
+echo Assign letter=%BOOTDRV% >> list.txt
+echo Create partition msr size=128 >> list.txt
+echo Create partition primary >> list.txt
+echo Format quick fs=ntfs label="Windows" >> list.txt
+echo Assign letter=%DATADRV% >> list.txt
+echo Exit >> list.txt
+diskpart /s list.txt
+REM Close the file before deleting it
+type nul > list.txt
+DEL list.txt
+
+GOTO WINRE_PARTITION
+
+:WINRE_PARTITION
+CLS
+ECHO Create WinRE Partition
+ECHO -----------------------------------------
+ECHO.
+
+CHOICE /C YN /M "Do you want to create a WinRE (Windows Recovery Environment) partition? [Y/N]"
+
+IF %ERRORLEVEL% == 2 GOTO Windows_Instalation
+IF %ERRORLEVEL% == 1 GOTO Create_WINRE
+
+:Create_WINRE
+echo Create WinRE partition...
+echo.
+echo Select disk %disk% > list.txt
+echo Create partition primary size=500 >> list.txt
+echo Format quick fs=ntfs label="Recovery" >> list.txt
+echo Assign letter=R >> list.txt
+echo Exit >> list.txt
+diskpart /s list.txt
+REM Close the file before deleting it
+type nul > list.txt
+DEL list.txt
+
+GOTO Windows_Instalation
+
+:Windows_Instalation
+CLS
+ECHO Windows Installation
+ECHO -----------------------------------------
+ECHO.
+
+CHOICE /C YN /M "Do you want to install Windows now? [Y/N]"
+
+IF %ERRORLEVEL% == 2 GOTO :End
+
+REM Generate the unattended.xml file
+call :GenerateUnattendedXML
+
+REM Copy the unattended.xml file to the root of the Windows installation drive
+copy unattended.xml %DATADRV%\unattended.xml
+
+REM Run the Windows installation
+start /wait %DATADRV%\sources\setup.exe /unattend:%DATADRV%\unattended.xml
+
+:End
+ENDLOCAL
+EXIT
+
+REM Function to generate unattended.xml
+:GenerateUnattendedXML
+ECHO Generating unattended.xml file...
+
+REM Prompt user for input
+SET /P ProductKey=Enter your product key:
+SET /P TimeZone=Enter your time zone (e.g., Eastern Standard Time):
+SET /P FullName=Enter your full name:
+SET /P Organization=Enter your organization:
+SET /P ComputerName=Enter your computer name:
+SET /P AdminPassword=Enter your administrator password:
+
+(
+ECHO ^<?xml version="1.0" encoding="utf-8"?^>
+ECHO ^<unattend xmlns="urn:schemas-microsoft-com:unattend"^>
+ECHO    ^<settings pass="windowsPE"^>
+ECHO        ^<component name="Microsoft-Windows-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
+ECHO            ^<UserData^>
+ECHO                ^<ProductKey^>
+ECHO                    ^<Key^>%ProductKey%^</Key^>
+ECHO                    ^<WillShowUI^>OnError^</WillShowUI^>
+ECHO                ^</ProductKey^>
+ECHO                ^<FullName^>%FullName%^</FullName^>
+ECHO                ^<Organization^>%Organization%^</Organization^>
+ECHO                ^<ComputerName^>%ComputerName%^</ComputerName^>
+ECHO            ^</UserData^>
+ECHO            ^<TimeZone^>%TimeZone%^</TimeZone^>
+ECHO        ^</component^>
+ECHO    ^</settings^>
+ECHO    ^<settings pass="specialize"^>
+ECHO        ^<component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
+ECHO            ^<AutoLogon^>
+ECHO                ^<Password^>
+ECHO                    ^<Value^>%AdminPassword%^</Value^>
+ECHO                    ^<PlainText^>true^</PlainText^>
+ECHO                ^</Password^>
+ECHO                ^<Enabled^>true^</Enabled^>
+ECHO                ^<LogonCount^>5^</LogonCount^>
+ECHO                ^<Username^>Administrator^</Username^>
+ECHO            ^</AutoLogon^>
+ECHO            ^<ComputerName^>%ComputerName%^</ComputerName^>
+ECHO            ^<ProductKey^>%ProductKey%^</ProductKey^>
+ECHO            ^<RegisteredOrganization^>%Organization%^</RegisteredOrganization^>
+ECHO            ^<RegisteredOwner^>%FullName%^</RegisteredOwner^>
+ECHO            ^<TimeZone^>%TimeZone%^</TimeZone^>
+ECHO            ^<DisableAutoDaylightTimeSet^>true^</DisableAutoDaylightTimeSet^>
+ECHO            ^<DisableOOBE^>true^</DisableOOBE^>
+ECHO        ^</component^>
+ECHO    ^</settings^>
+ECHO    ^<settings pass="oobeSystem"^>
+ECHO        ^<component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
+ECHO            ^<OOBE^>
+ECHO                ^<HideEULAPage^>true^</HideEULAPage^>
+ECHO                ^<HideOEMRegistrationScreen^>true^</HideOEMRegistrationScreen^>
+ECHO                ^<HideOnlineAccountScreens^>true^</HideOnlineAccountScreens^>
+ECHO                ^<HideWirelessSetupInOOBE^>true^</HideWirelessSetupInOOBE^>
+ECHO                ^<NetworkLocation^>Home^</NetworkLocation^>
+ECHO                ^<ProtectYourPC^>3^</ProtectYourPC^>
+ECHO                ^<SkipMachineOOBE^>true^</SkipMachineOOBE^>
+ECHO                ^<SkipUserOOBE^>true^</SkipUserOOBE^>
+ECHO            ^</OOBE^>
+ECHO        ^</component^>
+ECHO    ^</settings^>
+ECHO    ^<cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="wim://%DATADRV%\sources\install.wim#Windows 10 Pro" /^>
+ECHO ^</unattend^>
+) > unattended.xml
+
+ECHO Unattended.xml file generated successfully.
+
+REM Copy unattended.xml to the root of the Windows installation drive
+COPY unattended.xml "%DATADRV%\unattended.xml" /Y
+
+REM Start Windows installation using the unattended.xml file
+START "" "%DATADRV%\sources\setup.exe" /unattend:"%DATADRV%\unattended.xml"
+
 PAUSE GOTO end_BACKMENU
 
 ::========================================================================================================================================
