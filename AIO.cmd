@@ -1748,8 +1748,7 @@ reg add "HKCU\Software\Microsoft\Internet Explorer\Main" /v DisableFirstRunCusto
 
 REM Download the WinNTSetup_462.zip file using aria2
 set "downloaded=false"
-set "url=https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_462.zip"
-aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_462.zip -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_v462.zip -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
 
 REM Download using aria2
 %downloadCommand%
