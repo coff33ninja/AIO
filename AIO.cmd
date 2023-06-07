@@ -1736,6 +1736,8 @@ cls && goto CLEANER
 ::========================================================================================================================================
 
 :WIN_INSTALL
+setlocal enabledelayedexpansion
+
 cls
 color 0f
 mode con cols=98 lines=32
@@ -1744,60 +1746,52 @@ Title Windows Setup Test
 REM Disable the first-run check for Internet Explorer
 reg add "HKCU\Software\Microsoft\Internet Explorer\Main" /v DisableFirstRunCustomize /t REG_DWORD /d 1 /f
 
-REM Download the AIO.cmd file using different download tools with failover approach
+REM Download the WinNTSetup_462.zip file using aria2
 set "downloaded=false"
-set "url=https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/files/WinNTSetup_462.zip"
+set "url=https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_462.zip"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_462.zip -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
 
-REM Download using curl
-curl %url% -o "C:\temp\WinNTSetup_462.zip" --silent
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
-if %errorlevel% neq 0 (
-    echo Failed to download using curl. Error: %errorlevel%
+REM Download using aria2
+%downloadCommand%
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete1
+if not %errorlevel% equ 0 (
+    echo Failed to download WinNTSetup_462.zip using aria2. Error: %errorlevel%
 )
 
-REM Download using wget
-wget -O "C:\temp\WinNTSetup_462.zip" %url%
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
-if %errorlevel% neq 0 (
-    echo Failed to download using wget. Error: %errorlevel%
-)
-
-REM Download using aria2c
-aria2c %url% -d "C:\temp" --allow-overwrite=true --disable-ipv6
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
-if %errorlevel% neq 0 (
-    echo Failed to download using aria2c. Error: %errorlevel%
-)
-
-REM Download using PowerShell Invoke-RestMethod
-powershell -Command "Invoke-RestMethod -Uri '%url%' -OutFile 'C:\temp\WinNTSetup_462.zip' -UseBasicParsing"
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
-if %errorlevel% neq 0 (
-    echo Failed to download using Invoke-RestMethod. Error: %errorlevel%
-)
-
-REM Download using PowerShell Invoke-WebRequest
-powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile 'C:\temp\WinNTSetup_462.zip' -UseBasicParsing"
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
-if %errorlevel% neq 0 (
-    echo Failed to download using Invoke-WebRequest. Error: %errorlevel%
-)
-
-:DownloadComplete
+:DownloadComplete1
 if %downloaded%==true (
-    echo AIO.cmd file downloaded successfully.
+    echo WinNTSetup_462.zip file downloaded successfully.
 ) else (
-    echo Failed to download WinNTSetup_462.zip file from all sources.
+    echo Failed to download WinNTSetup_462.zip file.
+)
+
+REM Download the 7zr.exe file using aria2
+set "downloaded=false"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/7zr.exe -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
+
+REM Download using aria2
+%downloadCommand%
+if exist "C:\temp\7zr.exe" set "downloaded=true" & goto :DownloadComplete2
+if not %errorlevel% equ 0 (
+    echo Failed to download 7zr.exe using aria2. Error: %errorlevel%
+)
+
+:DownloadComplete2
+if %downloaded%==true (
+    echo 7zr.exe file downloaded successfully.
+) else (
+    echo Failed to download 7zr.exe file.
 )
 
 set "zipFile=C:\temp\WinNTSetup_462.zip"
 set "destination=C:\temp\WinNTSetup_462"
+set "zipExe=%~dp0\7zr.exe"
 
 REM Create the destination directory if it doesn't exist
 if not exist "%destination%" mkdir "%destination%"
 
-REM Unzip the file using expand.exe
-expand.exe -F:* "%zipFile%" "%destination%\"
+REM Unzip the file using 7zr.exe
+"%zipExe%" x "%zipFile%" -o"%destination%"
 
 REM Check if the unzip operation was successful
 if %errorlevel% equ 0 (
@@ -1806,7 +1800,9 @@ if %errorlevel% equ 0 (
     echo Failed to unzip the file. Error: %errorlevel%
 )
 
-PAUSE GOTO end_BACKMENU
+PAUSE
+goto:end_BACKMENU
+
 
 ::========================================================================================================================================
 ::========================================================================================================================================
