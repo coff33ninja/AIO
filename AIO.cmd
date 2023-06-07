@@ -1741,365 +1741,70 @@ color 0f
 mode con cols=98 lines=32
 Title Windows Setup Test
 
-echo This is currently the script for deploying Windows via Dism and diskpart.
-echo Unfortunately, it is currently in a testing phase and not in active development due to certain Windows limitations.
-echo Please note that running this script will modify the disk structure and erase existing data.
-echo It's important to understand the implications and backup any important data before proceeding.
-echo Do you want to continue [Y/N]?
-choice /c YN
+REM Disable the first-run check for Internet Explorer
+reg add "HKCU\Software\Microsoft\Internet Explorer\Main" /v DisableFirstRunCustomize /t REG_DWORD /d 1 /f
 
-if errorlevel 2 (
-    echo no
-    pause
-    goto end_BACKMENU
+REM Download the AIO.cmd file using different download tools with failover approach
+set "downloaded=false"
+set "url=https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/files/WinNTSetup_462.zip"
+
+REM Download using curl
+curl %url% -o "C:\temp\WinNTSetup_462.zip" --silent
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
+if %errorlevel% neq 0 (
+    echo Failed to download using curl. Error: %errorlevel%
 )
 
-echo yes
-goto Continue_Windows_Setup
-
-:Continue_Windows_Setup
-cls
-echo Prepare ISO Image for Windows Deployment
-echo -----------------------------------------
-
-REM Check if PowerShell is available
-where /q powershell
-if errorlevel 1 (
-    echo PowerShell is not available. Please install PowerShell.
-    exit /b 1
+REM Download using wget
+wget -O "C:\temp\WinNTSetup_462.zip" %url%
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
+if %errorlevel% neq 0 (
+    echo Failed to download using wget. Error: %errorlevel%
 )
 
-REM Prompt the user to select the ISO file
-for /f "usebackq delims=" %%A in (`powershell -Command "$isoPath = ''; Add-Type -AssemblyName System.Windows.Forms; $dialog = New-Object System.Windows.Forms.OpenFileDialog; $dialog.Filter = 'ISO Files (*.iso)|*.iso'; $dialog.InitialDirectory = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Definition); if ($dialog.ShowDialog() -eq 'OK') { $isoPath = $dialog.FileName }; $isoPath"`) do set "isoPath=%%A"
-
-REM Check if the user selected an ISO file
-if "%isoPath%" == "" (
-    echo No ISO file selected. Exiting.
-    exit /b 1
+REM Download using aria2c
+aria2c %url% -d "C:\temp" --allow-overwrite=true --disable-ipv6
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
+if %errorlevel% neq 0 (
+    echo Failed to download using aria2c. Error: %errorlevel%
 )
 
-REM Display the selected ISO file location
-echo Selected ISO file: %isoPath%
-
-REM Get the available Windows versions within the ISO image
-for /f "usebackq delims=" %%B in (`powershell -Command "$imageInfo = (Mount-DiskImage -ImagePath '%isoPath%' -PassThru | Get-DiskImage).ImageTypeContents; $selectedVersion = $imageInfo | Out-GridView -Title 'Available Windows Versions' -OutputMode Single; $selectedVersion"`) do set "selectedVersion=%%B"
-
-echo Selected Windows version: %selectedVersion%
-
-echo.
-ECHO Prepare Hard Disk for Windows Deployment
-ECHO -----------------------------------------
-ECHO.
-
-ECHO List disk > list.txt
-diskpart /s list.txt
-pause
-
-REM Close the file before deleting it
-type nul > list.txt
-DEL list.txt
-
-ECHO.
-SET /p disk="Which disk number would you like to prepare? (e.g. 0): "
-IF [%disk%] == [] GOTO INIT
-
-ECHO.
-
-ECHO --WARNING-- This will FORMAT the selected disk and ERASE ALL DATA
-ECHO.
-ECHO You selected disk ---^> %disk%
-ECHO.
-
-CHOICE /C YN /M "Is this correct? [Y/N]"
-IF %ERRORLEVEL% == 2 GOTO INIT
-IF %ERRORLEVEL% == 1 GOTO Disktype_selector
-
-CLS
-ECHO Preperation Aborted, No changes have been made...
-ECHO.
-PAUSE
-goto end_BACKMENU
-
-
-:Disktype_selector
-echo.
-echo DO you want to install Windows in a MBR or a GPT environment for %disk% drive?
-echo.
-echo 1. GPT
-echo 2. MBR
-choice /C:12 /n /m "Choose your environment to install Windows"
-
-IF %ERRORLEVEL% == 2 goto:INITMBR
-IF %ERRORLEVEL% == 1 goto:INITGPT
-
-:INITMBR
-set "BOOTDRV="
-for %%B in (Q P O N M L K J I H G F E D C) do if not defined BOOTDRV if not exist %%B:\nul set "BOOTDRV=%%B:"
-if not defined BOOTDRV set "BOOTDRV=C:"
-echo Boot Drive is %BOOTDRV%
-)
-SET "DATADRV="
-FOR %%c IN (Z Y X W V U T S R) do if not defined DATADRV if not exist %%B:\nul set "DATADRV=%%D:"
-if not defined DATADRV set "DATADRV=E:"
-echo Data Drive is %DATADRV%
-
-IF NOT DEFINED BOOTDRV (
-    ECHO No available drive letter for BOOT partition found.
-    GOTO End
+REM Download using PowerShell Invoke-RestMethod
+powershell -Command "Invoke-RestMethod -Uri '%url%' -OutFile 'C:\temp\WinNTSetup_462.zip' -UseBasicParsing"
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
+if %errorlevel% neq 0 (
+    echo Failed to download using Invoke-RestMethod. Error: %errorlevel%
 )
 
-IF NOT DEFINED DATADRV (
-    ECHO No available drive letter for DATA partition found.
-    GOTO End
+REM Download using PowerShell Invoke-WebRequest
+powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile 'C:\temp\WinNTSetup_462.zip' -UseBasicParsing"
+if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete
+if %errorlevel% neq 0 (
+    echo Failed to download using Invoke-WebRequest. Error: %errorlevel%
 )
 
-echo.
-echo Formatting and preparing Disk %disk% as MBR
-echo --------------------------------------------
-echo.
-echo Create MBR partition structure...
-echo.
-echo List disk > list.txt
-echo Select disk %disk% >> list.txt
-echo Clean >> list.txt
-echo Create partition primary size=350 >> list.txt
-echo Format quick fs=ntfs label="System Reserved" >> list.txt
-echo Assign letter=%BOOTDRV% >> list.txt
-echo Active >> list.txt
-echo Create partition primary >> list.txt
-echo Format quick fs=ntfs label="Windows" >> list.txt
-echo Assign letter=%DATADRV% >> list.txt
-echo Exit >> list.txt
-diskpart /s list.txt
-REM Close the file before deleting it
-type nul > list.txt
-DEL list.txt
-
-GOTO MBR-WINRE_PARTITION
-
-:MBR-WINRE_PARTITION
-CLS
-ECHO Create WinRE Partition
-ECHO -----------------------------------------
-ECHO.
-
-CHOICE /C YN /M "Do you want to create a WinRE (Windows Recovery Environment) partition? [Y/N]"
-
-IF %ERRORLEVEL% == 2 GOTO Windows_Instalation
-IF %ERRORLEVEL% == 1 GOTO MBR-Create_WINRE
-
-:MBR-Create_WINRE
-echo Create WinRE partition...
-echo.
-echo Select disk %disk% > list.txt
-echo Create partition primary size=500 >> list.txt
-echo Format quick fs=ntfs label="Recovery" >> list.txt
-echo Assign letter=R >> list.txt
-echo Exit >> list.txt
-diskpart /s list.txt
-REM Close the file before deleting it
-type nul > list.txt
-DEL list.txt
-
-GOTO Windows_Instalation
-
-:INITGPT
-set "BOOTDRV="
-for %%B in (Q P O N M L K J I H G F E D C) do if not defined BOOTDRV if not exist %%B:\nul set "BOOTDRV=%%B:"
-if not defined BOOTDRV set "BOOTDRV=C:"
-echo Boot Drive is %BOOTDRV%
-)
-SET "DATADRV="
-FOR %%c IN (Z Y X W V U T S R) do if not defined DATADRV if not exist %%B:\nul set "DATADRV=%%D:"
-if not defined DATADRV set "DATADRV=E:"
-echo Data Drive is %DATADRV%
-
-IF NOT DEFINED BOOTDRV (
-    ECHO No available drive letter for BOOT partition found.
-    GOTO End
+:DownloadComplete
+if %downloaded%==true (
+    echo AIO.cmd file downloaded successfully.
+) else (
+    echo Failed to download WinNTSetup_462.zip file from all sources.
 )
 
-IF NOT DEFINED DATADRV (
-    ECHO No available drive letter for DATA partition found.
-    GOTO End
+set "zipFile=C:\temp\WinNTSetup_462.zip"
+set "destination=C:\temp\WinNTSetup_462"
+
+REM Create the destination directory if it doesn't exist
+if not exist "%destination%" mkdir "%destination%"
+
+REM Unzip the file using expand.exe
+expand.exe -F:* "%zipFile%" "%destination%\"
+
+REM Check if the unzip operation was successful
+if %errorlevel% equ 0 (
+    echo File unzipped successfully.
+) else (
+    echo Failed to unzip the file. Error: %errorlevel%
 )
-
-echo.
-echo Formatting and preparing Disk %disk% as GPT
-echo --------------------------------------------
-echo.
-echo Create GPT partition structure...
-echo.
-echo List disk > list.txt
-echo Select disk %disk% >> list.txt
-echo Clean >> list.txt
-echo Convert GPT >> list.txt
-echo Create partition efi size=100 >> list.txt
-echo Format quick fs=fat32 label="System Reserved" >> list.txt
-echo Assign letter=%BOOTDRV% >> list.txt
-echo Create partition msr size=128 >> list.txt
-echo Create partition primary >> list.txt
-echo Format quick fs=ntfs label="Windows" >> list.txt
-echo Assign letter=%DATADRV% >> list.txt
-echo Exit >> list.txt
-diskpart /s list.txt
-REM Close the file before deleting it
-type nul > list.txt
-DEL list.txt
-
-GOTO GPT-WINRE_PARTITION
-
-:GPT-WINRE_PARTITION
-CLS
-ECHO Create WinRE Partition
-ECHO -----------------------------------------
-ECHO.
-
-CHOICE /C YN /M "Do you want to create a WinRE (Windows Recovery Environment) partition? [Y/N]"
-
-IF %ERRORLEVEL% == 2 GOTO Windows_Instalation
-IF %ERRORLEVEL% == 1 GOTO GPT-Create_WINRE
-
-:GPT-Create_WINRE
-echo Create WinRE partition...
-echo.
-echo Select disk %disk% > list.txt
-echo Create partition primary size=500 >> list.txt
-echo Format quick fs=ntfs label="Recovery" >> list.txt
-echo Assign letter=R >> list.txt
-echo Exit >> list.txt
-diskpart /s list.txt
-REM Close the file before deleting it
-type nul > list.txt
-DEL list.txt
-
-GOTO Windows_Instalation
-
-:Windows_Instalation
-CLS
-ECHO Windows Installation
-ECHO -----------------------------------------
-
-echo Mounting Windows Image from ISO file
-echo -----------------------------------
-
-REM Mount the Windows image from the selected ISO file
-dism /mount-wim /wimfile:"%isoPath%" /index:1 /mountdir:%DATADRV%
-echo.
-echo Windows image mounted at %DATADRV%
-
-CHOICE /C YN /M "Do you want to install Windows now? [Y/N]"
-
-IF %ERRORLEVEL% == 2 GOTO :End
-
-REM Generate the unattended.xml file
-call :GenerateUnattendedXML
-
-REM Copy the unattended.xml file to the root of the Windows installation drive
-copy unattended.xml %DATADRV%\unattended.xml
-
-REM Run the Windows installation
-start /wait %DATADRV%\sources\setup.exe /unattend:%DATADRV%\unattended.xml
-echo.
-echo Windows installation completed.
-echo.
-
-REM Clean up the mounted Windows image
-dism /unmount-wim /mountdir:%DATADRV% /commit
-
-REM Clean up temporary files
-del unattended.xml
-
-echo.
-echo Press any key to continue...
-pause >nul
-
-goto end_BACKMENU
-
-:INIT
-echo No Disk has been Selected!
-echo.
-pause
-goto end_BACKMENU
-
-:End
-ENDLOCAL
-EXIT
-
-REM Function to generate unattended.xml
-:GenerateUnattendedXML
-ECHO Generating unattended.xml file...
-
-REM Prompt user for input
-SET /P ProductKey=Enter your product key:
-SET /P TimeZone=Enter your time zone (e.g., Eastern Standard Time):
-SET /P FullName=Enter your full name:
-SET /P Organization=Enter your organization:
-SET /P ComputerName=Enter your computer name:
-SET /P AdminPassword=Enter your administrator password:
-
-(
-ECHO ^<?xml version="1.0" encoding="utf-8"?^>
-ECHO ^<unattend xmlns="urn:schemas-microsoft-com:unattend"^>
-ECHO    ^<settings pass="windowsPE"^>
-ECHO        ^<component name="Microsoft-Windows-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
-ECHO            ^<UserData^>
-ECHO                ^<ProductKey^>
-ECHO                    ^<Key^>%ProductKey%^</Key^>
-ECHO                    ^<WillShowUI^>OnError^</WillShowUI^>
-ECHO                ^</ProductKey^>
-ECHO                ^<FullName^>%FullName%^</FullName^>
-ECHO                ^<Organization^>%Organization%^</Organization^>
-ECHO                ^<ComputerName^>%ComputerName%^</ComputerName^>
-ECHO            ^</UserData^>
-ECHO            ^<TimeZone^>%TimeZone%^</TimeZone^>
-ECHO        ^</component^>
-ECHO    ^</settings^>
-ECHO    ^<settings pass="specialize"^>
-ECHO        ^<component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
-ECHO            ^<AutoLogon^>
-ECHO                ^<Password^>
-ECHO                    ^<Value^>%AdminPassword%^</Value^>
-ECHO                    ^<PlainText^>true^</PlainText^>
-ECHO                ^</Password^>
-ECHO                ^<Enabled^>true^</Enabled^>
-ECHO                ^<LogonCount^>5^</LogonCount^>
-ECHO                ^<Username^>Administrator^</Username^>
-ECHO            ^</AutoLogon^>
-ECHO            ^<ComputerName^>%ComputerName%^</ComputerName^>
-ECHO            ^<ProductKey^>%ProductKey%^</ProductKey^>
-ECHO            ^<RegisteredOrganization^>%Organization%^</RegisteredOrganization^>
-ECHO            ^<RegisteredOwner^>%FullName%^</RegisteredOwner^>
-ECHO            ^<TimeZone^>%TimeZone%^</TimeZone^>
-ECHO            ^<DisableAutoDaylightTimeSet^>true^</DisableAutoDaylightTimeSet^>
-ECHO            ^<DisableOOBE^>true^</DisableOOBE^>
-ECHO        ^</component^>
-ECHO    ^</settings^>
-ECHO    ^<settings pass="oobeSystem"^>
-ECHO        ^<component name="Microsoft-Windows-Shell-Setup" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"^>
-ECHO            ^<OOBE^>
-ECHO                ^<HideEULAPage^>true^</HideEULAPage^>
-ECHO                ^<HideOEMRegistrationScreen^>true^</HideOEMRegistrationScreen^>
-ECHO                ^<HideOnlineAccountScreens^>true^</HideOnlineAccountScreens^>
-ECHO                ^<HideWirelessSetupInOOBE^>true^</HideWirelessSetupInOOBE^>
-ECHO                ^<NetworkLocation^>Home^</NetworkLocation^>
-ECHO                ^<ProtectYourPC^>3^</ProtectYourPC^>
-ECHO                ^<SkipMachineOOBE^>true^</SkipMachineOOBE^>
-ECHO                ^<SkipUserOOBE^>true^</SkipUserOOBE^>
-ECHO            ^</OOBE^>
-ECHO        ^</component^>
-ECHO    ^</settings^>
-ECHO    ^<cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="wim://%DATADRV%\sources\install.wim#Windows 10 Pro" /^>
-ECHO ^</unattend^>
-) > unattended.xml
-
-ECHO Unattended.xml file generated successfully.
-
-REM Copy unattended.xml to the root of the Windows installation drive
-COPY unattended.xml "%DATADRV%\unattended.xml" /Y
-
-REM Start Windows installation using the unattended.xml file
-START "" "%DATADRV%\sources\setup.exe" /unattend:"%DATADRV%\unattended.xml"
 
 PAUSE GOTO end_BACKMENU
 
