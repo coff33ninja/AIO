@@ -1739,21 +1739,54 @@ cls && goto CLEANER
 cls
 color 0f
 mode con cols=98 lines=32
-Title Windows setup test
-ECHO This is currently the script for deploying Windows via the Dism and diskpart.
-ECHO Unfortunately it is currently in a testing phase and not in active development due to certain Windows limitations.
-ECHO Do you want to continue [Y/N]?
+Title Windows Setup Test
+
+echo This is currently the script for deploying Windows via Dism and diskpart.
+echo Unfortunately, it is currently in a testing phase and not in active development due to certain Windows limitations.
+echo Please note that running this script will modify the disk structure and erase existing data.
+echo It's important to understand the implications and backup any important data before proceeding.
+echo Do you want to continue [Y/N]?
 choice /c YN
-if %errorlevel%==1 goto yes
-if %errorlevel%==2 goto no
-:WIN_INSTALL_yes
+
+if errorlevel 2 (
+    echo no
+    pause
+    goto end_BACKMENU
+)
+
 echo yes
-goto :Continue_Windows_Setup
-:no
-echo no
-PAUSE GOTO end_BACKMENU
+goto Continue_Windows_Setup
+
 :Continue_Windows_Setup
-CLS
+cls
+echo Prepare ISO Image for Windows Deployment
+echo -----------------------------------------
+
+REM Check if PowerShell is available
+where /q powershell
+if errorlevel 1 (
+    echo PowerShell is not available. Please install PowerShell.
+    exit /b 1
+)
+
+REM Prompt the user to select the ISO file
+for /f "usebackq delims=" %%A in (`powershell -Command "$isoPath = ''; Add-Type -AssemblyName System.Windows.Forms; $dialog = New-Object System.Windows.Forms.OpenFileDialog; $dialog.Filter = 'ISO Files (*.iso)|*.iso'; $dialog.InitialDirectory = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Definition); if ($dialog.ShowDialog() -eq 'OK') { $isoPath = $dialog.FileName }; $isoPath"`) do set "isoPath=%%A"
+
+REM Check if the user selected an ISO file
+if "%isoPath%" == "" (
+    echo No ISO file selected. Exiting.
+    exit /b 1
+)
+
+REM Display the selected ISO file location
+echo Selected ISO file: %isoPath%
+
+REM Get the available Windows versions within the ISO image
+for /f "usebackq delims=" %%B in (`powershell -Command "$imageInfo = (Mount-DiskImage -ImagePath '%isoPath%' -PassThru | Get-DiskImage).ImageTypeContents; $selectedVersion = $imageInfo | Out-GridView -Title 'Available Windows Versions' -OutputMode Single; $selectedVersion"`) do set "selectedVersion=%%B"
+
+echo Selected Windows version: %selectedVersion%
+
+echo.
 ECHO Prepare Hard Disk for Windows Deployment
 ECHO -----------------------------------------
 ECHO.
@@ -1761,6 +1794,7 @@ ECHO.
 ECHO List disk > list.txt
 diskpart /s list.txt
 pause
+
 REM Close the file before deleting it
 type nul > list.txt
 DEL list.txt
@@ -1768,6 +1802,7 @@ DEL list.txt
 ECHO.
 SET /p disk="Which disk number would you like to prepare? (e.g. 0): "
 IF [%disk%] == [] GOTO INIT
+
 ECHO.
 
 ECHO --WARNING-- This will FORMAT the selected disk and ERASE ALL DATA
@@ -1783,6 +1818,7 @@ CLS
 ECHO Preperation Aborted, No changes have been made...
 ECHO.
 PAUSE
+goto end_BACKMENU
 
 
 :Disktype_selector
@@ -1797,23 +1833,15 @@ IF %ERRORLEVEL% == 2 goto:INITMBR
 IF %ERRORLEVEL% == 1 goto:INITGPT
 
 :INITMBR
-SET "BOOTDRV="
-FOR %%b IN (Q P O N M L K J I) DO (
-    IF NOT EXIST "%%b:" (
-        SET "BOOTDRV=%%b"
-        GOTO :BREAK_B
-    )
+set "BOOTDRV="
+for %%B in (Q P O N M L K J I H G F E D C) do if not defined BOOTDRV if not exist %%B:\nul set "BOOTDRV=%%B:"
+if not defined BOOTDRV set "BOOTDRV=C:"
+echo Boot Drive is %BOOTDRV%
 )
-:BREAK_B
-
 SET "DATADRV="
-FOR %%c IN (Z Y X W V U T S R) DO (
-    IF NOT EXIST "%%c:" (
-        SET "DATADRV=%%c"
-        GOTO :BREAK_C
-    )
-)
-:BREAK_C
+FOR %%c IN (Z Y X W V U T S R) do if not defined DATADRV if not exist %%B:\nul set "DATADRV=%%D:"
+if not defined DATADRV set "DATADRV=E:"
+echo Data Drive is %DATADRV%
 
 IF NOT DEFINED BOOTDRV (
     ECHO No available drive letter for BOOT partition found.
@@ -1825,6 +1853,10 @@ IF NOT DEFINED DATADRV (
     GOTO End
 )
 
+echo.
+echo Formatting and preparing Disk %disk% as MBR
+echo --------------------------------------------
+echo.
 echo Create MBR partition structure...
 echo.
 echo List disk > list.txt
@@ -1843,26 +1875,44 @@ REM Close the file before deleting it
 type nul > list.txt
 DEL list.txt
 
-GOTO WINRE_PARTITION
+GOTO MBR-WINRE_PARTITION
+
+:MBR-WINRE_PARTITION
+CLS
+ECHO Create WinRE Partition
+ECHO -----------------------------------------
+ECHO.
+
+CHOICE /C YN /M "Do you want to create a WinRE (Windows Recovery Environment) partition? [Y/N]"
+
+IF %ERRORLEVEL% == 2 GOTO Windows_Instalation
+IF %ERRORLEVEL% == 1 GOTO MBR-Create_WINRE
+
+:MBR-Create_WINRE
+echo Create WinRE partition...
+echo.
+echo Select disk %disk% > list.txt
+echo Create partition primary size=500 >> list.txt
+echo Format quick fs=ntfs label="Recovery" >> list.txt
+echo Assign letter=R >> list.txt
+echo Exit >> list.txt
+diskpart /s list.txt
+REM Close the file before deleting it
+type nul > list.txt
+DEL list.txt
+
+GOTO Windows_Instalation
 
 :INITGPT
-SET "BOOTDRV="
-FOR %%b IN (Q P O N M L K J I) DO (
-    IF NOT EXIST "%%b:" (
-        SET "BOOTDRV=%%b"
-        GOTO :BREAK_B
-    )
+set "BOOTDRV="
+for %%B in (Q P O N M L K J I H G F E D C) do if not defined BOOTDRV if not exist %%B:\nul set "BOOTDRV=%%B:"
+if not defined BOOTDRV set "BOOTDRV=C:"
+echo Boot Drive is %BOOTDRV%
 )
-:BREAK_B
-
 SET "DATADRV="
-FOR %%c IN (Z Y X W V U T S R) DO (
-    IF NOT EXIST "%%c:" (
-        SET "DATADRV=%%c"
-        GOTO :BREAK_C
-    )
-)
-:BREAK_C
+FOR %%c IN (Z Y X W V U T S R) do if not defined DATADRV if not exist %%B:\nul set "DATADRV=%%D:"
+if not defined DATADRV set "DATADRV=E:"
+echo Data Drive is %DATADRV%
 
 IF NOT DEFINED BOOTDRV (
     ECHO No available drive letter for BOOT partition found.
@@ -1874,6 +1924,10 @@ IF NOT DEFINED DATADRV (
     GOTO End
 )
 
+echo.
+echo Formatting and preparing Disk %disk% as GPT
+echo --------------------------------------------
+echo.
 echo Create GPT partition structure...
 echo.
 echo List disk > list.txt
@@ -1893,9 +1947,9 @@ REM Close the file before deleting it
 type nul > list.txt
 DEL list.txt
 
-GOTO WINRE_PARTITION
+GOTO GPT-WINRE_PARTITION
 
-:WINRE_PARTITION
+:GPT-WINRE_PARTITION
 CLS
 ECHO Create WinRE Partition
 ECHO -----------------------------------------
@@ -1904,9 +1958,9 @@ ECHO.
 CHOICE /C YN /M "Do you want to create a WinRE (Windows Recovery Environment) partition? [Y/N]"
 
 IF %ERRORLEVEL% == 2 GOTO Windows_Instalation
-IF %ERRORLEVEL% == 1 GOTO Create_WINRE
+IF %ERRORLEVEL% == 1 GOTO GPT-Create_WINRE
 
-:Create_WINRE
+:GPT-Create_WINRE
 echo Create WinRE partition...
 echo.
 echo Select disk %disk% > list.txt
@@ -1925,7 +1979,14 @@ GOTO Windows_Instalation
 CLS
 ECHO Windows Installation
 ECHO -----------------------------------------
-ECHO.
+
+echo Mounting Windows Image from ISO file
+echo -----------------------------------
+
+REM Mount the Windows image from the selected ISO file
+dism /mount-wim /wimfile:"%isoPath%" /index:1 /mountdir:%DATADRV%
+echo.
+echo Windows image mounted at %DATADRV%
 
 CHOICE /C YN /M "Do you want to install Windows now? [Y/N]"
 
@@ -1939,6 +2000,27 @@ copy unattended.xml %DATADRV%\unattended.xml
 
 REM Run the Windows installation
 start /wait %DATADRV%\sources\setup.exe /unattend:%DATADRV%\unattended.xml
+echo.
+echo Windows installation completed.
+echo.
+
+REM Clean up the mounted Windows image
+dism /unmount-wim /mountdir:%DATADRV% /commit
+
+REM Clean up temporary files
+del unattended.xml
+
+echo.
+echo Press any key to continue...
+pause >nul
+
+goto end_BACKMENU
+
+:INIT
+echo No Disk has been Selected!
+echo.
+pause
+goto end_BACKMENU
 
 :End
 ENDLOCAL
