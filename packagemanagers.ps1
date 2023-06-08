@@ -97,7 +97,7 @@ try {
             try {
                 Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
                 Install-Script -Name winget-install -Force
-                .\winget-install.ps1
+                Add-AppxPackage https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
                 $wingetInstalled = $true
             }
             catch {
