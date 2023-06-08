@@ -2,6 +2,9 @@
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned 2> $null
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted 2> $null
 
+# Clear the content of the folder
+Remove-Item -Path 'C:\temp' -Force -Recurse
+
 # Set the console window size and title
 $Host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(98, 32)
 $Host.UI.RawUI.WindowTitle = 'SOFTWARE UPDATER'

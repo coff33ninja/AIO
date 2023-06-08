@@ -1743,51 +1743,25 @@ color 0f
 mode con cols=98 lines=32
 Title Windows Setup Test
 
-REM Disable the first-run check for Internet Explorer
-reg add "HKCU\Software\Microsoft\Internet Explorer\Main" /v DisableFirstRunCustomize /t REG_DWORD /d 1 /f
+REM First install 7Zip
+powershell.exe winget install -e --id 7zip.7zip
 
 REM Download the WinNTSetup_462.zip file using aria2
 set "downloaded=false"
-aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_v462.zip -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_v462.zip -d, --dir=C:\temp\ --allow-overwrite=true --disable-ipv6
 
-REM Download using aria2
-%downloadCommand%
-if exist "C:\temp\WinNTSetup_462.zip" set "downloaded=true" & goto :DownloadComplete1
-if not %errorlevel% equ 0 (
-    echo Failed to download WinNTSetup_462.zip using aria2. Error: %errorlevel%
-)
-
-:DownloadComplete1
-if %downloaded%==true (
+REM Check if the WinNTSetup_462.zip file was downloaded successfully
+if exist "C:\temp\WinNTSetup_v462.zip" (
+    set "downloaded=true"
     echo WinNTSetup_462.zip file downloaded successfully.
 ) else (
     echo Failed to download WinNTSetup_462.zip file.
+    goto :end_BACKMENU
 )
 
-REM Download the 7zr.exe file using aria2
-set "downloaded=false"
-aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/7zr.exe -d, --dir=C:\temp\ --allow-overwrite="true" --disable-ipv6
-
-REM Download using aria2
-%downloadCommand%
-if exist "C:\temp\7zr.exe" set "downloaded=true" & goto :DownloadComplete2
-if not %errorlevel% equ 0 (
-    echo Failed to download 7zr.exe using aria2. Error: %errorlevel%
-)
-
-:DownloadComplete2
-if %downloaded%==true (
-    echo 7zr.exe file downloaded successfully.
-) else (
-    echo Failed to download 7zr.exe file.
-)
-
-set "zipFile=C:\temp\WinNTSetup_462.zip"
-set "destination=C:\temp\WinNTSetup_462"
-set "zipExe=%~dp0\7zr.exe"
-
-REM Create the destination directory if it doesn't exist
-if not exist "%destination%" mkdir "%destination%"
+set "zipFile=C:\temp\WinNTSetup_v462.zip"
+set "destination=C:\temp"
+set "zipExe=C:\Program Files\7-Zip\7z.exe"
 
 REM Unzip the file using 7zr.exe
 "%zipExe%" x "%zipFile%" -o"%destination%"
@@ -1795,6 +1769,7 @@ REM Unzip the file using 7zr.exe
 REM Check if the unzip operation was successful
 if %errorlevel% equ 0 (
     echo File unzipped successfully.
+    cls & goto :PREP
 ) else (
     echo Failed to unzip the file. Error: %errorlevel%
 )
@@ -1802,6 +1777,8 @@ if %errorlevel% equ 0 (
 PAUSE
 goto:end_BACKMENU
 
+:PREP
+call C:\temp\WinNTSetup_v462\Prep\PrepareDiskNT.cmd
 
 ::========================================================================================================================================
 ::========================================================================================================================================
