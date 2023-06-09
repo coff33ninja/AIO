@@ -21,19 +21,30 @@ Write-Host 'to make it much more visible to use with color-based indicators.'
 
 # Check if Chocolatey is already installed
 try {
-    if (Get-Command choco -ErrorAction Stop) {
+    if (Get-Command choco -ErrorAction SilentlyContinue) {
         Write-Host 'Chocolatey is already installed.' -ForegroundColor $green
+        clear-host
         $chocoInstalled = $true
+    }
+    else {
+        Write-Host 'Installing Chocolatey...' -ForegroundColor $yellow
+        try {
+            Invoke-WebRequest -Uri 'https://chocolatey.org/install.ps1' -UseBasicParsing | Invoke-Expression
+            $chocoInstalled = $true
+        }
+        catch {
+            Write-Host 'Failed to install Chocolatey.' -ForegroundColor $red
+            $choice = Read-Host "Do you want to continue? (Y/N)"
+            if ($choice -ne "Y") {
+                exit
+            }
+        }
     }
 }
 catch {
-    Write-Host 'Installing Chocolatey...' -ForegroundColor $yellow
-    try {
-        Invoke-WebRequest -Uri 'https://chocolatey.org/install.ps1' -UseBasicParsing | Invoke-Expression
-        $chocoInstalled = $true
-    }
-    catch {
-        Write-Host 'Failed to install Chocolatey.' -ForegroundColor $red
+    Write-Host 'An error occurred while checking Chocolatey.' -ForegroundColor $red
+    $choice = Read-Host "Do you want to continue? (Y/N)"
+    if ($choice -ne "Y") {
         exit
     }
 }
@@ -45,7 +56,7 @@ $aria2Installed = $false
 $wingetInstalled = $false
 
 try {
-    if (-not (Get-Command wget -ErrorAction Stop)) {
+    if (-not (Get-Command wget -ErrorAction SilentlyContinue)) {
         Write-Host 'Installing wget...' -ForegroundColor $yellow
         try {
             choco install -y wget
@@ -59,7 +70,7 @@ try {
         $wgetInstalled = $true
     }
 
-    if (-not (Get-Command curl -ErrorAction Stop)) {
+    if (-not (Get-Command curl -ErrorAction SilentlyContinue)) {
         Write-Host 'Installing curl...' -ForegroundColor $yellow
         try {
             choco install -y curl
@@ -73,7 +84,7 @@ try {
         $curlInstalled = $true
     }
 
-    if (-not (Get-Command aria2c -ErrorAction Stop)) {
+    if (-not (Get-Command aria2c -ErrorAction SilentlyContinue)) {
         Write-Host 'Installing aria2...' -ForegroundColor $yellow
         try {
             choco install -y aria2
@@ -87,7 +98,7 @@ try {
         $aria2Installed = $true
     }
 
-    if (-not (Get-Command winget -ErrorAction Stop)) {
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
         if (-not $curlInstalled) {
             Write-Host 'Winget and Curl are not installed. Please download and install the Windows Package Manager and curl manually and then re-run this script.' -ForegroundColor $red
             exit
@@ -114,16 +125,24 @@ catch {
     exit
 }
 
-# Display status of installed package managers
-Clear-Host
-Write-Host "Chocolatey installed: $chocoInstalled" -ForegroundColor $green
-Write-Host "Wget installed: $wgetInstalled" -ForegroundColor $green
-Write-Host "Winget installed: $wingetInstalled" -ForegroundColor $green
-Write-Host "Curl installed: $curlInstalled" -ForegroundColor $green
-Write-Host "Aria2 installed: $aria2Installed" -ForegroundColor $green
-Write-Host
-Write-Host 'You can now choose whether to go back to the previous menu or continue with selections'
-Write-Host 'showcased below.'
+#  Display summary of installed package managers
+Write-Host 'Summary of installed package managers:' -ForegroundColor $yellow
+if ($chocoInstalled) {
+    Write-Host ' - Chocolatey is installed.' -ForegroundColor $green
+}
+if ($wgetInstalled) {
+    Write-Host ' - wget is installed.' -ForegroundColor $green
+}
+if ($curlInstalled) {
+    Write-Host ' - curl is installed.' -ForegroundColor $green
+}
+if ($aria2Installed) {
+    Write-Host ' - aria2 is installed.' -ForegroundColor $green
+}
+if ($wingetInstalled) {
+    Write-Host ' - winget is installed.' -ForegroundColor $green
+}
+
 Pause
 
 # Check if PowerShell is up-to-date
@@ -133,7 +152,7 @@ if ($chocoInstalled) {
             $installedVersion = (Get-Command powershell).FileVersionInfo.ProductVersion
             $latestVersion = ((Invoke-WebRequest -Uri 'https://chocolatey.org/api/v2/package/powershell').Content | ConvertFrom-Json).Version
             if ($installedVersion -ge $latestVersion) {
-                Write-Host "PowerShell is already up-to-date (version $installedVersion)."
+                Write-Host "PowerShell is already up-to-date (version $installedVersion)." -ForegroundColor $green
             }
             else {
                 Write-Host 'Updating PowerShell...'
