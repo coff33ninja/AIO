@@ -1,6 +1,7 @@
 ## ![Logo](https://github.com/coff33ninja/AIO/blob/main/AIO-LOGO.ico) AIO 
 
-    Note: This project has been dropped in favor of a new project: NexTool-Windows-Suite.
+# Note: 
+This project has been dropped in favor of a new project: [NexTool-Windows-Suite](https://github.com/coff33ninja/NexTool-Windows-Suite).
 
 This toolkit consists of various scripts: some are original creations, while others incorporate the work of other developers. Each script is purpose-driven and, unless otherwise specified, operates independently. It's set up to run as an administrator automatically and will download the necessary files on-the-go to maintain a clutter-free system. Ensure your Anti-Virus is disabled when using this application to avoid false positives; it can be re-enabled after the application completes its execution.
 
