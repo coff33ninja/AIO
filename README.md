@@ -1,53 +1,41 @@
 ## ![Logo](https://github.com/coff33ninja/AIO/blob/main/AIO-LOGO.ico) AIO 
 
-Some scripts are entirely my own, while others include the work of others. Each one has a specific, clearly defined purpose, and unless noted, will work independently of the others.
-It has been setup so that it will automatically call and run as Administrator; and download the files as needed (just to keep system clear from extra clutter). The item in release was build with "update" in mind for when updates occur in the main [AIO](https://github.com/coff33ninja/AIO) package gets updated.
-Please disable you're Anti-Virus as certian Anti-Virus software may detect this application as false-possitive, Anti-Virus may be re-enabled once the application has finished running.
+    Note: This project has been dropped in favor of a new project: NexTool-Windows-Suite.
 
+This toolkit consists of various scripts: some are original creations, while others incorporate the work of other developers. Each script is purpose-driven and, unless otherwise specified, operates independently. It's set up to run as an administrator automatically and will download the necessary files on-the-go to maintain a clutter-free system. Ensure your Anti-Virus is disabled when using this application to avoid false positives; it can be re-enabled after the application completes its execution.
 
-## Pre-requisites
+# 📋 Prerequisites
 
-- Active Internet Connection
-- Windows PowerShell version 5.0 or above
-- .Net Framework 4.5 and above
-- If requirements are not met, Read the limitations below.
+  -  Active Internet Connection
+  -  Windows PowerShell version 5.0 or higher
+  -  .Net Framework 4.5 or higher
+  -  For unmet requirements, see the Limitations section below.
 
+# 🚧 Limitations & Instructions
 
-## Limitations and Instructions
+If you face any issues, especially with the installer, please use the 'ARIA' version available in the [RELEASES](https://github.com/coff33ninja/AIO/releases) section. These limitations are mainly due to constraints in Windows and PowerShell. For the time being, most code updates are kept online, and there won't be frequent updates to installers or version numbers.
 
-In [RELEASES](https://github.com/coff33ninja/AIO/releases) section please use 'ARIA' version due to limitations of windows and powershell if you come across any issues with installer.
-I won't update the installers or versioning number due to the choice of keeping most of the code online for the time being.
+# ⚠️ Disclaimer
 
+This program simplifies Windows Configuration but comes with NO GUARANTEE. This includes but isn't limited to any implied warranties. Check the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) General Public License for detailed information. The scripts have been tested on specific versions of Windows. If you think modifications or improvements are necessary and have the expertise, start a [DISCUSSION](https://github.com/coff33ninja/AIO/discussions). All ideas are welcome.
 
-## Disclaimer
+# 🙌 Credits
 
-This program is distributed in order to simplify Windows Configuration,
-but WITHOUT ANY GUARANTEE; including, but not limited to, the implied guarantee of RESALES or ANY OTHER unlisted purposes.
-See the [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html) General Public License for more details.
-These scripts have been tested on Windows 10 v2004/21H1 and early official release of Windows 11. They may or may not work on older versions of Windows.
-If any changes or improvements are needed and you have the know-how feel free to start a - [DISCUSSION](https://github.com/coff33ninja/AIO/discussions), any idea is welcome.
-Future releases will include wget and a stripped down version of AIO for older versions of windows.
-
-
-## Credits
-
-My thanks goes out to:
+Special thanks to:
 
 - [Builtbybel](https://github.com/builtbybel/),
 - [massgravel](https://github.com/massgravel/Microsoft-Activation-Scripts/),
 - [slavanap](https://github.com/slavanap/Windows10ManualUpdate/),
 - [darius-vr](https://github.com/darius-vr/),
 - [StackOverFlow](https://stackoverflow.com/)
-for the code, info, and a basis to work from. 
 - [O&OShutup](https://www.oo-software.com/en/shutup10) Used for extra preset telemetry fixes.
 - [SNAPPY DRIVER INSTALLER](https://sdi-tool.org/) Used as a driver update medium.
 
+# 💡 Extras
 
-## Extra's
-Most of the code is still "Dirty" due to learning cmd, bat, vbs and ps1 creation from the ground up.
-Hope this will become an excelent toolkit for everyone in the future.
+Many code snippets remain "raw" as this toolkit emerged from learning cmd, bat, vbs, and ps1 from scratch. The hope is for this to evolve into an invaluable toolkit for everyone.
 
-# &#x1f4c8; GitHub Stats
+# 📊 GitHub Stats
 
 <a href="https://github.com/coff33ninja/AIO">
   <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=coff33ninja&hide=java,html,tex&title_color=ffffff&text_color=c9cacc&icon_color=2bbc8a&bg_color=1d1f21&langs_count=3" />
