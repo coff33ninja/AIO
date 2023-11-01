@@ -14,8 +14,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/HLTWO/OneDrive/Documents/GitHub/AIO",
-      "program": "c:/Users/HLTWO/OneDrive/Documents/GitHub/AIO/build/Debug/outDebug",
+      "cwd": "c:/Users/DRAGOHN/Documents/GitHub/AIO",
+      "program": "c:/Users/DRAGOHN/Documents/GitHub/AIO/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
