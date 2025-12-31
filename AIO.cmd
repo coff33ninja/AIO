@@ -52,36 +52,17 @@ if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 
 :MainMenu
 cls
-title  AIO TOOLBOX
-mode con cols=98 lines=32
-echo:
-echo                       Press the corresponding number to go to desired section:
-echo:
-echo                [7;31m                                                                   [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m
-echo                [7;31m  [0m       [1] INFORMATION                                         [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [2] COMPUTER CONFIGURATION                              [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [3] UPDATER                                             [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [4] CLEANER                                             [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [5] WINDOWS INSTALL (WORK IN PROGRESS)                  [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [6] EXTRAS                                              [7;31m  [0m
-echo                [7;31m  [0m                                                               [7;31m  [0m 
-echo                [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m 
-echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
-echo                [7;31m  [0m       [96m[7][0m SHUTDOWN OPTIONS                   [41m  [0m  [93m[8][0m EXIT     [7;31m  [0m
-echo                [7;31m  [0m                                              [41m  [0m               [7;31m  [0m 
-echo                [7;31m                                                                   [0m
-echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
+title  AIO TOOLBOX ARIA VERSION
+mode con cols=80 lines=15
+Set "Path=%Path%;%cd%;%cd%\files"
+Color 0a
 
-if errorlevel  9 goto:EASTER
+:Main
+Cls
+Echo.
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+Echo.
+CmdMenuSel 0Ab1 "   [1] System Information Gathering" "   [2] COMPUTER CONFIGURATION" "   [3] UPDATER" "   [4] CLEANER" "   [5] WINDOWS INSTALL (WORK IN PROGRESS)" "   [6] EXTRAS" "   [7] SHUTDOWN OPTIONS" "   [8] EXIT"
 if errorlevel  8 goto:EXIT
 if errorlevel  7 goto:SHUTDOWN_OPTIONS
 if errorlevel  6 goto:EXTRAS
@@ -90,36 +71,31 @@ if errorlevel  4 goto:CLEANER
 if errorlevel  3 goto:UPDATER
 if errorlevel  2 goto:COMPUTER_CONFIGURATION
 if errorlevel  1 goto:INFORMATION
-cls
-
+Cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 ::========================================================================================================================================
 
 :INFORMATION
 CLS
 Title SYSTEM INFO
-mode con cols=70 lines=19
+mode con cols=98 lines=15
 ECHO:
-ECHO      HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
-echo:
-echo        [7;31m                                                       [0m
-echo        [7;31m  [0m                                                   [7;31m  [0m
-echo        [7;31m  [0m        [1] QUICK INFORMATION CONFIGURATION        [7;31m  [0m
-echo        [7;31m  [0m                                                   [7;31m  [0m
-echo        [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
-echo        [7;31m  [0m                                                   [7;31m  [0m
-echo        [7;31m  [0m        [2] HWINFO32 THIRD PARTY APPLICATION       [7;31m  [0m
-echo        [7;31m  [0m                                                   [7;31m  [0m
-echo        [7;31m  [0m       [41m                                       [0m     [7;31m  [0m
-echo        [7;31m  [0m                                   [41m [0m               [7;31m  [0m
-echo        [7;31m  [0m                                   [41m [0m  [3] BACK     [7;31m  [0m
-echo        [7;31m  [0m                                   [41m [0m               [7;31m  [0m
-echo        [7;31m                                                       [0m
-echo:
-choice /C:123 /N /M ">      Enter Your Choice in the Keyboard [1,2,3] : "
-echo:
+ECHO                      HERE IS 2 POSSIBLE METHODS OF DISPLAYING DEVICE INFORMATION
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+Echo.
+CmdMenuSel 0Ab1 "   [1] QUICK INFORMATION CONFIGURATION" "   [2] HWINFO32 THIRD PARTY APPLICATION" "   [3] GO TO PREVIOUS MENU" "   [4] EXIT"
+if errorlevel  4 goto:exit
 if errorlevel  3 goto:end_BACKMENU
 if errorlevel  2 goto:HWINFO32
 if errorlevel  1 goto:QUICK_INFO
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 ::========================================================================================================================================
 
@@ -127,31 +103,12 @@ cls
 cls
 TITLE QUICK INFO
 echo THIS WILL CREATE A INFORMATIONAL PRINTOUT OF YOUR COMPUTER CONFIGURATION
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\ComputerInfo.ps1"  -verb runas
+rem testing enviromental methods of saving items due to microsoft accounts with spaces and special characters giving issues to the script
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/ComputerInfo.ps1 -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+Powershell -ExecutionPolicy Bypass -File "C:\AIO\ComputerInfo.ps1"  -verb runas
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Operation completed successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-start /wait C:\Windows\Temp\Basic-Computer-Information-Report.html
+start /wait C:\AIO\Basic-Computer-Information-Report.html
 timeout 2 >nul
-goto email_confirmation
-rem pause & cls & goto end_BACKMENU
-
-:email_confirmation
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('For diagnostic purposes a log file is needed in order to allow the development of this package to be further adjusted to improve future releases. Do you agree?', 'EMAIL CONFIRMATION', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
-set /p OUT=<%TEMP%\out.tmp
-if %OUT%==Yes goto email_Yes
-if %OUT%==No goto email_no
-:email_Yes
-goto email
-:email_NO
-goto end_BACKMENU
-
-:email
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/chefsender.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\chefsender.exe"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/gui.exe" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\gui.exe"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/Microsoft.Exchange.WebServices.dll" -O "%USERPROFILE%\AppData\Local\Temp\\AIO\Microsoft.Exchange.WebServices.dll"
-echo working on email setup script or will utilize mailto call function or maybe use third party mail function with cli SUPPORT
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\chefsender.exe /smtp-server:"smtp-mail.outlook.com" /to:"coff33ninja69@gmail.com" /smtp-user:"hltworkshop@outlook.com" /smtp-password:"HLTP@ssw0rd1" /port:"587" /ssl /from-name:TEST /from-mail:"hltworkshop@outlook.com" /sub:"ComputerINFO" /html /attach:"C:\aio\*.html"
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Email send successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 goto end_BACKMENU
 
 
@@ -162,9 +119,9 @@ cls
 TITLE HWINFO32 THIRD PARTY APPLICATION
 echo THIS WILL LOAD AN THIRD PARTY APPLICATION TO PREVIEW USEFULL INFORMATION
 echo ABOUT YOUR DEVICE AND SYSTEM RECOURSES
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI" -O "%USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.INI"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\HWiNFO32.exe
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.exe -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/HWiNFO32.INI -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
+start /wait C:\AIO\HWiNFO32.exe
 timeout 2 >nul
 pause & cls & GOTO TEST_CONNECTION
 
@@ -175,7 +132,7 @@ color 0f
 mode con cols=98 lines=60
 cls
 title LIST OF NETWORK CONFIGURATION
-echo This section will display a list of all network configurations registered on the device. > c:\AIO\log.txt 
+echo This section will display a list of all network configurations registered on the device. > c:\AIO\log.txt
 ECHO:
 Echo %Date% %Time% >> %USERPROFILE%\AppData\Local\Temp\AIO\log.txt
 ECHO:
@@ -187,82 +144,42 @@ pause & GOTO end_BACKMENU
 ::========================================================================================================================================
 
 :COMPUTER_CONFIGURATION
+cls
 title COMPUTER_CONFIGURATION
-mode con cols=85 lines=30
+mode con cols=98 lines=32
 echo:
-echo                Press the corresponding number to go to desired section:
+echo                       Press the corresponding number to go to desired section:
 echo:
-echo          [7;31m                                                                   [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m                COMPUTER CONFIGURATION MAIN MENU               [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m 
-echo          [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [1] NETWORK SETUP                                       [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [2] DEFENDER TOOLBOX                                    [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [3] MICROSOFT ACTIVATION                                [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [4] TELEMETRY                                           [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [5] Disable Specific Services                           [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [6] BACKUPPER                                           [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [41m                                                   [0m     [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m  [0m       [7] SHUTDOWN OPTIONS       [8] BACK      [9] EXIT       [7;31m  [0m
-echo          [7;31m  [0m                                                               [7;31m  [0m
-echo          [7;31m                                                                   [0m
-echo:          
-choice /C:123456789 /N /M ">              Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
-
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+Echo.
+CmdMenuSel 0Ab1 "   [1] NETWORK SETUP" "   [2] DEFENDER TOOLBOX" "   [3] MICROSOFT ACTIVATION" "   [4] TELEMETRY" "   [5] Disable Specific Services" "   [6] BACKUPPER" "   [7] SHUTDOWN OPTIONS" "   [8] BACK"  "   [8] EXIT"
 if errorlevel  9 goto:EXIT
 if errorlevel  8 goto:end_BACKMENU
 if errorlevel  7 goto:SHUTDOWN_OPTIONS
 if errorlevel  6 goto:BACKUP_CONFIG
 if errorlevel  5 goto:SERVICES_DISABLE
-if errorlevel  4 goto:TELEMETRY 
+if errorlevel  4 goto:TELEMETRY
 if errorlevel  3 goto:MAS
 if errorlevel  2 goto:DEFENDER_TOOLBOX
 if errorlevel  1 goto:NETWORK_CONFIGURATION
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 
 ::========================================================================================================================================
 
 :NETWORK_CONFIGURATION
+cls
 color 0f
 title  NETWORK CONFIGURATION
 mode con cols=98 lines=32
-cls
-echo:
-echo:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] TEST CONNECTION                                      ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] PING WITH USER INPUT                                 ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] TRACE ROUTE WITH USER INPUT                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] IP CONFIGURATION                                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] WIFI SETUP PREVIEW                                   ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] SETUP NETWORK SHARE                                  ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] REMOVE NETWORK MAP                                   ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                 [8] Go back   ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
-
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+Echo.
+CmdMenuSel 0Ab1 "   [1] TEST CONNECTION" "   [2] PING WITH USER INPUT" "   [3] TRACE ROUTE WITH USER INPUT" "   [4] IP CONFIGURATION" "   [5] WIFI SETUP PREVIEW" "   [6] SETUP NETWORK SHARE" "   [7] REMOVE NETWORK MAP" "   [8] GO BACK"  "   [9] EXIT"
+if errorlevel  9 goto:EXIT
 if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:REMOVE_NETWORK_MAP
 if errorlevel  6 goto:SETUP_NETWORK_SHARE
@@ -272,6 +189,11 @@ if errorlevel  3 goto:TRACE_ROUTE
 if errorlevel  2 goto:PING
 if errorlevel  1 goto:TEST_CONNECTION
 cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
+cls
 
 ::========================================================================================================================================
 
@@ -280,7 +202,7 @@ color 0f
 mode con cols=98 lines=60
 cls
 ECHO THIS SECTION WILL RUN A CLI BASED SPEED TEST TO DETECT INTERNET STABILITY
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/speedtest.exe" -O "c:\AIO\speedtest.exe"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/1.INFORMATION/speedtest.exe -d, --dir=C:\AIO --allow-overwrite="true" --disable-ipv6
 start /wait C:\AIO\speedtest.exe
 pause & mode con cols=98 lines=30 & goto end_NETWORK_CONFIGURATION
 cls
@@ -293,41 +215,20 @@ mode con cols=98 lines=32
 cls
 echo:
 title IP CONFIGURATION
-echo:
-echo                      SELECT ONE OF THE FOLLOWING TO SETUP NETWORK SETTINGS
-echo:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|      [1] LIST ADAPTERS                                        ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] WIFI AUTOMATIC CONFIGURATION                         ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] ETHERNET AUTOMATIC CONFIGURATION                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] WIFI MANUAL                                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] ETHERNET MANUAL                                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                      [6] GO BACK              ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-ECHO:
-choice /c 123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6]"
-
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+Echo.
+CmdMenuSel 0Ab1 "   [1] LIST ADAPTERS" "   [2] WIFI AUTOMATIC CONFIGURATION" "   [3] ETHERNET AUTOMATIC CONFIGURATION" "   [4] WIFI MANUAL" "   [5] ETHERNET MANUAL" "   [6] GO BACK"
 if errorlevel 6 goto:end_NETWORK_CONFIGURATION
 if errorlevel 5 goto:ETHERNET_MANUAL
 if errorlevel 4 goto:WIFI_MANUAL
 if errorlevel 3 goto:AUTOMATIC_CONFIGURATION_ETHERNET
 if errorlevel 2 goto:AUTOMATIC_CONFIGURATION_WIFI
 if errorlevel 1 goto:LIST_ADAPTERS
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 
 ::========================================================================================================================================
@@ -369,7 +270,7 @@ color 0f
 mode con cols=98 lines=32
 title WIFI MANUAL CONFIGURATION
 cls
-echo: 
+echo:
 echo TYPE IN THE NESSESARY CONFIG IN THE FOLLOWING ORDER:
 echo:
 netsh interface ipv4 set address name="Wi-Fi" static %WIFI-IP% %WIFI-SUBNET% %WIFI-GATEWAY%
@@ -410,8 +311,7 @@ echo 8.8.8.8 for GOOGLE
 echo 1.1.1.1 for CLOUDFLARE
 echo:
 Set /P pinghost=Enter an IP address or hostname to ping:
-ping.exe %pinghost%
-timeout 2 >nul
+ping.exe %pinghost% -t
 pause & cls & goto end_NETWORK_CONFIGURATION
 
 ::========================================================================================================================================
@@ -509,36 +409,10 @@ cls & goto end_NETWORK_CONFIGURATION
 :BACKUP_CONFIG
 color 0f
 mode con cols=98 lines=32
-title  BACKUP NETWORK CONFIGURATION
+title  BACKUP OPTIONS
 cls
-
-echo:
-echo:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] BACKUP WIFI CONFIGURATION                            ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] RESTORE WIFI CONFIGURATION                           ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] NETWORK INTERFACES CONFIGURATION BACKUP              ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] NETWORK INTERFACES CONFIGURATION RESTORE             ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] BACKUP DRIVERS                                       ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] RESTORE DRIVERS                                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] USER DATA BACKUP                                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                 [8] Go back   ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:12345678 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8] : "
-
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+CmdMenuSel 0Ab1 "   [1] BACKUP WIFI CONFIGURATION" "   [2] RESTORE WIFI CONFIGURATION" "   [3] NETWORK INTERFACES CONFIGURATION BACKUP" "   [4] NETWORK INTERFACES CONFIGURATION RESTORE" "   [5] BACKUP DRIVERS" "   [6] RESTORE DRIVERS" "   [7] USER DATA BACKUP" " [8]   GO BACK"
 if errorlevel  8 goto:end_COMPUTER_CONFIGURATION
 if errorlevel  7 goto:USER_DATA
 if errorlevel  6 goto:RESTORE_DRIVERS
@@ -547,6 +421,11 @@ if errorlevel  4 goto:RESTORE_IP
 if errorlevel  3 goto:Backup_IP
 if errorlevel  2 goto:RESTORE_WIFI
 if errorlevel  1 goto:BACKUP_WIFI
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 
 ::========================================================================================================================================
@@ -650,8 +529,8 @@ echo
 echo This section is still a work in progress, STAY TUNED!
 @echo off
 Powershell -ExecutionPolicy Bypass Set-MpPreference -DisableRealtimeMonitoring 1
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/6.EXTRAS/User_profile_Backup_and_Restore.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_and_Restore.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\User_profile_Backup_and_Restore.ps1"  -verb runas
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/6.EXTRAS/User_profile_Backup_and_Restore.ps1 -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+Powershell -ExecutionPolicy Bypass -File "C:\AIO\User_profile_Backup_and_Restore.ps1"  -verb runas
 echo.The operation completed successfully.
 pause & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
@@ -663,34 +542,6 @@ color 0f
 mode con cols=98 lines=32
 title  WINDOWS DEFENDER TOOLBOX
 cls
-
-echo:
-echo:
-echo                                      WINDOWS DEFENDER TOOLBOX
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] WINDOWS DEFENDER TOOLBOX                             ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] REMOVE WINDOWS DEFENDER (NOT ADVISED)                ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                          [3] GO BACK            [4] EXIT      ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:1234 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4] : "
-
-if errorlevel  4 goto:EXIT
-if errorlevel  3 goto:end_COMPUTER_CONFIGURATION
-if errorlevel  2 goto:REMOVE_WINDOWS_DEFENDER
-if errorlevel  1 goto:DISABLE_WINDOWS_DEFENDER
-cls
-
-:DISABLE_WINDOWS_DEFENDER
-title DEFENDER TOOLBOX
-color 0f
 mode con cols=98 lines=32
 cls
 ECHO:
@@ -703,8 +554,8 @@ PAUSE
 
 @echo off
 Powershell -ExecutionPolicy Bypass Set-MpPreference -DisableRealtimeMonitoring 1
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\disable-windows-defender.ps1"  -verb runas
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/disable-windows-defender.ps1 -d, --dir=C:\AIO\WINDOWS_DEFENDER\ --allow-overwrite="true" --disable-ipv6
+Powershell -ExecutionPolicy Bypass -File "C:\AIO\WINDOWS_DEFENDER\disable-windows-defender.ps1"  -verb runas
 
 @echo off
 START Powershell -nologo -noninteractive -windowStyle hidden -noprofile -command ^
@@ -736,45 +587,11 @@ Add-MpPreference -ExclusionPath C:\ProgramData\Online_KMS_Activation\Activate.cm
 @echo off
 CLS
 ECHO NOW THE DEFENDER DISABLE APPLICATION WILL LOAD CLOSE IF NOT NEEDED
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\Defender_Tools.exe 
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/Defender_Tools.exe -d, --dir=C:\AIO\WINDOWS_DEFENDER\ --allow-overwrite="true" --disable-ipv6
+start /wait C:\AIO\WINDOWS_DEFENDER\Defender_Tools.exe
 timeout 2 >nul
 pause & cls & goto end_COMPUTER_CONFIGURATION
 
-:REMOVE_WINDOWS_DEFENDER
-title REMOVE WINDOWS DEFENDER
-color 0f
-mode con cols=98 lines=32
-cls
-ECHO:
-ECHO This script makes use of the install_wim_tweak.exe to run API in the system to remove Windows Defender.\n\nThe install_wim_tweak.exe will be
-ECHO automatically downloaded and executed. This script must be run as administrator and the system restarted after finish. If Windows complains
-ECHO afterwards about the system being unprotected, right click the notification and hide it.
-ECHO This script changes can not be reverted. USE AT OWN RISK!
-ECHO STILL WORKING OUT THE FINE DETAILS
-timeout 2 >nul
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/install_wim_tweak.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe"
-setx install_wim_tweak %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /m
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /o /l,SHOWCLI
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /o /c Windows-Defender /r,SHOWCLI
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\install_wim_tweak.exe /h /o /l,SHOWCLI
-Reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v SmartScreenEnabled /t REG_SZ /d "Off" /f
-Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
-Reg add HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter /v "EnabledV9" /t REG_DWORD /d "0" /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v SpyNetReporting /t REG_DWORD /d 0 /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v SubmitSamplesConsent /t REG_DWORD /d 2 /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet /v DontReportInfectionInformation /t REG_DWORD /d 1 /f
-Reg delete HKLM\SYSTEM\CurrentControlSet\Services\Sense /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\MRT /v "DontReportInfectionInformation" /t REG_DWORD /d 1 /f
-Reg add HKLM\SOFTWARE\Policies\Microsoft\MRT /v "DontOfferThroughWUAU" /t REG_DWORD /d 1 /f
-Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "SecurityHealth" /f
-Reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run /v "SecurityHealth" /f
-Reg add HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
-Reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance /v "Enabled" /t REG_DWORD /d 0 /f
-Reg delete HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService /f
-
-pause & cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 
 :MAS
@@ -782,10 +599,11 @@ color 0f
 mode con cols=98 lines=32
 cls
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
+powershell.exe -Command "irm https://massgrave.dev/get | iex"
 rem powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/MAS.cmd" -O "%USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd"
 rem call %USERPROFILE%\AppData\Local\Temp\AIO\MAS.cmd
-call C:\AIO\MAS.cmd
-cls & goto end_COMPUTER_CONFIGURATION 
+rem call C:\AIO\MAS.cmd
+cls & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -795,13 +613,13 @@ mode con cols=98 lines=32
 cls
 ECHO THE FILE HERE WILL BE CHANGED INTO MULTIPLE PACKS AND TRIGGERS STAY TUNED
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /F 1> NUL
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\block-telemetry.ps1"  -verb runas
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe"
-powershell.exe Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg" -O "%USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.cfg"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\ooshutup10.exe ooshutup10.cfg /quiet
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/block-telemetry.ps1 -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+Powershell -ExecutionPolicy Bypass -File "C:\AIO\block-telemetry.ps1"  -verb runas
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.exe -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/2.COMPUTER_CONFIGURATION/ooshutup10.cfg -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+start /wait C:\AIO\ooshutup10.exe ooshutup10.cfg /quiet
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Telemetry blocked successfully. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-cls & goto end_COMPUTER_CONFIGURATION 
+cls & goto end_COMPUTER_CONFIGURATION
 
 ::========================================================================================================================================
 
@@ -815,7 +633,7 @@ timeout 2 >nul
 
 rem Query the SC service name. SC aka Service Control has different names for the services
 rem and you cannot disable them using the actual service name listed on services.msc.
-rem Instead we need to send a query to get the service name and then we can run a query to disable it 
+rem Instead we need to send a query to get the service name and then we can run a query to disable it
 rem Get the name of the service you want to disable e.g.
 rem    Apple Mobile Device
 rem    AMD FUEL Service
@@ -828,7 +646,7 @@ rem   sc GetKeyName “AMD FUEL Service” (including the quotes!)
 rem Sc does not account for typos.
 rem If you do not enter the service name EXACTLY as seen on the services.msc
 rem list, then it will give you the error “The specified service does not
-rem exist as an installed service”, no matter what! 
+rem exist as an installed service”, no matter what!
 
 rem To configure the services you need to modify,
 rem add the following to the string showed in the example below:
@@ -836,7 +654,7 @@ rem Example
 rem    sc config “AMD Fuel Service” start= disabled
 
 rem In the query above you can replace disabled with the following states:
-rem    boot | system | auto | demand | disabled | delayed-auto 
+rem    boot | system | auto | demand | disabled | delayed-auto
 
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('IF YOU WOULD LIKE TO CONTRIBUTE TO THE SERVICES PLEASE RERUN AIO AND GO TO 1.INFORMATION THEN ONTO 1.QUICK INFORMATION CONFIGURATION AND ACCEPT AGREEMENT FOR THE DIAGNOSTICS POPUP TO FURTHER INVESTIGATE EXTRA SERVICES FOR FUTURE USE. Do you agree?', 'EMAIL CONFIRMATION', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\AIO\sout.tmp
 set /p SOUT=<%TEMP%\AIO\sout.tmp
@@ -882,12 +700,12 @@ sc config "XblAuthManager" start= disabled
 sc config "XblGameSave" start= disabled
 sc config "XboxNetApiSvc" start= Disabled
 echo If any errors occured during disabling phase please rerun AIO as Administrator.
-PAUSE & cls & goto end_COMPUTER_CONFIGURATION 
+PAUSE & cls & goto end_COMPUTER_CONFIGURATION
 
 :SERVICES_DISALLOWED
-Echo 
+Echo
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('NO SERVICES WAS DISABLED BY PRESSING NO... Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-cls & goto end_COMPUTER_CONFIGURATION 
+cls & goto end_COMPUTER_CONFIGURATION
 ::========================================================================================================================================
 ::========================================================================================================================================
 
@@ -901,40 +719,19 @@ color 0f
 mode con cols=98 lines=32
 title  UPDATER
 cls
-
-echo:
-echo:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] WINDOWS UPDATE                                       ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] WINDOWS UPDATE PAUSER                                ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] SOFTWARE UPDATER                                     ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] DRIVER_UPDATER                                       ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                          [5] GO BACK            [6] EXIT      ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
-
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+CmdMenuSel 0Ab1 "   [1] WINDOWS UPDATE" "   [2] WINDOWS UPDATE PAUSER" "   [3] SOFTWARE UPDATER" "   [4] DRIVER_UPDATER" "   [5] GO BACK" "   [6] EXIT"
 if errorlevel  6 goto:EXIT
 if errorlevel  5 goto:end_BACKMENU
 if errorlevel  4 goto:DRIVER_UPDATER
 if errorlevel  3 goto:SOFTWARE_UPDATER
 if errorlevel  2 goto:WINDOWS_UPDATE_PAUSER
 if errorlevel  1 goto:WINDOWS_UPDATE
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 
 ::========================================================================================================================================
@@ -945,11 +742,11 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATER
 echo This will start a Windows Manual Updater
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe"
-start /wait %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/WUpdater.exe -d, --dir=C:\AIO\WINDOWS_UPDATE\ --allow-overwrite="true" --disable-ipv6
+start /wait C:\AIO\WINDOWS_UPDATE\WUpdater.exe
 timeout 2 >nul
 del %USERPROFILE%\AppData\Local\Temp\AIO\WUpdater.exe
-pause & goto end_UPDATER
+pause & goto UPDATER
 
 ::========================================================================================================================================
 
@@ -959,10 +756,10 @@ color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS UPDATE PAUSE
 echo This section will give options to pause Windows Update...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\UPDATES_PAUSE_TASK.ps1"  -verb runas
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/UPDATES_PAUSE_TASK.ps1 -d, --dir=C:\AIO\WINDOWS_UPDATE\ --allow-overwrite="true" --disable-ipv6
+Powershell -ExecutionPolicy Bypass -File "C:\AIO\WINDOWS_UPDATE\UPDATES_PAUSE_TASK.ps1"  -verb runas
 timeout 2 >nul
-pause & goto end_UPDATER
+pause & goto UPDATER
 
 
 ::========================================================================================================================================
@@ -971,40 +768,119 @@ pause & goto end_UPDATER
 color 0f
 mode con cols=98 lines=32
 title  SOFTWARE UPDATER
-cls
-echo                         This section will give options to update software
-echo                            Pre_Selected or gives options to self select
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] PatchMyPC Pre-Set Selections                         ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] PatchMyPC Self Select                                ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] Chocolatey Pre-Set Selections                        ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] Chocolatey Self Select                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                          [5] GO BACK            [6] EXIT      ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:123456 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6] : "
+echo The script will automatically download and install packages managers that will give an indication
+echo of what you as a user would be able to use for the rest of the script. A few items will be changed
+echo to make it much more visible to use with color based indicators.
 
-if errorlevel  6 goto:EXIT
-if errorlevel  5 goto:end_UPDATER
+:: Initialize variables
+set chocoInstalled=0
+set wgetInstalled=0
+set wingetInstalled=0
+set curlInstalled=0
+
+echo Checking for package managers...
+
+:: Check if Chocolatey is already installed
+where choco >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Chocolatey is already installed.
+    set chocoInstalled=1
+)
+
+:: Install Chocolatey if not already installed
+if %chocoInstalled% equ 0 (
+    echo Installing Chocolatey...
+    powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+
+    :: Restart the script to continue with the rest of the installation process after Chocolatey is installed
+    powershell -Command "Start-Process cmd -ArgumentList '/c %0' -Verb RunAs" -Verb RunAs && exit
+)
+
+:: Check if wget is already installed
+where wget >nul 2>&1
+if %errorlevel% equ 0 (
+    echo wget is already installed.
+    set wgetInstalled=1
+)
+
+:: Install wget if not already installed
+if %wgetInstalled% equ 0 (
+    echo Installing wget...
+    choco install -y wget
+    if %errorlevel% neq 0 (
+        echo Error installing wget. Please try again or install manually.
+        goto end
+    )
+    set wgetInstalled=1
+)
+
+:: Check if curl is already installed
+where curl >nul 2>&1
+if %errorlevel% equ 0 (
+    echo curl is already installed.
+    set curlInstalled=1
+)
+
+:: Install curl if not already installed
+if %curlInstalled% equ 0 (
+    echo Installing curl...
+    choco install -y curl
+    if %errorlevel% neq 0 (
+        echo Error installing curl. Please try again or install manually.
+        goto end
+    )
+    set curlInstalled=1
+)
+
+:: Check if winget is already installed
+where winget >nul 2>&1
+if %errorlevel% equ 0 (
+    echo winget is already installed.
+    set wingetInstalled=1
+)
+
+:: Install winget if not already installed
+if %wingetInstalled% equ 0 (
+    echo Installing winget...
+    powershell Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+    powershell Install-Script -Name winget-install -Force
+    powershell winget-install.ps1
+    if %errorlevel% neq 0 (
+        echo Error installing winget. Please try again or install manually.
+        goto end
+    )
+    set wingetInstalled=1
+)
+
+:: Display installation status
+cls
+echo Chocolatey installed: %chocoInstalled%
+echo wget installed: %wgetInstalled%
+echo curl installed: %curlInstalled%
+echo winget installed: %wingetInstalled%
+echo
+echo You can now choose wether to go back to previous menu or continue with selections
+echo showcased below.
+pause
+
+cls
+echo This section will give options to update the software
+echo Pre_Selected or gives options to self select
+Echo. Select the Menu-options (you can use KEYBOARD or MOUSE)
+echo.
+CmdMenuSel 0Ab1 "   [1] PatchMyPC Pre-Set Selections" "   [2] PatchMyPC Self Select" "   [3] Chocolatey Pre-Set Selections" "   [4] Chocolatey Self Select" "   [5] Winget-ui temp setup" "   [6] GO BACK" "   [6] EXIT"
+if errorlevel  7 goto:EXIT
+if errorlevel  6 goto:UPDATER
+if errorlevel  5 goto:WINGET-UI
 if errorlevel  4 goto:Chocolatey_GUI
 if errorlevel  3 goto:Chocolatey
 if errorlevel  2 goto:PatchMyPC_OWN_SELECTIONS
 if errorlevel  1 goto:PatchMyPC
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
 cls
 
 :PatchMyPC
@@ -1013,25 +889,103 @@ color 0f
 mode con cols=98 lines=32
 TITLE PatchMyPC auto setup
 echo This will start a SOFTWARE UPDATE SESSION...
-echo A bunch of software will be auto installed in accordece with clientelle we worked with...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
-START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe /auto switch
+echo.
+echo Patch My PC is an automated patch management application that simplifies the process of
+echo keeping software up-to-date and secure. It scans your computer for installed software
+echo and automatically installs available updates for a wide range of third-party applications,
+echo including popular ones like Google Chrome, Mozilla Firefox, and Adobe Flash Player.
+echo.
+echo In addition, Patch My PC offers additional features such as the ability to uninstall software,
+echo disable startup programs, and create a system restore points. It is user-friendly and requires
+echo minimal configuration, making it a popular choice for both home users and IT professionals.
+echo.
+echo A bunch of software will be auto-installed based on our client's needs.
+echo.
+pause
+REM Check if PatchMyPC is already installed
+if exist "C:\AIO\SOFTWARE_UPDATER\patchmypc.exe" (
+    echo PatchMyPC is already installed. Skipping installation...
+    timeout 2 >nul
+    pause & cls & goto UPDATER
+)
+
+REM Download PatchMyPC installer and configuration file
+echo Downloading PatchMyPC installer and configuration file...
+set "TMP_DIR=C:\AIO\SOFTWARE_UPDATER\"
+if not exist "%TMP_DIR%" mkdir "%TMP_DIR%"
+set "PATCHMYPCEXE=%TMP_DIR%PatchMyPC.exe"
+set "PATCHMYPCCONFIG=%TMP_DIR%PatchMyPC.ini"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.exe -d, --dir="%TMP_DIR%" --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/PRE-SELECT/PatchMyPC.ini -d, --dir="%TMP_DIR%" --allow-overwrite="true" --disable-ipv6
+
+REM Install PatchMyPC
+echo Installing PatchMyPC...
+set "PATCHMYPCEXE_PATH=%TMP_DIR%PatchMyPC.exe"
+set "PATCHMYPCCONFIG_PATH=%TMP_DIR%PatchMyPC.ini"
+try {
+    START /wait "%PATCHMYPCEXE_PATH%" /auto switch
+} catch {
+    echo Error installing PatchMyPC. %ERRORLEVEL%
+    timeout 2 >nul
+    pause & cls & goto UPDATER
+}
+
+echo PatchMyPC successfully installed.
 timeout 2 >nul
-pause & cls & goto end_UPDATER
+pause & cls & goto UPDATER
 
 :PatchMyPC_OWN_SELECTIONS
 cls
 color 0f
 mode con cols=98 lines=32
-TITLE PatchMyPC auto setup
+TITLE PatchMyPC Self Selection setup
+
 echo This will start a SOFTWARE UPDATE SESSION...
-echo Select the software in accordence with your own needs...
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe" 
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini" -O "%USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.ini"
-START /wait %USERPROFILE%\AppData\Local\Temp\AIO\PatchMyPC.exe
+echo.
+echo Patch My PC is an automated patch management application that simplifies the process of
+echo keeping software up-to-date and secure. It scans your computer for installed software
+echo and automatically installs available updates for a wide range of third-party applications,
+echo including popular ones like Google Chrome, Mozilla Firefox, and Adobe Flash Player.
+echo.
+echo In addition, Patch My PC offers additional features such as the ability to uninstall software,
+echo disable startup programs, and create a system restore points. It is user-friendly and requires
+echo minimal configuration, making it a popular choice for both home users and IT professionals.
+echo.
+echo Feel free to install any software that you would need, by only selecting the checked boxes
+echo for the software of your own choice and pressing the dedicated install button.
+echo.
+pause
+REM Check if PatchMyPC is already installed
+if exist "C:\AIO\SOFTWARE_UPDATER\patchmypc.exe" (
+    echo PatchMyPC is already installed. Skipping installation...
+    timeout 2 >nul
+    pause & cls & goto UPDATER
+)
+
+REM Download PatchMyPC installer and configuration file
+echo Downloading PatchMyPC installer and configuration file...
+set "TMP_DIR=C:\AIO\SOFTWARE_UPDATER\"
+if not exist "%TMP_DIR%" mkdir "%TMP_DIR%"
+set "PATCHMYPCEXE=%TMP_DIR%PatchMyPC.exe"
+set "PATCHMYPCCONFIG=%TMP_DIR%PatchMyPC.ini"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.exe -d, --dir="%TMP_DIR%" --allow-overwrite="true" --disable-ipv6
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/SELF-SELECT/PatchMyPC.ini -d, --dir="%TMP_DIR%" --allow-overwrite="true" --disable-ipv6
+
+REM Install PatchMyPC
+echo Installing PatchMyPC...
+set "PATCHMYPCEXE_PATH=%TMP_DIR%PatchMyPC.exe"
+set "PATCHMYPCCONFIG_PATH=%TMP_DIR%PatchMyPC.ini"
+try {
+    START /wait "%PATCHMYPCEXE_PATH%" /auto switch
+} catch {
+    echo Error installing PatchMyPC. %ERRORLEVEL%
+    timeout 2 >nul
+    pause & cls & goto UPDATER
+}
+
+echo PatchMyPC successfully installed.
 timeout 2 >nul
-pause & cls & goto end_UPDATER
+pause & cls & goto UPDATER
 
 :Chocolatey
 cls
@@ -1039,26 +993,80 @@ color 0f
 mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
 echo This will start a Chocolatey INSTANCE SOFTWARE UPDATE SESSION...
-echo A bunch of software will be auto installed in accordece with clientelle we worked with...
+echo A bunch of software will be auto-installed in accordance with clients we have worked with...
+
+rem Check if Chocolatey is already installed
+where choco >nul 2>nul
+if %errorlevel% equ 0 (
+    echo Chocolatey is already installed on the system.
+    pause & goto UPDATER
+)
+
+rem Install Chocolatey
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"
-Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\choco_Preset.ps1"  -verb runas
+
+rem Download and run Chocolatey preset
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SOFTWARE/choco_Preset.ps1 -d, --dir=C:\AIO\ --allow-overwrite="true" --disable-ipv6
+try {
+    Powershell -ExecutionPolicy Bypass -File "C:\AIO\choco_Preset.ps1"  -verb runas
+} catch {
+    echo An error occurred while running the Chocolatey preset.
+    pause & goto UPDATER
+}
+
 timeout 2 >nul
-pause & cls & goto end_UPDATER
+pause & cls & goto UPDATER
 
 :Chocolatey_GUI
 cls
 color 0f
 mode con cols=98 lines=32
 TITLE Chocolatey Installer Setup
-echo This will start a SOFTWARE UPDATE SESSION...
-echo Select the software in accordence with your own needs...
+echo This will start a software update session using the Chocolatey package manager. Please wait while it downloads and installs update...
+
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-powershell choco upgrade all --noop
-powershell choco install chocolateygui
-rem powershell choco install hot-chocolatey
+
+if %errorlevel% neq 0 (
+    echo An error occurred while installing the Chocolatey package manager.
+    echo Please check your internet connection and try again later.
+    timeout 5
+    exit /b
+)
+
+rem Check if Chocolatey is already installed and reinstall it if necessary.
+choco upgrade chocolatey --force
+
+if %errorlevel% neq 0 (
+    echo An error occurred while upgrading the Chocolatey package manager.
+    echo Please check your internet connection and try again later.
+    timeout 5
+    exit /b
+)
+
+echo Chocolatey package manager has been successfully installed and upgraded.
+
+echo Installing Chocolatey GUI...
+
+choco install chocolateygui -y
+if %errorlevel% neq 0 (
+    echo An error occurred while installing Chocolatey GUI.
+    echo Please check your internet connection and try again later.
+    timeout 5
+    exit /b
+)
+
+echo Chocolatey GUI has been successfully installed.
+echo.
+echo All software updates have been successfully installed.
+echo Install other software packages as needed.
 timeout 2 >nul
-pause & cls & goto end_UPDATER
+pause & cls & goto UPDATER
+
+:WINGET-UI
+echo this is a temporary setup for winget
+winget install --id=SomePythonThings.WingetUIStore -e
+timeout 2 >nul
+pause & cls & goto UPDATER
 
 ::========================================================================================================================================
 
@@ -1067,9 +1075,9 @@ cls
 color 0f
 mode con cols=98 lines=32
 Title DRIVER UPDATER
-powershell Invoke-WebRequest "https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip" -O "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/main/TOOLS/3.UPDATER/SNAPPY_DRIVER.zip -d, --dir=C:\AIO\SNAPPY_DRIVER\ --allow-overwrite="true" --disable-ipv6
 cd /d %~dp0
-Call :UnZipFile "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER" "%USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER.zip"
+Call :UnZipFile "C:\AIO\SNAPPY_DRIVER\" "C:\AIO\SNAPPY_DRIVER\SNAPPY_DRIVER.zip"
 exit /b
 
 :UnZipFile <ExtractTo> <newzipfile>
@@ -1087,18 +1095,32 @@ if exist %vbs% del /f /q %vbs%
 cscript //nologo %vbs%
 if exist %vbs% del /f /q %vbs%
 
-if /i "%processor_architecture%"=="AMD64" GOTO AMD64
-if /i "%PROCESSOR_ARCHITEW6432%"=="AMD64" GOTO AMD64
-if /i "%processor_architecture%"=="x86" GOTO x86
-if error GOTO UNSUPPORTED
+if not exist "C:\AIO\SNAPPY_DRIVER\" mkdir "C:\AIO\SNAPPY_DRIVER\"
+7z x -y -o"C:\AIO\SNAPPY_DRIVER\" "C:\AIO\SNAPPY_DRIVER\SNAPPY_DRIVER.zip"
+
+if not exist "C:\AIO\SNAPPY_DRIVER\" mkdir "C:\AIO\SNAPPY_DRIVER\"
+powershell Expand-Archive -Path "C:\AIO\SNAPPY_DRIVER\SNAPPY_DRIVER.zip" -DestinationPath "C:\AIO\SNAPPY_DRIVER\" -Force
+
+wmic cpu get architecture | find "64" > nul
+if %errorlevel% equ 0 goto AMD64
+wmic cpu get addresswidth | find "64" > nul
+if %errorlevel% equ 0 goto AMD64
+goto x86
+
+:UNSUPPORTED
+echo Unsupported architecture "%processor_architecture%"!
+echo  Not found 'Snappy Driver Installer'!
+echo.
+timeout 6
+pause & cls & goto end_UPDATER
 
 :AMD64
-start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
+start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_x64_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x64
 pause & cls & goto end_UPDATER
 
 :x86
-start /wait /b %USERPROFILE%\AppData\Local\Temp\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
+start /wait /b C:\AIO\SNAPPY_DRIVER\SDI_R2111.exe -checkupdates -autoupdate -autoclose
 echo SNAPPY DRIVER INSTALLER x86
 pause & cls & goto end_UPDATER
 :UNSUPPORTED
@@ -1118,35 +1140,14 @@ cls
 color 0f
 mode con cols=98 lines=40
 TITLE PC Cleanup Utility
-ECHO                THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
-echo                     ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
-ECHO                        THERE ARE 2 OTHER REPAIR TOOLS AS A LAST RESORT REPAIR.
-ECHO                                    PLEASE READ BEFORE PROCEEDING
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] Disk Cleanup                                         ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] Disk Defragment                                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] DISK CHECK                                           ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] DISM AND SFC WINDOWS REPAIR                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] Windows Debloater                                    ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] Group Policy Reset - USE AT OWN RISK                 ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] WMI RESET - USE AT OWN RISK                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                          [8] GO BACK            [9] EXIT      ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo:          
-choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
-CLS
+ECHO THIS OPTION WILL GIVE OPTIONS TO CLEAN UP TEMPORARY ITEMS FROM WINDOWS
+echo ASWELL AS DEBLOAT A FEW OF WINDOWS PREINSTALLED APPLICATIONS
+ECHO THERE ARE 2 OTHER REPAIR TOOLS AS A LAST RESORT REPAIR.
+ECHO PLEASE READ BEFORE PROCEEDING
+echo.
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+echo.
+CmdMenuSel 0Ab1 "   [1] Disk Cleanup" "   [2] Disk Defragment" "   [3] DISK CHECK" "   [4] DISM AND SFC WINDOWS REPAIR" "   [5] Windows Debloater" "   [6] Group Policy Reset - USE AT OWN RISK" "   [7] WMI RESET - USE AT OWN RISK" "   [8] GO BACK" "   [9] EXIT"
 if errorlevel 9 goto :EXIT
 if errorlevel 8 goto :end_BACKMENU
 if errorlevel 7 goto :WMI_RESET_AGREEMENT
@@ -1157,12 +1158,26 @@ if errorlevel 3 goto :DISK_CHECK
 if errorlevel 2 goto :Disk_Defragment
 if errorlevel 1 goto :Disk_Cleanup
 goto error
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
+cls
 
 :Disk_Cleanup
 cls
 echo.
 title DISK CLEANUP
 echo.
+echo Cleaning temporary files...
+
+REM delete temporary files
+del /s /q %temp%\*
+del /s /q %windir%\temp\*
+del /s /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
+del /s /q "%userprofile%\AppData\Local\Temp\*.*"
+del /s /q "%windir%\Prefetch\*.*"
 del /f /q "%userprofile%\Cookies\*.*"
 del /f /q "%userprofile%\AppData\Local\Microsoft\Windows\Temporary Internet Files\*.*"
 del /f /q "%userprofile%\AppData\Local\Temp\*.*"
@@ -1173,15 +1188,6 @@ del /s /f /q "C:\WINDOWS\Prefetch"
 del /s /f /q "%temp%\*.*"
 rd /s /q "%temp%"
 md %temp%
-deltree /y "c:\windows\tempor~1"
-deltree /y "c:\windows\temp"
-deltree /y "c:\windows\tmp"
-deltree /y "c:\windows\ff*.tmp"
-deltree /y "c:\windows\history"
-deltree /y "c:\windows\cookies"
-deltree /y "c:\windows\recent"
-deltree /y "c:\windows\spool\printers"
-del c:\WIN386.SWP 
 del /f /s /q "%systemdrive%\*.tmp"
 del /f /s /q "%systemdrive%\*._mp"
 del /f /s /q "%systemdrive%\*.log"
@@ -1203,45 +1209,12 @@ if exist "C:\tmp" del /f /q "C:\tmp\*.*"
 if exist "C:\temp" del /f /q "C:\temp\*.*"
 if exist "%temp%" del /f /q "%temp%\*.*"
 if exist "%tmp%" del /f /q "%tmp%\*.*"
-if exist "C:\WINDOWS\Users\*.zip" del "C:\WINDOWS\Users\*.zip" /f /q
-if exist "C:\WINDOWS\Users\*.exe" del "C:\WINDOWS\Users\*.exe" /f /q
-if exist "C:\WINDOWS\Users\*.gif" del "C:\WINDOWS\Users\*.gif" /f /q
-if exist "C:\WINDOWS\Users\*.jpg" del "C:\WINDOWS\Users\*.jpg" /f /q
-if exist "C:\WINDOWS\Users\*.png" del "C:\WINDOWS\Users\*.png" /f /q
-if exist "C:\WINDOWS\Users\*.bmp" del "C:\WINDOWS\Users\*.bmp" /f /q
-if exist "C:\WINDOWS\Users\*.avi" del "C:\WINDOWS\Users\*.avi" /f /q
-if exist "C:\WINDOWS\Users\*.mpg" del "C:\WINDOWS\Users\*.mpg" /f /q
-if exist "C:\WINDOWS\Users\*.mpeg" del "C:\WINDOWS\Users\*.mpeg" /f /q
-if exist "C:\WINDOWS\Users\*.ra" del "C:\WINDOWS\Users\*.ra" /f /q
-if exist "C:\WINDOWS\Users\*.ram" del "C:\WINDOWS\Users\*.ram"/f /q
-if exist "C:\WINDOWS\Users\*.mp3" del "C:\WINDOWS\Users\*.mp3" /f /q
-if exist "C:\WINDOWS\Users\*.mov" del "C:\WINDOWS\Users\*.mov" /f /q
-if exist "C:\WINDOWS\Users\*.qt" del "C:\WINDOWS\Users\*.qt" /f /q
-if exist "C:\WINDOWS\Users\*.asf" del "C:\WINDOWS\Users\*.asf" /f /q
-if exist "C:\WINDOWS\Users\AppData\Temp\*.zip" del "C:\WINDOWS\Users\Users\*.zip /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.exe" del "C:\WINDOWS\Users\Users\*.exe /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.gif" del "C:\WINDOWS\Users\Users\*.gif /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.jpg" del "C:\WINDOWS\Users\Users\*.jpg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.png" del "C:\WINDOWS\Users\Users\*.png /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.bmp" del "C:\WINDOWS\Users\Users\*.bmp /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.avi" del "C:\WINDOWS\Users\Users\*.avi /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mpg" del "C:\WINDOWS\Users\Users\*.mpg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mpeg" del "C:\WINDOWS\Users\Users\*.mpeg /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.ra" del "C:\WINDOWS\Users\Users\*.ra /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.ram" del "C:\WINDOWS\Users\Users\*.ram /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mp3" del "C:\WINDOWS\Users\Users\*.mp3 /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.asf" del "C:\WINDOWS\Users\Users\*.asf /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.qt" del "C:\WINDOWS\Users\Users\*.qt /f /q"
-if exist "C:\WINDOWS\Users\AppData\Temp\*.mov" del "C:\WINDOWS\Users\Users\*.mov /f /q"
-if exist "C:\WINDOWS\ff*.tmp" del "C:\WINDOWS\ff*.tmp /f /q"
-if exist "C:\WINDOWS\ShellIconCache" del /f /q "C:\WINDOWS\ShellI~1\*.*"
 DEL /S /Q "%TMP%\*.*"
 DEL /S /Q "%TEMP%\*.*"
 DEL /S /Q "%WINDIR%\Temp\*.*"
 DEL /S /Q "%USERPROFILE%\Local Settings\Temp\*.*"
 DEL /S /Q "%USERPROFILE%\Appdata\Local\BraveSoftware\Brave-Browser\User Data\Default\Cache"
 DEL /S /Q "%LocalAppData%\Temp"
-
 DEL /S /Q "C:\Program Files (x86)\Google\Temp"
 DEL /S /Q "C:\Program Files (x86)\Steam\steamapps\temp"
 DEL /S /Q "U:\Games\steamapps\temp"
@@ -1251,6 +1224,38 @@ DEL /S /Q "C:\Windows\Temp"
 DEL /S /Q "C:\Windows\System32\DriverStore\Temp"
 DEL /S /Q "C:\Windows\WinSxS\Temp"
 
+REM remove cookies, recent files, and thumbnail cache
+powershell -command "Remove-Item -Path '$env:userprofile\Cookies\*' -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\AppData\Local\Microsoft\Windows\Temporary Internet Files\*' -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\AppData\Local\Temp\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\temp\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\Prefetch\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:temp\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\Recent\*' -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\Local Settings\Temporary Internet Files\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\Local Settings\Temp\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:userprofile\AppData\Local\Microsoft\Windows\Explorer\thumbcache_*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*.tmp' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*._mp' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*.log' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*.gid' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*.chk' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\*.old' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:systemdrive\Recycled\*.*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\*.bak' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\Prefetch\*.*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\SoftwareDistribution\Download\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\ServiceProfiles\LocalService\AppData\Local\Microsoft\Windows\Temporary Internet Files\*' -Recurse -Force"
+powershell -command "Remove-Item -Path '$env:windir\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\Temporary Internet Files\*' -Recurse -Force"
+powershell -command "Remove-Item -Path $env:TEMP\* -Recurse -Force"
+powershell -command "Remove-Item -Path $env:windir\Temp\* -Recurse -Force"
+
+echo Temporary files have been cleaned.
+
+REM launch disk cleaner for verification cleanup
+cleanmgr /d C:
+cleanmgr /sageset:1
+cleanmgr /sagerun:1
 cleanmgr /VERYLOWDISK /sagerun:0
 ipconfig /flushdns
 echo.
@@ -1284,14 +1289,105 @@ pause & goto end_CLEANER
 color 0f
 mode con cols=98 lines=32
 TITLE DISK CHECK
-Set /P %DLETTER%=ENTER DRIVE LETTER THAT NEEDS ATTENTION:
-CHKDSK %DLETTER%: /R /I /F /X
-pause & goto end_CLEANER
+cls
+setlocal EnableDelayedExpansion
+cls
+echo ==================
+ver | findstr /i "6\.[01]" > nul && set powershell_ver=6 || set powershell_ver=5
+echo Installed PowerShell Version: %powershell_ver%
+
+echo Detecting available disks...
+echo list disk | diskpart > available_disks.txt
+findstr /i /c:"Disk ###" /c:"Gpt" /c:"Status" available_disks.txt > disk_info.txt
+type disk_info.txt
+echo list volume | diskpart > available_volumes.txt
+findstr /i /c:"Volume ###" /c:"Ltr" /c:"Label" /c:"Size" /c:"Fs" available_volumes.txt > volume_info.txt
+type volume_info.txt
+
+setlocal EnableDelayedExpansion
+set /p disk=Enter number of disks:
+set "disks="
+for /l %%i in (1,1,%disk%) do (
+  set /p drive=Enter drive letter of disk %%i:
+  set "disks=!disks! /d %%i: !drive!"
+)
+echo Disk letter and numbers selected:
+echo %disks%
+echo ========================
+echo Disk Check Menu
+echo ========================
+Echo.Select the Menu-options (you can use KEYBOARD or MOUSE)
+echo.
+CmdMenuSel 0Ab1 "   [1] CHKDSK (cmd)        : Compatible with all Windows versions" "   [2] Repair-Volume (PSv4): Compatible with Windows 8.1/Server 2012 R2 or newer" "   [3] Test-Volume (PSv4)  : Compatible with Windows 8.1/Server 2012 R2 or newer" "   [4] Repair-Partition (PSv4): Compatible with Windows 8.1/Server 2012 R2 or newer" "   [5] Disk Space Test (cmd): Compatible with all Windows versions" "   [6] Get Volume Info (cmd): Compatible with all Windows versions" "   [7] Read Speed Test (cmd): Compatible with all Windows versions" "   [8] Write Speed Test (cmd): Compatible with all Windows versions" "   [9] Go Back"
+set /p choice=Enter your choice:
+if '%choice%'=='1' goto CHKDSK
+if '%choice%'=='2' goto POWERSHELL_REPAIR_VOLUME
+if '%choice%'=='3' goto TEST_VOLUME
+if '%choice%'=='4' goto REPAIR_PARTITION
+if '%choice%'=='5' goto DISK_SPACE_TEST
+if '%choice%'=='6' goto VOLUME_INFO
+if '%choice%'=='7' goto READ_SPEED_TEST
+if '%choice%'=='8' goto WRITE_SPEED_TEST
+if '%choice%'=='9' goto end_CLEANER
+goto DISK_CHECK
+goto error
+cls
+Echo. You Selected: Option %Errorlevel%
+Echo.
+Echo.
+timeout /t 2 >nul
+
+:CHKDSK
+set /p drive_letter=Enter drive letter that needs attention:
+CHKDSK %drive_letter%: /R /I /F /X
+pause
+goto DISK_CHECK
+
+:POWERSHELL_REPAIR_VOLUME
+powershell.exe -Command "Repair-Volume -DriveLetter %drive_letter% -SpotFix"
+pause
+goto DISK_CHECK
+
+:TEST_VOLUME
+powershell.exe -Command "Get-Volume -DriveLetter %drive_letter% | Test-Volume"
+pause
+goto DISK_CHECK
+
+:REPAIR_PARTITION
+powershell.exe -Command "Repair-Volume -DriveLetter %drive_letter% -OfflineScanAndFix"
+pause
+goto DISK_CHECK
+
+:DISK_SPACE_TEST
+set /p drive_letter=Enter drive letter to test disk space:
+powershell.exe -Command "Get-PSDrive %drive_letter% | Select-Object Used, Free, Provider, Root"
+pause
+goto DISK_CHECK
+
+:VOLUME_INFO
+set /p drive_letter=Enter drive letter to get volume info:
+powershell.exe -Command "Get-Volume -DriveLetter %drive_letter% | Select-Object DriveLetter, FileSystemLabel, HealthStatus"
+pause
+goto DISK_CHECK
+
+:READ_SPEED_TEST
+for /f "tokens=2 delims=:" %%a in ('wmic diskdrive get index^,model /format:list ^| find "="') do set "model=%%a"
+echo Testing read speed of drive %drive_letter% using model %model%...
+winsat disk -read -drive %drive_letter%
+pause
+goto DISK_CHECK
+
+:WRITE_SPEED_TEST
+for /f "tokens=2 delims=:" %%a in ('wmic diskdrive get index^,model /format:list ^| find "="') do set "model=%%a"
+echo Testing write speed of drive %drive_letter% using model %model%...
+winsat disk -write -drive %drive_letter%
+pause
+goto DISK_CHECK
 
 :DISM_and_SFC
 color 0f
 mode con cols=98 lines=32
-TITLE DISM
+TITLE DISM and SFC
 cls
 echo ------------------------------------------------
 echo Windows component files check - procedure 1 of 3
@@ -1310,29 +1406,53 @@ cls
 echo --------------------------------------------------------------
 echo Checking the integrity of the Windows image - procedure 2 of 3
 echo --------------------------------------------------------------
-DISM /Online /Cleanup-Image /CheckHealth
-echo --------------------------------------------------
-echo Phase 1 of 3 completed
-echo --------------------------------------------------
-DISM /Online /Cleanup-Image /ScanHealth
-echo --------------------------------------------------
-echo Phase 2 of 3 completed
-echo --------------------------------------------------
-DISM /Online /Cleanup-Image /RestoreHealth
-echo --------------------------------------------------
-echo Phase 3 of 3 completed 
-echo PRESS ANY KEY TO CONTINUE.
-pause >null
-del null
-cls
-echo -------------------------------------------------
-echo Running System file check - procedure 3 of 3
-echo -------------------------------------------------
-sfc /scannow
-echo --------------------------------------------------------------------------------
-echo If SFC found some errors and could not repair, re-run the script after a reboot.
-echo --------------------------------------------------------------------------------
-del null
+DISM /Online /Cleanup-Image /CheckHealth >nul 2>&1
+if %errorlevel% neq 0 (
+    echo --------------------------------------------------
+    echo Errors detected in DISM tool. Cannot proceed with SFC.
+    echo --------------------------------------------------
+) else (
+    echo --------------------------------------------------
+    echo Phase 1 of 3 completed
+    echo --------------------------------------------------
+    DISM /Online /Cleanup-Image /ScanHealth
+    echo --------------------------------------------------
+    echo Phase 2 of 3 completed
+    echo --------------------------------------------------
+    DISM /Online /Cleanup-Image /RestoreHealth
+    echo --------------------------------------------------
+    echo Phase 3 of 3 completed
+    echo PRESS ANY KEY TO CONTINUE.
+    pause >null
+    del null
+    cls
+    echo -------------------------------------------------
+    echo Running System file check - procedure 3 of 3
+    echo -------------------------------------------------
+    sfc /scannow >sfc.log
+    echo --------------------------------------------------------------------------------
+    echo If SFC found some errors and could not repair, re-run the script after a reboot.
+    echo --------------------------------------------------------------------------------
+    findstr /C:"[SR]" sfc.log >sfcerrors.log
+    if not exist sfcerrors.log (
+        echo No errors found in SFC.
+    ) else (
+        echo SFC detected errors. Attempting repair...
+        set /p media="Enter the drive letter of the Windows installation media that contains the install.wim file (e.g., D): "
+        for /f "tokens=1,2* delims=]" %%a in ('type sfcerrors.log ^| find /i "[SR]"') do (
+            set "file=%%~b"
+            set "file=!file:~1!"
+            echo Repairing file !file!...
+            DISM /Online /Cleanup-Image /RestoreHealth /source:WIM:%media%:\sources\install.wim:1 /limitaccess /replace:"!file!"
+        )
+        echo Repair complete. Re-running SFC...
+        sfc /scannow
+        echo --------------------------------------------------------------------------------
+        echo If SFC found some errors and could not repair, re-run the script after a reboot.
+        echo --------------------------------------------------------------------------------
+    )
+    pause & cls & goto end_CLEANER
+)
 pause & cls & goto end_CLEANER
 
 :Windows_Debloater
@@ -1341,7 +1461,7 @@ mode con cols=98 lines=32
 TITLE DEBLOATER
 ECHO THIS OPTION WILL DEBLOAT WINDOWS 10 + 11
 timeout 2 >nul
-powershell Invoke-WebRequest "https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1" -O "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"
+aria2c https://github.com/coff33ninja/AIO/blob/92e827cb6a57ef688d1f87f0635aa91a337e7a68/TOOLS/4.CLEANER_REPAIR/DEBLOATER.ps1 -d, --dir=%USERPROFILE%\AppData\Local\Temp\AIO\ --allow-overwrite="true" --disable-ipv6
 Powershell -ExecutionPolicy Bypass -File "%USERPROFILE%\AppData\Local\Temp\AIO\Debloater.ps1"  -verb runas
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('This device has been successfully debloated. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
 cls & goto end_CLEANER
@@ -1362,18 +1482,22 @@ if %OUT%==No cls & goto CLEANER
 cls
 color 0f
 mode con cols=98 lines=32
-TITLE GROUP POLICY RESET
-ECHO The Group Policy Editor is an important tool for Windows OS using which
-ECHO System Administrators can fine-tune system settings.
-ECHO It has several infrastructural configuration options that allow you to make
-ECHO adjustments to the specific performance and security settings for users and computers.
-ECHO Sometimes you might end up tweaking your Group Policy Editor a bit further down the
-ECHO line where your computer starts behaving in an unwanted way. This is when you
-ECHO know that its time to reset all Group Policy settings to default
-ECHO and save yourself the pain of reinstalling Windows again. This section is Pre-Setup
-ECHO so that you won't have to look through forums to find a solution.
-ECHO Please reboot once the cleanup is complete.
+title Group Policy Reset
+ECHO The Group Policy Editor is an important tool for Windows OS, which allows
+ECHO system administrators to fine-tune system settings. It has several
+ECHO infrastructural configuration options that allow you to make adjustments
+ECHO to specific performance and security settings for users and computers.
 ECHO.
+ECHO Sometimes, you might end up tweaking your Group Policy Editor to a point
+ECHO where your computer starts behaving in an unwanted way. This is when you
+ECHO know that it's time to reset all Group Policy settings to default and
+ECHO save yourself the pain of reinstalling Windows. This section is pre-setup
+ECHO so that you won't have to look through forums to find a solution.
+ECHO.
+ECHO Please reboot once the cleanup is complete...
+ECHO.
+
+
 RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
 RD /S /Q "%WinDir%\System32\GroupPolicy"
 gpupdate /force
@@ -1388,8 +1512,9 @@ reg delete "HKLM\Software\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Policies" /f
 reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /f
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('GroupPolicy has been successfully reset. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-cls & goto end_CLEANER
+
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; if([System.Windows.Forms.MessageBox]::Show('Group Policy has been successfully reset. Do you want to reboot?', 'COMPLETE', [System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Information) -eq 'Yes'){Restart-Computer -Force}}"
+goto :CLEANER
 
 :WMI_RESET_AGREEMENT
 cls
@@ -1398,7 +1523,7 @@ mode con cols=98 lines=32
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
 echo WINDOWS MANAGEMENT INSTRUMENTATION RESET AGREEMENT
 timeout 2 >nul
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Full WMI reset to the state when the operating system was installed is a serious measurement that should be well thought about, if needed at all. After the reset, you will need to reinstall any software that uses WMI repository. If, for example, your Server is System Center Configuration Manager Distribution Point or Pull Distribution Point, then you should not have any problem resetting though you will need to reinstall SCCM Client. However, keep in mind that if there are other uses for the server, you might need to check it afterwards. If youre in a case, when you need to reset WMI and it fixed your system to the state when you can boot – backup your content and better reinstall. It should not be an escape solution. Press YES if you understand. Press NO to go back to the previous section.', 'WINDOWS MANAGEMENT INSTRUMENTATION RESET AGREEMENT', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Full WMI reset to the state when the operating system was installed is a serious measurement that should be well thought about, if needed at all. After the reset, you will need to reinstall any software that uses WMI repository. If, for example, your Server is System Center Configuration Manager Distribution Point or Pull Distribution Point, then you should not have any problem resetting though you will need to reinstall SCCM Client. However, keep in mind that if there are other uses for the server, you might need to check it afterwards. If youre in a case, when you need to reset WMI and it fixed your system to the state when you can boot backup your content and better reinstall. It should not be an escape solution. Press YES if you understand. Press NO to go back to the previous section.', 'WINDOWS MANAGEMENT INSTRUMENTATION RESET AGREEMENT', 'YesNo', [System.Windows.Forms.MessageBoxIcon]::Warning);}" > %TEMP%\out.tmp
 set /p OUT=<%TEMP%\out.tmp
 if %OUT%==Yes cls & GOTO WMI_RESET
 if %OUT%==No cls & goto CLEANER
@@ -1408,87 +1533,252 @@ cls
 color 0f
 mode con cols=98 lines=32
 TITLE WINDOWS MANAGEMENT INSTRUMENTATION RESET
-ECHO Full WMI reset (to the state when the operating system was installed)
-ECHO is a serious measurement that should be well thought about, if needed
-ECHO at all. After the reset, you will need to reinstall any software that
-ECHO uses WMI repository. If, for example, your Server is System Center
-ECHO Configuration Manager Distribution Point or Pull Distribution Point,
-ECHO then you should not have any problem resetting (though you will need
-ECHO to reinstall SCCM Client). However, keep in mind that if there are
-ECHO other uses for the server, you might need to check it afterwards.
-ECHO If you’re in a case, when you need to reset WMI and it fixed your
-ECHO system to the state when you can boot – backup your content and better
-ECHO reinstall. It should not be an escape solution.
+echo Full WMI reset to the state when the operating system was installed
+echo is a serious measurement that should be well thought about, if needed
+echo at all. After the reset, you will need to reinstall any software that
+echo uses WMI repository. If, for example, your Server is System Center
+echo Configuration Manager Distribution Point or Pull Distribution Point,
+echo then you should not have any problem resetting though you will need
+echo to reinstall SCCM Client. However, keep in mind that if there are
+echo other uses for the server, you might need to check it afterwards.
+echo If you're in a case when you need to reset WMI and it fixed your
+echo system to the state when you can boot backup your content and better
+echo reinstall. It should not be an escape solution.
 PAUSE
-ECHO FULL WMI REPOSITORY RESET
-echo:
-ECHO To merge current WMI repository with factory defaults
-winmgmt /salvagerepository
-PAUSE
-rem need if command here
 
-ECHO If this still doesn’t help, make full reset of the WMI respository:
-winmgmt /resetrepository
-PAUSE
-rem need if command here
+call :stage1
+call :stage2
+call :stage3
 
-:-----------------------------------------------------------------------------
+echo Windows Management interface has been successfully reset.
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Windows Management interface has been successfully reset. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+exit /b
 
-ECHO If previous attempt failed, then we must make use of an older method:
-REM Turn winmgmt service Startup type to Disabled
-sc config winmgmt start = disabled
-REM Stop winmgmt service
+:stage1
+echo Salvaging WMI repository...
+winmgmt /salvagerepository || call :salvage_failed
+echo WMI repository salvaged successfully.
+exit /b
+
+:salvage_failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository salvaging failed. Review the error message and try again.', 'WMI Repository Salvaging', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+exit /b
+
+:stage2
+echo Resetting WMI repository...
+winmgmt /resetrepository || call :reset_failed
+echo WMI repository reset successfully.
+exit /b
+
+:reset_failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository reset failed. Review the error message and try again.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+exit /b
+
+:stage3
+echo Rebuilding WMI repository...
+call :disable_winmgmt_service
+call :unregister_dlls
+call :delete_repository_folder
+call :register_dlls
+call :rebuild_mofs
+call :rebuild_mfls
+call :rebuild_services
+call :enable_winmgmt_service
+echo WMI repository rebuilt successfully.
+exit /b
+
+:disable_winmgmt_service
+echo Turning winmgmt service Startup type to Disabled...
+sc config winmgmt start=disabled
+echo Stopping winmgmt service...
 net stop winmgmt /y
+exit /b
 
-REM Register / Reregister Service DLLs
-regsvr32 /s %systemroot%\system32\scecli.dll 
+:unregister_dlls
+echo Registering / Reregistering Service DLLs...
+regsvr32 /s %systemroot%\system32\scecli.dll
 regsvr32 /s %systemroot%\system32\userenv.dll
+exit /b
 
-REM Enter WBEM folder
-cd /d %systemroot%\system32\wbem 
-REM Remove “repository” folder
+:delete_repository_folder
+echo Entering WBEM folder...
+cd /d %systemroot%\system32\wbem
+echo Removing "repository" folder...
 rd /S /Q repository
-REM Register / Reregister Service DLLs
-for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
-for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
-for /f %%s in ('dir /b *.mof') do mofcomp %%s 
-for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+exit /b
 
-REM Register / Reregister wmiprvse Service
+:register_dlls
+echo Registering / Reregistering Service DLLs...
+for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s
+for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s
+exit /b
+
+:rebuild_mofs
+echo Rebuilding MOFs...
+for /f %%s in ('dir /b *.mof') do mofcomp %%s
+exit /b
+
+:rebuild_mfls
+echo Rebuilding MFLs...
+for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+exit /b
+
+:rebuild_services
+echo Registering / Reregistering wmiprvse Service...
 wmiprvse /regserver
-REM Register / Reregister winmgmt Service
+echo Registering / Reregistering winmgmt Service...
 winmgmt /regserver
+echo Entering WBEM folder in SysWOW64...
 
 REM Enter WBEM folder in SysWOW64
 cd /d %systemroot%\SysWOW64\wbem\
 REM Remove “repository” folder
 rd /S /Q repository
 REM Register / Reregister Service DLLs
-for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s 
-for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s 
-for /f %%s in ('dir /b *.mof') do mofcomp %%s 
+for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s
+for /f %%s in ('dir /b /s *.exe') do regsvr32 /s %%s
+for /f %%s in ('dir /b *.mof') do mofcomp %%s
 for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+
+echo WMI repository reset completed.
 
 REM Turn winmgmt service Startup type to Automatic
 sc config winmgmt start = auto
-REM Stop winmgmt service
+REM Start winmgmt service
 net start winmgmt
 
-echo After you run it, there might be “Manageability” errors
-echo on Servers (maybe even clients), so you need to run again:
+REM Notify the user that the WMI repository has been reset
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Windows Management Interface has been successfully reset. Press OK to continue.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+
+GOTO :CLEANER
+
+:reset_failed
+REM Notify the user that the WMI repository reset failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository reset failed. Review the error message and try again.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+
+GOTO :CLEANER
+
+:salvage_failed
+REM Notify the user that the WMI repository salvaging failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository salvaging failed. Review the error message and try again.', 'WMI Repository Salvaging', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+
+GOTO :CLEANER
+
+REM Prompt the user to select a category
+CHOICE /C 123 /N /M "Select a category: 1) Reset WMI repository 2) Salvage WMI repository 3) Full WMI repository reset"
+
+REM Call the appropriate function based on the user's choice
+IF ERRORLEVEL 3 CALL :full_reset
+IF ERRORLEVEL 2 CALL :salvage
+IF ERRORLEVEL 1 CALL :reset
+
+GOTO :CLEANER
+
+:reset
+REM Call the reset function
+CALL :reset_func
+GOTO :CLEANER
+
+:salvage
+REM Call the salvage function
+CALL :salvage_func
+GOTO :CLEANER
+
+:full_reset
+REM Call the full reset function
+CALL :full_reset_func
+GOTO :CLEANER
+
+:reset_func
+REM Perform the WMI repository reset
+echo Performing WMI repository reset...
 winmgmt /resetrepository
+
+REM Test if the reset was successful
+IF %ERRORLEVEL% EQU 0 (
+    echo WMI repository reset completed successfully.
+    REM Notify the user that the WMI repository has been reset
+    powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Windows Management Interface has been successfully reset. Press OK to continue.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+) ELSE (
+REM Notify the user that the WMI repository salvaging failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository salvaging failed. Review the error message and try again.', 'WMI Repository Salvaging', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+
+REM Check if the WMI repository reset was successful
+if %errorlevel% equ 0 (
+REM Notify the user that the WMI repository reset was successful
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository reset completed successfully.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+) else (
+REM Notify the user that the WMI repository reset failed
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('WMI repository reset failed. Review the error message and try again.', 'WMI Repository Reset', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+)
+
+REM Re-enable the winmgmt service
+sc config winmgmt start=auto
+
+REM Start the winmgmt service
+net start winmgmt
+
+REM Check if the winmgmt service started successfully
+if %errorlevel% equ 0 (
+REM Notify the user that the winmgmt service has started
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('The Windows Management Instrumentation service has been started successfully.', 'Winmgmt Service', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+) else (
+REM Notify the user that the winmgmt service failed to start
+powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Failed to start the Windows Management Instrumentation service. Review the error message and try again.', 'Winmgmt Service', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+)
+
+REM Notify the user that the WMI repository has been successfully reset
 powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('Windows Management interface has been successfully reset. Press OK to continue.', 'COMPLETE', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-cls & goto end_CLEANER
+
+REM Clear the screen
+cls && goto CLEANER
 ::========================================================================================================================================
 ::========================================================================================================================================
 
 :WIN_INSTALL
+setlocal enabledelayedexpansion
+
 cls
 color 0f
 mode con cols=98 lines=32
-Title AIO PRE-SETUP
-ECHO STILL BLANK
-PAUSE GOTO end_BACKMENU
+Title Windows Setup Test
+
+REM First install 7Zip
+powershell.exe winget install -e --id 7zip.7zip
+
+REM Download the WinNTSetup_462.zip file using aria2
+set "downloaded=false"
+aria2c https://raw.githubusercontent.com/coff33ninja/AIO/testing-irm-new-layout/Files/WinNTSetup_v462.zip -d, --dir=C:\temp\ --allow-overwrite=true --disable-ipv6
+
+REM Check if the WinNTSetup_462.zip file was downloaded successfully
+if exist "C:\temp\WinNTSetup_v462.zip" (
+    set "downloaded=true"
+    echo WinNTSetup_462.zip file downloaded successfully.
+) else (
+    echo Failed to download WinNTSetup_462.zip file.
+    goto :end_BACKMENU
+)
+
+set "zipFile=C:\temp\WinNTSetup_v462.zip"
+set "destination=C:\temp"
+set "zipExe=C:\Program Files\7-Zip\7z.exe"
+
+REM Unzip the file using 7zr.exe
+"%zipExe%" x "%zipFile%" -o"%destination%"
+
+REM Check if the unzip operation was successful
+if %errorlevel% equ 0 (
+    echo File unzipped successfully.
+    cls & goto :PREP
+) else (
+    echo Failed to unzip the file. Error: %errorlevel%
+)
+
+PAUSE
+goto:end_BACKMENU
+
+:PREP
+call C:\temp\WinNTSetup_v462\Prep\PrepareDiskNT.cmd
 
 ::========================================================================================================================================
 ::========================================================================================================================================
@@ -1563,89 +1853,9 @@ REM THIS SECTION RESERVED FOR A FEW INTRESTING ITEMS
 ::========================================================================================================================================
 :EASTER
 cls
-mode con cols=41 lines=24
-echo [41m                                         [0m
-echo [41m                                         [0m
-echo [41m                                         [0m
-echo [41m     [0m                               [41m     [0m
-echo [41m     [0m  ###########################  [41m     [0m
-echo [41m     [0m  ###########################  [41m     [0m
-echo [41m     [0m  ##########   ##   #########  [41m     [0m
-echo [41m     [0m  #########    #    #########  [41m     [0m
-echo [41m     [0m  ##########  ###   #########  [41m     [0m
-echo [41m     [0m  ########### #### ##########  [41m     [0m
-echo [41m     [0m  #########    #    #########  [41m     [0m
-echo [41m     [0m  ##########   ##   #########  [41m     [0m
-echo [41m     [0m  ###########################  [41m     [0m
-echo [41m     [0m  ######   ##    #  ##  #####  [41m     [0m
-echo [41m     [0m          #  #   # #  #        [41m     [0m
-echo [41m     [0m         ######  # #  #        [41m     [0m
-echo [41m     [0m        ##    ## #  ##         [41m     [0m
-echo [41m                    [0m  [41m                   [0m
-echo [41m                  [0m      [41m                 [0m
-echo [41m              [0m              [41m             [0m
-echo [41m                                         [0m
-echo [41m                                         [0m
-echo [41m                                         [0m
-pause & cls & goto MainMenu
+echo you have been lied tool
+pause & cls & goto end_BACKMENU
 ::========================================================================================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1660,132 +1870,65 @@ title Shutdown Script
 mode con cols=98 lines=32
 set seconds=1
 
-:start
 cls
+echo ===============================================================================
+echo                               Shutdown Script
+echo ===============================================================================
 echo.
+echo    Select an option:
 echo.
+echo    [1] Restart (default settings)
+echo    [2] Restart and re-register applications
+echo    [3] Restart to UEFI/BIOS menu
+echo    [4] Restart and load advanced boot options menu
+echo    [5] Shutdown (default settings)
+echo    [6] Shutdown and re-register applications
+echo    [7] Sign out user
+echo    [8] Exit script
 echo.
-echo                    Select a number:
-echo                  ^|===============================================================^|
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|      [1] Restart (Default Setting)                            ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] Restart Reregister Applications                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] Restart UEFI/BIOS                                    ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] Restart Advanced Boot Options                        ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] Shutdown (Default Setting)                           ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] Shutdown Reregister Applications                     ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] Sign Out User                                        ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                              [8] GO BACK      ^|
-echo                  ^|                                                               ^|
-echo                  ^|===============================================================^|
-echo.
-choice /c 12345678 /m "Enter your choice:"
+choice /c 12345678 /n /m "Enter your choice: "
+
 if errorlevel 8 goto :end_BACKMENU
-if errorlevel 7 (
-cls
-echo.
-echo Sign out
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /l
-goto error
-)
+if errorlevel 7 call :signout
+if errorlevel 6 call :shutdown /sg
+if errorlevel 5 call :shutdown /s
+if errorlevel 4 call :restart /r /o
+if errorlevel 3 call :restart /r /fw
+if errorlevel 2 call :restart /g
+if errorlevel 1 call :restart /r
+goto :menu
 
-if errorlevel 6 (
+:signout
 cls
 echo.
-echo Shutdown PC and Re-register any applications on next boot
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /sg /t %seconds%
-goto error
-)
+echo Signing out...
+echo.
+choice /c YN /m "Are you sure you want to continue?"
+if errorlevel 2 goto :menu
+shutdown /l
+goto :eof
 
-if errorlevel 5 (
+:shutdown
 cls
 echo.
-echo Shutdown PC ^(Default Setting^)
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /s /t %seconds%
-goto error
-)
+echo Shutting down...
+echo.
+choice /c YN /m "Are you sure you want to continue?"
+if errorlevel 2 goto :menu
+shutdown %1 /t %seconds%
+goto :eof
 
-if errorlevel 4 (
+:restart
 cls
 echo.
-echo Restart PC and load the advanced boot options menu
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /r /o /t %seconds%
-goto error
-)
+echo Restarting...
+echo.
+choice /c YN /m "Are you sure you want to continue?"
+if errorlevel 2 goto :menu
+shutdown %1 /t %seconds%
+goto :eof
 
-if errorlevel 3 (
-cls
-echo.
-echo Restart PC to UEFI/BIOS menu
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /r /fw /t %seconds%
-goto error
-)
-
-if errorlevel 2 (
-cls
-echo.
-echo Restart PC and Re-register any applications
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /g /t %seconds%
-goto error
-)
-
-if errorlevel 1 (
-cls
-echo.
-echo Restart PC ^(Default Setting^)
-choice /c yne /m "Are you sure you want to continue Y or N or [E]xit?"
-if errorlevel 3 goto end
-if errorlevel 2 goto startover
-if errorlevel 1 shutdown /r /t %seconds%
-goto error
-)
-
-:startover
-cls
-echo.
-echo Restarting script
-timeout 2 >nul
-goto start
-
-:error
-cls
-echo.
-echo You might be here because of a bad input selection
-timeout 2 >nul
-echo.
-echo Perhaps try another input
+:end
+echo Exiting script...
 endlocal
 exit /b
-
-::========================================================================================================================================
-::========================================================================================================================================
-
